@@ -1,0 +1,22 @@
+# Original paper illustrations stay in this local project only.
+/dist/assets/papers/
+
+# Generated public site and unpublished Sites configuration.
+/_site/
+/.openai/
+/.local-backup/
+
+# Archives, caches, environments, and installed dependencies.
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+__pycache__/
+*.py[cod]
+node_modules/
+.venv/
+venv/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+*.log
