@@ -10,3 +10,9 @@
 *.py text eol=lf
 *.yml text eol=lf
 *.cmd text eol=crlf
+*.webp binary
+*.jpg binary
+*.tsv text eol=lf
+*.csv text eol=lf
+dist/data.json -diff linguist-generated
+dist/sources.csv -diff linguist-generated

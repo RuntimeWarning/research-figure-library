@@ -1,0 +1,6 @@
+# Asset pipeline dependencies (the web page and scripts/ need only the Python standard library).
+PyMuPDF>=1.24
+Pillow>=10
+numpy>=1.26
+resvg-py>=0.2
+lxml>=5

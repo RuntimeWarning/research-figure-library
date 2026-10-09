@@ -1,26 +1,38 @@
 # 第三方素材说明
 
-项目代码的 MIT 许可不替代素材的原始许可。
+本项目代码与数据整理采用 [MIT](LICENSE) 许可，该许可**不替代**下列素材的原始许可。逐项来源、作者、许可与 SHA-256 见 [`dist/sources.csv`](dist/sources.csv)，许可原文见 [`dist/licenses/`](dist/licenses/)。
 
-## 可公开分发的图标
+## 论文原图与小图元
 
-- **IconPark**：官方 `@icon-park/svg@1.4.2`，采用 Apache-2.0。保留 Bytedance 的原始版权与许可文本。本站将官方图形按 multi-color 主题导出，使用深灰、蓝、白、青四种颜色；去除四个内容完全相同的别名后收录 2,654 个 SVG。原始源包不包含独立 NOTICE 文件。
-- **Tabler Icons**：官方 `@tabler/icons@3.49.0`，采用 MIT。只收录 outline 系列的 5,184 个 SVG，保留原始几何与 `currentColor`。页面可以为下载版本指定颜色。
-- **Microsoft Fluent Emoji**：官方仓库固定版本 `1ffb34c752ecf5d402f04cfb4b392c77f57c54bc`，采用 MIT。精选 265 个独立 Color SVG；保留 Microsoft 的版权与许可文本。
-- **Phosphor Icons**：官方 `@phosphor-icons/core@2.1.1`，采用 MIT。精选 487 个 Duotone SVG，原样保留 `currentColor` 与透明图层；同一图标不重复收录其他字重。下载包的 SHA-512 完整性和逐项 SVG 的 SHA-256 已核对。
+`dist/assets/papers/` 中的 289 张论文原图与 43 个小图元，按原样从论文 PDF（个别来自论文的官方代码仓库或文档）裁剪，未重绘、未改色。它们不是本项目的原创作品，版权属于原作者或出版方。
 
-完整原文见 `dist/licenses/`，逐项来源见 `dist/data.json` 和 `dist/sources.csv`。README 的图标预览是以上图标的排版展示。
+- 每张图对应的论文、作者、出处、arXiv 版本与页码记录在 `dist/data.json` 的 `sources` 中，页面详情可直接打开原文 PDF 对应页。
+- 许可按论文在 arXiv 上由作者选择的许可记录：264 张为 [arXiv 非独占分发许可](https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html)（作者保留版权，仅授权 arXiv 分发），42 张为 CC BY 4.0，10 张为 CC BY-NC-ND 4.0，5 张为 CC BY-NC-SA 4.0，3 张为 CC BY-SA 4.0，1 张为 CC0 1.0；其余 7 张来自期刊、会议论文集或官方代码仓库（IEEE、MIT Press、AAAS、NeurIPS 论文集版权，或仓库的 MIT / BSD-3-Clause 许可）。
+- 本仓库收录这些图，用于学术检索、比较与介绍，并在每一项标明出处。再次使用（论文、课件、出版物等）时，请引用原论文，并按原许可或出版方规定使用：NC 表示仅限非商业用途，ND 表示不得改编，arXiv 非独占许可与出版方版权的图片需要按出版方规定取得授权。arXiv 的说明见 [Reuse of arXiv content](https://info.arxiv.org/help/license/reuse.html)。
+- 权利人如希望调整署名或移除某张图，请在 [Issues](https://github.com/RuntimeWarning/research-figure-library/issues) 中说明，我们会尽快处理。
 
-## 原创架构示意图
+## 图标
 
-`dist/assets/architectures/` 中的 SVG 由本项目独立绘制，使用本项目 MIT 许可。它们根据论文事实概括数据流、关键模块和连接关系，没有复刻原论文插图的版式。来源论文仍应在学术使用中引用；示意图不代表逐层可执行实现。
+| 图标集 | 版本 | 许可 | 收录说明 |
+| --- | --- | --- | --- |
+| [IconPark](https://github.com/bytedance/IconPark) | `@icon-park/svg` 1.4.2 | Apache-2.0 | 2,654 个，按 multi-color 主题导出，去除 4 个内容完全相同的别名 |
+| [Tabler Icons](https://github.com/tabler/tabler-icons) | `@tabler/icons` 3.49.0 | MIT | 5,184 个 outline 图标，保留原始几何与 `currentColor` |
+| [Phosphor Icons](https://github.com/phosphor-icons/core) | `@phosphor-icons/core` 2.1.1 | MIT | 1,432 个 Duotone 图标，不含品牌标志 |
+| [Fluent Emoji](https://github.com/microsoft/fluentui-emoji) | 提交 `1ffb34c7` | MIT | 1,587 个 Color SVG，默认肤色，不含国旗；中文名取自 Unicode CLDR |
+| [Fluent System Icons](https://github.com/microsoft/fluentui-system-icons) | `@fluentui/svg-icons` 1.1.343 | MIT | 2,896 个 Regular 图标与 199 个 Color 图标 |
+| [Material Design Icons](https://github.com/Templarian/MaterialDesign-SVG) | `@mdi/svg` 7.4.47 | Apache-2.0（Pictogrammers Free License） | 7,188 个，不含已弃用图标与品牌标志 |
+| [Carbon Icons](https://github.com/carbon-design-system/carbon) | `@carbon/icons` 11.90.0 | Apache-2.0 | 2,505 个，不含品牌、IBM 产品与 Watson 标志 |
+| [Carbon Pictograms](https://github.com/carbon-design-system/carbon) | `@carbon/pictograms` 12.86.0 | Apache-2.0 | 1,485 个，不含 IBM、Red Hat 与第三方标志 |
+| [Health Icons](https://github.com/resolvetosavelives/healthicons) | `healthicons` 2.0.0 | MIT | 690 个 Filled 图标 |
+| [Bioicons](https://github.com/duerrsimon/bioicons) | 提交 `d29e766e` | 逐项：CC0 1.0、CC BY 3.0、CC BY 4.0、MIT | 2,282 个；不收录 CC BY-SA、BSD 标志、内嵌位图或超过 300 KB 的文件 |
 
-生成脚本见 `scripts/generate_architectures.py`，逐图来源见素材索引。单独分发 SVG 时请保留 `dist/licenses/original-architectures-LICENSE.txt` 中的许可与版权声明。
+处理方式：
 
-## 论文配图
+- 新增图标在构建时去除注释、元数据、编辑器属性、脚本、事件属性与外部引用；单色图标的黑色填充统一改为 `currentColor`，以便页面改色。图形本身未修改。
+- **Bioicons 的 CC BY 图标须署名**：每个图标的作者与许可显示在详情页，并列在 `sources.csv` 的 `authors` 与 `license` 列；作者主页见 `dist/licenses/bioicons-LICENSES.txt`。
+- 各图标集保留原始版权与许可文本。Material Design Icons 与 Carbon 的 Apache-2.0 许可、Health Icons 与 Fluent 的 MIT 许可等原文均在 `dist/licenses/`。
 
-109 项配图包括原有的 90 项模块、局部图元、频谱、小波子带和特征纹理，以及新增的 19 项经典架构原论文图。它们不是本项目原创图形。原论文或代码仓库采用某种许可，不应自动推定所有论文插图、示例数据和第三方画面具有相同授权。
+## 中文名称数据
 
-当前没有将这 109 项统一声明为已获得公开再分发授权。图像仅保存在本地忽略目录 `dist/assets/papers/`；公开构建不复制这些文件，并把对应记录变为来源卡片。来源、图号、裁剪/导出说明和已有的许可备注继续保留。
-
-如果后续逐项核实某张图的再分发许可，应记录许可原文链接、作者、来源与修改说明，再明确加入公开构建的许可清单。
+- Fluent Emoji 的中文名称与关键词来自 [Unicode CLDR](https://cldr.unicode.org/) 注释数据（`cldr-annotations-full` / `cldr-annotations-derived-full` 48.2.0，Unicode License V3）。
+- 其余图标的中文名称由本项目词表 `pipeline/icons/zh_terms.tsv` 生成，属于本项目 MIT 许可范围。

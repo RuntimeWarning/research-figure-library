@@ -1,30 +1,69 @@
-# 论文素材统一检索 · Research Figure Library
+# 图元仓 · 论文配图素材库
 
-“图元仓”是为深度学习模型结构图整理的图标、经典架构与配图检索工具。一个页面搜索中文名称、英文名称、用途和来源，支持分类筛选、收藏、预览与单张下载。
+**Figure Atlas** — 为深度学习论文配图准备的素材库：从 227 篇经典论文中按原样裁出的结构图，加上 10 个开源图标集的 28,102 个科研图标。一个页面完成中英文检索、筛选、预览、改色与下载，每张论文原图都附有原文图注、作者、出处与许可。
 
-[在线检索](https://runtimewarning.github.io/research-figure-library/) · [GitHub 仓库](https://github.com/RuntimeWarning/research-figure-library)
+[在线检索](https://runtimewarning.github.io/research-figure-library/) · [GitHub 仓库](https://github.com/RuntimeWarning/research-figure-library) · [完整来源清单](dist/sources.csv)
 
-![图标精选预览](docs/preview.png)
+![图元仓首页](docs/screenshot-home.jpg)
 
 ## 素材规模
 
-| 系列 | 数量 | 内容 |
+| 集合 | 数量 | 说明 |
 | --- | ---: | --- |
-| IconPark 多色图标 | 2,654 | 计算、数据、箭头、几何形状、工具等 |
-| Tabler 线性图标 | 5,184 | 网络拓扑、数学、图表、层叠、天气等 |
-| Microsoft Fluent 彩色场景 | 265 | 大脑、机器人、设备、实验、天气和地理等 |
-| Phosphor Duotone 精选 | 487 | 计算节点、张量层叠、几何网格、数学、流程、科学与天气 |
-| 论文细节配图 | 53 | 注意力、频域、小波、特征、卷积和光流等 |
-| 独立论文小图元 | 37 | 权重条、卷积核、采样网格、频谱曲面等 |
-| 经典架构原论文图 | 19 | LeNet、AlexNet、ResNet、U-Net、Transformer、ViT 等 |
-| 原创经典架构 SVG | 21 | 独立绘制、可编辑、透明背景，可随项目公开 |
-| **合计** | **8,720** | 按独立素材计数，PNG/SVG 格式不重复计数 |
+| 论文原图 | 289 | 来自 227 篇论文（1997–2025），覆盖 21 个方向；按原样裁剪，不重绘、不改色 |
+| 论文小图元 | 43 | 从论文图中截出的张量、卷积核、采样网格、频谱与小波子带等局部元素 |
+| 科研图标 | 28,102 | 10 个开源图标集，统一为 20 个中文分类，可按图标集筛选 |
+| **合计** | **28,434** | 每项素材在 `dist/sources.csv` 中列出文件、来源、许可与 SHA-256 |
 
-默认提供 **2,303 项论文常用素材**。图标保留 SVG；页面可导出 512 × 512 透明 PNG，Tabler 与 Phosphor 图标支持改色。原创架构图可导出保留图形比例、最长边 2,048 像素的透明 PNG。论文配图保留原 PNG、可用的 SVG 和裁剪 PDF；详情页标明混合图、内嵌位图 SVG 等格式差异。
+### 论文原图覆盖的方向
+
+![论文原图按方向浏览](docs/screenshot-papers.jpg)
+
+| 方向 | 代表模型 |
+| --- | --- |
+| 卷积网络与轻量化 | LeNet-5、AlexNet、VGG、GoogLeNet / Inception v3–v4、ResNet、ResNeXt、DenseNet、Xception、SENet、MobileNet v1–v3、ShuffleNet、EfficientNet、ConvNeXt、RepVGG、HRNet、GhostNet |
+| 注意力模块 | CBAM、ECA、Coordinate Attention、Non-local、GCNet、SKNet、BAM、Triplet Attention、DANet、Attention Gate |
+| 视觉 Transformer | ViT、Swin、DeiT、PVT、MLP-Mixer、CvT、MobileViT、PoolFormer、CoAtNet、MaxViT、Vision Mamba |
+| 检测与分割 | R-CNN 系列、YOLO、SSD、RetinaNet、FPN、DETR、Deformable DETR、FCOS、RT-DETR、Grounding DINO、FCN、U-Net / UNet++ / 3D U-Net / V-Net、DeepLabv3+、PSPNet、SegFormer、Mask2Former、SAM / SAM 2、TransUNet、Swin-Unet、UNETR |
+| 序列、语言与大模型 | Seq2Seq、Bahdanau 注意力、Transformer、BERT、GPT-3、T5、BART、XLNet、Transformer-XL、Longformer、MoE、Switch Transformer、LoRA、Adapter、Prefix-Tuning、InstructGPT、RAG、FlashAttention、Mamba、RWKV、RetNet |
+| 生成与扩散 | GAN、cGAN、DCGAN、pix2pix、CycleGAN、StyleGAN 1–2、VAE、VQ-VAE、VQGAN、Glow、RealNVP、DDPM、DDIM、Score SDE、Latent Diffusion、ControlNet、DiT、unCLIP、Consistency Models |
+| 自监督与多模态 | SimCLR、MoCo、BYOL、SimSiam、Barlow Twins、DINO、BEiT、MAE、CLIP、BLIP / BLIP-2、LLaVA、Flamingo、ViLT |
+| 时空、气象与时间序列 | ConvLSTM、TrajGRU、PredRNN、PhyDNet、SimVP、Earthformer、DGMR、SmaAt-UNet、LDCast、PreDiff、CasCast、DiffCast、FourCastNet、Pangu-Weather、GraphCast、FengWu、FuXi、ClimaX、MetNet、Informer、Autoformer、FEDformer、PatchTST、TimesNet、iTransformer、DLinear、TCN、WaveNet、N-BEATS、TFT、DeepAR |
+| 图、三维与其他 | GCN、GAT、GraphSAGE、Graphormer、DCRNN、STGCN、Graph WaveNet、PointNet / PointNet++、DGCNN、VoxelNet、NeRF、3D Gaussian Splatting、FNO、GFNet、WTConv、SRCNN、SRGAN、ESRGAN、Restormer、RAFT、PWC-Net、CapsNet、Neural ODE、STN、MAML |
+
+### 图标集
+
+| 图标集 | 数量 | 风格 | 许可 |
+| --- | ---: | --- | --- |
+| [Material Design Icons](https://pictogrammers.com/library/mdi/) | 7,188 | 实心，可改色 | Apache-2.0 |
+| [Tabler Icons](https://tabler.io/icons) | 5,184 | 线性，可改色 | MIT |
+| [Fluent System Icons](https://github.com/microsoft/fluentui-system-icons) | 3,095 | 线性 2,896 + 彩色 199 | MIT |
+| [IconPark](https://github.com/bytedance/IconPark) | 2,654 | 多色 | Apache-2.0 |
+| [Carbon Icons](https://carbondesignsystem.com/elements/icons/library/) | 2,505 | 实心，可改色 | Apache-2.0 |
+| [Bioicons](https://bioicons.com) | 2,282 | 生物与实验插图 | CC0 / CC BY 3.0 / CC BY 4.0 / MIT（逐项，含作者） |
+| [Fluent Emoji](https://github.com/microsoft/fluentui-emoji) | 1,587 | 彩色拟物 | MIT |
+| [Carbon Pictograms](https://carbondesignsystem.com/elements/pictograms/library/) | 1,485 | 线描插画，可改色 | Apache-2.0 |
+| [Phosphor Icons](https://phosphoricons.com) | 1,432 | 双色，可改色 | MIT |
+| [Health Icons](https://healthicons.org) | 690 | 医疗实心，可改色 | MIT |
+
+品牌标志、IBM 产品图标与国旗表情不收录；同一图标只收录一种字重。Fluent Emoji 的中文名称来自 Unicode CLDR，其余图标的中文名由 `pipeline/icons/zh_terms.tsv` 词表生成，英文原名始终保留，可直接用英文检索。
+
+## 功能
+
+- **一个搜索框**：搜索中文名、英文名、模型简称、作者、原文图注和标签；`U-Net`、`unet`、`UNet` 都能命中。按 `/` 聚焦搜索框。
+- **分类与筛选**：论文原图 21 个方向、小图元 5 类、图标 20 类；可只看完整架构图、附矢量文件的原图、可改色图标或科研常用图标。
+- **论文原图详情**：原文图注、论文主页、直达原文 PDF 对应页、作者与许可；一键复制 BibTeX 或引用文本；下载 PNG，以及可用时的 SVG / PDF。
+- **图标改色与导出**：单色图标可在网格中统一改色，详情页可选色后下载 SVG、复制 SVG 代码，或导出 256–2048 px 的透明 PNG。
+- **收藏与分享**：收藏保存在当前浏览器；搜索条件写入网址，详情页可用 `#素材编号` 直接分享。
+- **浅色 / 深色主题**，桌面与手机布局，全部为静态文件，无需后端或前端构建工具。
+
+![论文原图详情](docs/screenshot-detail.jpg)
+
+![图标检索与改色](docs/screenshot-icons.jpg)
 
 ## 本地使用
 
-需要 Python 3.9 或更新版本，无需安装依赖。
+只需要 Python 3.9 或更新版本，不依赖第三方包。
 
 ```bash
 git clone https://github.com/RuntimeWarning/research-figure-library.git
@@ -32,116 +71,65 @@ cd research-figure-library
 python scripts/serve.py
 ```
 
-Windows 双击根目录的 **`启动检索.cmd`**，或在项目目录运行：
+Windows 可直接双击根目录的 **`启动检索.cmd`**。浏览器打开 <http://127.0.0.1:8766/>，终端窗口关闭或按 `Ctrl+C` 后服务停止；端口被占用时运行 `python scripts/serve.py --port 8767`。请通过本地服务访问，直接双击 `dist/index.html` 会因浏览器的本地文件限制而无法加载索引。
 
-```bash
-python scripts/serve.py
-```
+## 论文原图是如何得到的
 
-浏览器打开 **[http://127.0.0.1:8766/](http://127.0.0.1:8766/)**。终端窗口关闭或按 `Ctrl+C` 后服务停止；下次运行相同命令即可恢复。端口被占用时可运行 `python scripts/serve.py --port 8767`。
+1. `pipeline/papers/fetch.py` 按 `papers.json` 中的 arXiv 编号下载固定版本的 PDF，并通过 arXiv API 与 OAI-PMH 记录标题、作者、版本和作者选择的许可。
+2. `pipeline/papers/extract.py` 在 PDF 中定位图注（"Figure 3:"、"Table 1:" 等），自动排除正文、页眉页脚和图注本身，只取图形区域；个别排版特殊的图在 `figures.json` 中给出手工裁剪框。
+3. 每张图导出 300 dpi PNG（以内嵌位图为主的图按原生分辨率渲染）、WebP 缩略图；矢量图在渲染逐像素比对一致时另存 SVG，紧凑时另存单页 PDF。
+4. `pipeline/papers/catalog.py` 读取原文图注并合并元数据。每张原图都经过目检核对，确认没有带入正文、页眉或相邻的图。
 
-请通过 HTTP 服务访问，直接双击 `index.html` 可能因浏览器对本地文件的限制而无法加载索引。本机网址不对外网开放。
+裁剪只改变画幅，不重绘、不改色、不增删图中内容。早期由本项目手工绘制的 21 张架构示意图已全部删除，由对应论文的原图替代。
 
-## 检索与下载
+## 使用须知与许可
 
-- 搜索中文、英文或用途，例如 `卷积核`、`张量`、`网络`、`箭头`、`降雨`、`brain`、`cube`。
-- 切换全部、论文常用、论文配图、小图元、图标或收藏，并按用途与风格进一步筛选。
-- “经典架构”集中展示原论文结构图与原创概念示意；可按风格区分两者，搜索 `ResNet`、`U-Net`、`Transformer`、`ViT` 等名称。
-- 点击卡片查看大图、背景效果、来源和许可，下载可用的 SVG、PNG 或 PDF。
-- 收藏保存在当前浏览器的本地存储中。
+本项目自行编写的检索页面、构建脚本与数据整理采用 [MIT](LICENSE) 许可。第三方素材**不在**本项目 MIT 许可范围内：
 
-## 经典架构
+- **图标**保留各自的开源许可，许可原文在 [`dist/licenses/`](dist/licenses/)。Bioicons 中 CC BY 图标须按条目注明作者，作者与许可显示在详情页和 `sources.csv` 中。
+- **论文原图**的版权属于原作者或出版方。每张图的许可按论文在 arXiv 上的选择记录：264 张为 arXiv 非独占分发许可，42 张为 CC BY 4.0，另有 CC BY-SA、CC BY-NC-SA、CC BY-NC-ND、CC0 及出版方版权等，详情页会标出 NC（非商业）与 ND（禁止改编）等限制。本仓库收录这些图用于学术检索与介绍；在论文、课件或出版物中使用时，请引用原论文，并按原许可或出版方规定取得授权。
+- 如果你是论文作者或权利人，希望调整或移除某张图，请[提交 Issue](https://github.com/RuntimeWarning/research-figure-library/issues)，我们会尽快处理。
 
-点击页面的 **“经典架构”**，可浏览 40 项内容：21 张原创可编辑概念图，以及 19 项从原论文提取的结构图或结构单元。
-
-![原创经典深度学习架构预览](docs/architectures-preview.png)
-
-| 原创示意图系列 | 覆盖模型 |
-| --- | --- |
-| 卷积与轻量网络 | LeNet-5、AlexNet、VGG-16、GoogLeNet、ResNet-18、DenseNet、MobileNetV2 |
-| 分割与编码解码 | U-Net、FCN-8s |
-| 循环与序列 | LSTM、GRU、Seq2Seq LSTM |
-| Transformer | Transformer、BERT、ViT、Swin |
-| 潜变量与生成 | Autoencoder、VAE、GAN、DCGAN、DDPM |
-
-原创架构图可随仓库公开，SVG 的文字、节点和箭头均可编辑；它们是根据原论文事实独立绘制的概念简图，不是论文原图，也不代替逐层实现。LSTM 示意图明确采用包含遗忘门的常用变体。原论文图继续保留在本地，通过相同入口检索；公开版本显示其来源卡片。
-
-用 `python scripts/generate_architectures.py` 可重新生成原创 SVG，无需第三方依赖。可选的预览渲染使用 `resvg-py` 与 `Pillow`，见脚本的 `--qa` 参数。
-
-## GitHub 开源与 Pages 部署
-
-仓库已发布在 [RuntimeWarning/research-figure-library](https://github.com/RuntimeWarning/research-figure-library)。项目包含 GitHub Pages 工作流；无需 Node.js、npm 或第三方前端服务。自行部署到其他仓库时：
-
-1. 在 GitHub 创建空仓库，将本项目提交并推送到 `main` 或 `master`。
-2. 打开仓库 **Settings → Pages → Build and deployment → Source**，选择 **GitHub Actions**。
-3. 在 **Actions** 运行 `Deploy GitHub Pages`，或再次推送触发部署。
-4. 工作流完成后，打开部署结果中的网址。项目资源使用相对路径，兼容仓库子路径。
-
-部署方式参考 [GitHub Pages 官方自定义工作流文档](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
-
-本地项目的 `main` 分支已关联此仓库。提交后续更新可运行：
-
-```bash
-git add .
-git commit -m "Update research figure library"
-git push
-```
-
-公开构建也可以在本地生成：
-
-```bash
-python scripts/build.py --public --output _site
-python -m http.server 8767 --directory _site --bind 127.0.0.1
-```
-
-**公开版本包含 8,590 个图标、21 张原创架构图和 109 项论文来源卡片。** 未核实再分发许可的论文图片保留在本地 `dist/assets/papers/`，由 `.gitignore` 排除；公开构建同时移除这些图片及其下载路径，避免出现失效图片。当前这份本地项目仍可完整检索全部 8,720 项素材。新克隆的公开仓库若没有本地论文图片，会显示论文来源卡片。
+详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 ## 项目结构
 
 ```text
-论文素材统一检索/
-├── README.md
-├── LICENSE                       # 本项目代码的 MIT 许可
-├── THIRD_PARTY_NOTICES.md         # 第三方素材许可边界
-├── 启动检索.cmd
-├── scripts/
-│   ├── serve.py                   # 本地完整检索服务
-│   ├── build.py                   # GitHub Pages 公开构建
-│   ├── validate.py                # 索引、文件、哈希与许可检查
-│   └── generate_architectures.py  # 原创架构 SVG 的生成脚本
-├── dist/
-│   ├── index.html / app.js / style.css
-│   ├── data.json                  # 合并后的唯一素材索引
-│   ├── sources.csv                # 来源记录
-│   ├── licenses/                  # 四套图标与原创架构图的许可证
+research-figure-library/
+├── dist/                         # 发布到 GitHub Pages 的静态站点
+│   ├── index.html · style.css · app.js · favicon.svg
+│   ├── data.json                 # 页面索引：论文原图记录 + 图标表
+│   ├── sources.csv               # 每项素材的文件、来源、作者、许可与 SHA-256
+│   ├── licenses/                 # 各图标集的许可原文
 │   └── assets/
-│       ├── icons/                 # 8,590 个独立 SVG
-│       ├── architectures/         # 21 张可编辑原创经典架构示意图
-│       └── papers/                # 本地论文图片，不提交 Git
-├── docs/preview.png
-└── .github/workflows/pages.yml
+│       ├── papers/               # 论文原图 PNG / SVG / PDF 与 thumbs/ 缩略图
+│       └── icons/<图标集>/        # 按图标集分目录的 SVG
+├── pipeline/                     # 素材构建流程（需要 PyMuPDF 等，见 requirements.txt）
+│   ├── papers/                   # 论文清单、下载、裁剪与元数据
+│   ├── icons/                    # 图标下载、清洗、分类、中文名词表
+│   └── catalog.py                # 生成 dist/data.json 与 dist/sources.csv
+├── scripts/
+│   ├── serve.py                  # 本地检索服务（仅标准库）
+│   └── validate.py               # 索引、文件、SVG 安全与哈希校验（仅标准库）
+├── docs/                         # README 截图
+└── .github/workflows/pages.yml   # 校验后部署 GitHub Pages
 ```
 
-`_site/` 是公开构建产物，不提交 Git。项目不需要压缩包，也不依赖原先的下载目录。
+## 更新素材
 
-当前本地副本的 `.local-backup/` 保存整理前的下载目录与临时缓存，已排除 Git，不参与检索或公开构建；确认新项目正常使用后可自行删除。
+```bash
+pip install -r pipeline/requirements.txt
+python pipeline/papers/fetch.py       # 下载论文 PDF 与元数据（缓存在 .cache/）
+python pipeline/papers/extract.py     # 裁剪 figures.json 中的图，生成 .cache/papers/qa/ 核对图
+python pipeline/papers/catalog.py     # 合并论文原图元数据
+python pipeline/icons/fetch.py        # 下载固定版本的图标源包
+python pipeline/icons/build.py        # 清洗、分类并写入 dist/assets/icons/
+python pipeline/catalog.py            # 生成 data.json 与 sources.csv
+python scripts/validate.py --hashes   # 校验
+```
 
-更新素材后，可运行 `python scripts/validate.py` 检查索引、文件引用和许可记录；运行 `python scripts/validate.py _site` 检查公开构建。
+- **新增论文图**：在 `pipeline/papers/papers.json` 加入 arXiv 编号，在 `figures.json` 加入图号、中文名、分类与说明，依次运行上面的论文步骤，并查看核对图确认裁剪无误。
+- **改进图标中文名**：在 `pipeline/icons/zh_terms.tsv` 增加“英文词 / 中文”对照，可用第三列限定图标集，然后重新运行图标构建。
+- 所有 SVG 在构建时去除脚本、事件属性、外部引用与编辑器元数据；`validate.py` 会再次检查。
 
-## 来源与许可
-
-本项目自行编写的检索界面与构建代码采用 [MIT](LICENSE)。第三方图标和论文配图不在本项目 MIT 许可的授权范围内。
-
-| 素材来源 | 原许可 | 官方项目 |
-| --- | --- | --- |
-| IconPark | Apache-2.0 | [bytedance/IconPark](https://github.com/bytedance/IconPark) |
-| Tabler Icons | MIT | [tabler/tabler-icons](https://github.com/tabler/tabler-icons) |
-| Fluent Emoji | MIT | [microsoft/fluentui-emoji](https://github.com/microsoft/fluentui-emoji) |
-| Phosphor Duotone | MIT | [phosphor-icons/core](https://github.com/phosphor-icons/core) |
-| 论文配图 | 逐项查看原论文及权利说明 | 见 `dist/data.json` 与 `dist/sources.csv` |
-
-四套图标的原始许可与版权声明保存在 `dist/licenses/`。本项目独立绘制的架构 SVG 使用 MIT 许可，原论文作为事实来源；这些概念简图省略部分实现细节，具体结构以原论文为准。论文原配图保留题名、链接、图号和处理说明；下载可访问性不代表已取得公开再分发许可，因此公开构建仅提供原论文图的来源索引。[arXiv 的复用说明](https://info.arxiv.org/help/license/reuse.html)
-
-## 增补素材
-
-新增记录应具有唯一 `id`、中文名称、标签、类别、来源 URL 和实际许可信息。把具有明确分发许可的图标 SVG 放入 `dist/assets/icons/`；论文本地图像放入 `dist/assets/papers/`；本项目原创架构图放入 `dist/assets/architectures/`，使用 `type: architecture`。经典架构原论文记录仍保留 `type: paper`，用 `architecture: true` 加入经典架构集合。同时更新 `dist/data.json` 与来源 CSV，并运行公开构建确认无断链。不要将未知许可自动标为 MIT，也不要用同一图标的多种导出格式增加素材计数。
+推送到 `main` 后，GitHub Actions 会运行校验并把 `dist/` 部署到 GitHub Pages（仓库 **Settings → Pages → Source** 选择 **GitHub Actions**）。

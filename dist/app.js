@@ -1,292 +1,736 @@
 'use strict';
 
+/* 图元仓 · Figure Atlas — static search page over data.json (catalog version 3). */
+
 const ICONS = {
-  search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/>',
-  bookmark: '<path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/>',
-  download: '<path d="M12 3v12m-4-4 4 4 4-4M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/>',
-  close: '<path d="m6 6 12 12M6 18 18 6"/>',
-  layers: '<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>',
-  link: '<path d="m9 15 6-6m-8 4-1 1a4 4 0 0 0 6 6l3-3a4 4 0 0 0 0-6M9 13a4 4 0 0 1 0-6l3-3a4 4 0 0 1 6 6l-1 1"/>',
-  external: '<path d="M14 3h7v7m0-7L11 13m-1-8H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/>',
-  left: '<path d="m14 6-6 6 6 6"/>',
-  right: '<path d="m10 6 6 6-6 6"/>',
-  document: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Zm0 0v6h6M8 13h8m-8 4h5"/>'
+  search: '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+  close: '<path d="M6 6l12 12M18 6 6 18"/>',
+  bookmark: '<path d="M6.5 4.5A1.5 1.5 0 0 1 8 3h8a1.5 1.5 0 0 1 1.5 1.5V21L12 17.3 6.5 21Z"/>',
+  download: '<path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19h14"/>',
+  external: '<path d="M14 4h6v6m0-6-9 9M19 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"/>',
+  copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
+  left: '<path d="m14.5 6-6 6 6 6"/>', right: '<path d="m9.5 6 6 6-6 6"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/>',
+  sliders: '<path d="M4 7h10m4 0h2M4 17h4m4 0h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>',
+  contrast: '<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17a8.5 8.5 0 0 0 0-17Z" fill="currentColor"/>',
+  github: '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  file: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Zm0 0v5h5"/>'
 };
-const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.document}</svg>`;
-document.querySelectorAll('[data-icon]').forEach(el => { el.innerHTML = icon(el.dataset.icon); });
+const svgIcon = name => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ''}</svg>`;
+const paintIcons = (root = document) => root.querySelectorAll('[data-icon]').forEach(el => { if (!el.firstChild) el.innerHTML = svgIcon(el.dataset.icon); });
+paintIcons();
 
 const $ = id => document.getElementById(id);
-const TYPE_NAMES = {icon:'独立图标',atomic:'小图元',paper:'论文配图',architecture:'架构示意图'};
-const COLLECTION_NAMES = {featured:'论文常用',all:'全部素材',architecture:'经典架构',paper:'论文配图',atomic:'小图元',icon:'独立图标',favorites:'我的收藏'};
-const STORAGE_KEY = 'paper-elements-favorites-v1';
-let favorites;
-try { favorites = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]').map(String)); }
-catch { favorites = new Set(); }
-const state = {collection:'featured',query:'',category:'',style:'',svgOnly:false,pdfOnly:false,sort:'recommended',page:1,pageSize:96};
-const urlParams = new URLSearchParams(location.search);
-if (urlParams.get('q')) state.query = urlParams.get('q');
-if (COLLECTION_NAMES[urlParams.get('collection')]) state.collection = urlParams.get('collection');
-let assets = [], filtered = [], catalog = {}, activeAsset = null, toastTimer, searchTimer;
-let previewBlob = '', previewSequence = 0, selectedColor = '#334155';
+const fmt = n => Number(n || 0).toLocaleString('zh-CN');
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const norm = v => String(v ?? '').normalize('NFKC').toLowerCase().replace(/[‐-―_]+/g, '-');
+// "U-Net", "Swin Transformer" also match "unet", "swintransformer".
+const compact = (...values) => values.map(v => norm(v).replace(/[\s\-·.]+/g, '')).join(' ');
+const store = {
+  get(key, fallback) { try { const v = localStorage.getItem(key); return v === null ? fallback : JSON.parse(v); } catch { return fallback; } },
+  set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ } }
+};
+
+const TAB_NAMES = { all: '全部素材', paper: '论文原图', atomic: '论文小图元', icon: '科研图标', favorites: '我的收藏' };
+const KIND_LABEL = { paper: '论文原图', atomic: '小图元', icon: '图标' };
+const SWATCHES = ['#1f2937', '#3b5bdb', '#0f8a5f', '#d9480f', '#c2255c', '#7048e8', '#0b7285', '#ffffff'];
+const FAVORITES_KEY = 'paper-elements-favorites-v1';
+const PAGE = { paper: 48, icon: 180, mixed: 96 };
+
+const state = {
+  tab: 'all', q: '', category: '', pack: '', arch: false, vector: false, mono: false, featured: false,
+  sort: 'relevance', limit: 0, color: store.get('figure-atlas-color', '#1f2937')
+};
+let catalog = null, items = [], byId = new Map(), results = [], current = null, pngSize = 512, searchTimer = 0;
+let favorites = new Set((store.get(FAVORITES_KEY, []) || []).map(String));
+
+/* ------------------------------------------------------------------ theme */
+(function initTheme() {
+  const saved = store.get('figure-atlas-theme', '');
+  if (saved) document.documentElement.dataset.theme = saved;
+  $('themeToggle').addEventListener('click', () => {
+    const dark = document.documentElement.dataset.theme
+      ? document.documentElement.dataset.theme === 'dark'
+      : matchMedia('(prefers-color-scheme: dark)').matches;
+    const next = dark ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    store.set('figure-atlas-theme', next);
+  });
+})();
+
+/* ------------------------------------------------------------------ data */
+function buildItems(data) {
+  const out = [];
+  const sources = data.sources;
+  for (const p of data.papers) {
+    const s = sources[p.source] || {};
+    const it = {
+      type: p.kind, id: p.id, name: p.name, category: p.category, tags: p.tags || [], description: p.description,
+      figure: p.figure, caption: p.caption, source: s, sourceKey: p.source, year: p.year || s.year, page: p.page,
+      files: p.files, thumb: p.files.thumb || p.files.png, width: p.width, height: p.height, svgKind: p.svg_kind,
+      architecture: p.architecture, hasAlpha: p.has_alpha, vector: Boolean(p.files.svg || p.files.pdf), featured: true
+    };
+    it.en = `${s.short || ''}${p.figure ? ' · ' + p.figure : ''}`;
+    it.search = norm([it.id, it.name, it.en, it.category, it.description, it.tags.join(' '), s.title, s.short,
+      s.venue, (s.authors || []).join(' '), it.caption, it.year].join(' ')) + ' ' + compact(it.name, it.en, s.short, it.tags.join(' '));
+    out.push(it);
+  }
+  const f = Object.fromEntries(data.icons.fields.map((k, i) => [k, i]));
+  const cats = data.categories.icon;
+  for (const r of data.icons.rows) {
+    const pack = data.packs[r[f.pack]];
+    const it = {
+      type: 'icon', id: r[f.id], pack: r[f.pack], packInfo: pack, file: r[f.file], src: pack.path + r[f.file],
+      name: r[f.zh], en: r[f.en], category: cats[r[f.cat]], tagText: r[f.tags], featured: Boolean(r[f.flags] & 1),
+      mono: Boolean(r[f.flags] & 2), author: r[f.author], license: r[f.license]
+    };
+    it.thumb = it.src;
+    it.search = norm([it.id, it.name, it.en, it.category, it.tagText, pack.name, it.author].join(' ')) + ' ' + compact(it.en);
+    out.push(it);
+  }
+  out.forEach((it, i) => {
+    it.order = i; it.nName = norm(it.name); it.nEn = norm(it.en);
+    it.cName = compact(it.name); it.cEn = compact(it.type === 'icon' ? it.en : it.source.short || it.en);
+  });
+  return out;
+}
+
+async function load() {
+  $('loadError').hidden = true;
+  $('grid').innerHTML = Array.from({ length: 8 }, () => '<div class="skeleton" aria-hidden="true"></div>').join('');
+  try {
+    const res = await fetch('data.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    catalog = await res.json();
+    if (catalog.version !== 3) throw new Error('索引版本不兼容');
+    items = buildItems(catalog);
+    byId = new Map(items.map(it => [it.id, it]));
+    fillCounts();
+    heroArt();
+    readUrl();
+    syncControls();
+    render();
+    openFromHash();
+  } catch (error) {
+    console.error(error);
+    $('grid').replaceChildren();
+    $('grid').setAttribute('aria-busy', 'false');
+    $('loadError').hidden = false;
+    $('resultsSummary').textContent = '加载失败';
+    $('loadErrorMessage').textContent = location.protocol === 'file:'
+      ? '请用 python scripts/serve.py 启动本地服务后再打开页面。' : `请检查网络后重试（${error.message}）。`;
+  }
+}
+
+function fillCounts() {
+  const c = catalog.counts;
+  const values = { papers: c.papers, atomic: c.atomic, icons: c.icons, sources: c.sources, packs: c.packs };
+  document.querySelectorAll('[data-count]').forEach(el => { el.textContent = fmt(values[el.dataset.count]); });
+  updateTabCounts();
+}
+
+function updateTabCounts() {
+  const counts = { all: items.length, paper: 0, atomic: 0, icon: 0, favorites: favorites.size };
+  for (const it of items) counts[it.type] += 1;
+  counts.favorites = items.filter(it => favorites.has(it.id)).length;
+  document.querySelectorAll('[data-tab]').forEach(btn => {
+    const span = [...btn.querySelectorAll('span')].find(s => !s.dataset.icon);
+    if (span) span.textContent = fmt(counts[btn.dataset.tab]);
+  });
+  $('favoriteCount').textContent = fmt(counts.favorites);
+}
+
+function heroArt() {
+  const picks = ['arch-paper-transformer', 'arch-paper-unet', 'p-resnet-f2', 'arch-paper-vit', 'p-ldm-f3'];
+  const labels = picks.map(id => byId.get(id)).filter(Boolean);
+  const art = $('heroArt');
+  art.innerHTML = labels.map((it, i) => `<div class="tile t${i + 1}"><img src="${esc(it.thumb)}" alt="" decoding="async"><span>${esc(it.en)}</span></div>`).join('')
+    + chipFor('IP0297', 'c1') + chipFor('bio-pyramidal-neuron', 'c2', 'Bioicons 科研插图');
+  function chipFor(id, cls, label) {
+    const it = byId.get(id) || items.find(x => x.type === 'icon' && x.pack === 'bioicons');
+    return it ? `<div class="chip ${cls}"><img src="${esc(it.src)}" alt="">${esc(label || it.packInfo.name)}</div>` : '';
+  }
+}
+
+/* ------------------------------------------------------------------ url state */
+function readUrl() {
+  const p = new URLSearchParams(location.search);
+  if (TAB_NAMES[p.get('tab')]) state.tab = p.get('tab');
+  state.q = p.get('q') || '';
+  state.category = p.get('cat') || '';
+  state.pack = p.get('pack') || '';
+}
+function writeUrl() {
+  const p = new URLSearchParams();
+  if (state.tab !== 'all') p.set('tab', state.tab);
+  if (state.q) p.set('q', state.q);
+  if (state.category) p.set('cat', state.category);
+  if (state.pack) p.set('pack', state.pack);
+  const qs = p.toString();
+  history.replaceState(null, '', `${location.pathname}${qs ? '?' + qs : ''}${location.hash}`);
+}
+
+/* ------------------------------------------------------------------ filtering */
+function inTab(it) {
+  switch (state.tab) {
+    case 'paper': return it.type === 'paper';
+    case 'atomic': return it.type === 'atomic';
+    case 'icon': return it.type === 'icon';
+    case 'favorites': return favorites.has(it.id);
+    default: return true;
+  }
+}
+function passOptions(it, skip = '') {
+  if (state.arch && it.type !== 'icon' && !it.architecture) return false;
+  if (state.arch && it.type === 'icon') return false;
+  if (state.vector && !(it.type !== 'icon' && it.vector)) return false;
+  if (state.mono && !(it.type === 'icon' && it.mono)) return false;
+  if (state.featured && it.type === 'icon' && !it.featured) return false;
+  if (skip !== 'pack' && state.pack && it.pack !== state.pack) return false;
+  if (skip !== 'category' && state.category && it.category !== state.category) return false;
+  return true;
+}
+function tokens() { return norm(state.q).split(/\s+/).filter(Boolean); }
+function matches(it, toks) { return toks.every(t => it.search.includes(t)); }
+
+function score(it, toks) {
+  let s = it.type === 'paper' ? 300 : it.type === 'atomic' ? 200 : (it.featured ? 120 : 0);
+  if (it.type === 'icon') s -= PACK_RANK[it.pack] || 0;
+  if (!toks.length) return s;
+  const name = it.nName, en = it.nEn, cName = it.cName, cEn = it.cEn;
+  for (const t of toks) {
+    const ct = t.replace(/[\s\-·.]+/g, '');
+    if (name === t || en === t || cName === ct || cEn === ct) s += 400;
+    else if (name.startsWith(t) || en.startsWith(t) || cName.startsWith(ct) || cEn.startsWith(ct)) s += 220;
+    else if (name.includes(t) || en.includes(t) || cName.includes(ct) || cEn.includes(ct)) s += 120;
+  }
+  return s;
+}
+const PACK_RANK = { phosphor: 0, tabler: 2, iconpark: 4, 'fluent-emoji': 5, bioicons: 3, healthicons: 6, 'carbon-pictograms': 7, carbon: 9, mdi: 10, 'fluent-system': 11 };
+
+function compute() {
+  const toks = tokens();
+  const base = items.filter(it => inTab(it) && matches(it, toks));
+  results = base.filter(it => passOptions(it));
+  if (state.sort === 'name') results.sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+  else if (state.sort === 'year-desc') results.sort((a, b) => (b.year || 0) - (a.year || 0) || a.order - b.order);
+  else if (state.sort === 'year-asc') results.sort((a, b) => (a.year || 9999) - (b.year || 9999) || a.order - b.order);
+  else {
+    const scored = results.map(it => [score(it, toks), it]);
+    scored.sort((a, b) => b[0] - a[0] || a[1].order - b[1].order);
+    results = scored.map(x => x[1]);
+  }
+  return base;
+}
+
+/* ------------------------------------------------------------------ facets */
+function renderFacets(base) {
+  const catCount = new Map(), packCount = new Map();
+  for (const it of base) {
+    if (passOptions(it, 'category')) catCount.set(it.category, (catCount.get(it.category) || 0) + 1);
+    if (it.type === 'icon' && passOptions(it, 'pack')) packCount.set(it.pack, (packCount.get(it.pack) || 0) + 1);
+  }
+  const cat = $('categoryFacet');
+  const groups = [['paper', '论文原图'], ['atomic', '论文小图元'], ['icon', '图标']];
+  const html = [];
+  for (const [type, label] of groups) {
+    const list = catalog.categories[type].filter(c => catCount.get(c));
+    if (!list.length) continue;
+    if (state.tab === 'all' || state.tab === 'favorites') html.push(`<div class="group-label">${label}</div>`);
+    for (const c of list) {
+      html.push(`<button type="button" data-category="${esc(c)}" class="${state.category === c ? 'active' : ''}"><span>${esc(c)}</span><span class="count">${fmt(catCount.get(c))}</span></button>`);
+    }
+  }
+  if (state.category && !catCount.get(state.category)) {
+    html.unshift(`<button type="button" data-category="${esc(state.category)}" class="active"><span>${esc(state.category)}</span><span class="count">0</span></button>`);
+  }
+  cat.innerHTML = html.join('') || '<p class="sub">没有可选分类</p>';
+  const showPacks = state.tab === 'icon' || state.tab === 'all' || state.tab === 'favorites';
+  $('packBlock').hidden = !showPacks || !packCount.size;
+  $('packFacet').innerHTML = Object.entries(catalog.packs)
+    .filter(([key]) => packCount.get(key) || state.pack === key)
+    .map(([key, p]) => `<button type="button" data-pack="${esc(key)}" class="${state.pack === key ? 'active' : ''}"><span>${esc(p.name)} <span class="sub">${esc(p.style)}</span></span><span class="count">${fmt(packCount.get(key) || 0)}</span></button>`)
+    .join('');
+  document.querySelectorAll('#optionBlock [data-scope]').forEach(el => {
+    const scope = el.dataset.scope;
+    el.hidden = !(state.tab === 'all' || state.tab === 'favorites' || state.tab === scope || (scope === 'paper' && state.tab === 'atomic'));
+  });
+}
+
+function renderActive() {
+  const chips = [];
+  if (state.q) chips.push(['q', `搜索：${state.q}`]);
+  if (state.category) chips.push(['category', state.category]);
+  if (state.pack) chips.push(['pack', catalog.packs[state.pack]?.name || state.pack]);
+  if (state.arch) chips.push(['arch', '完整架构图']);
+  if (state.vector) chips.push(['vector', '附矢量']);
+  if (state.mono) chips.push(['mono', '可改色']);
+  if (state.featured) chips.push(['featured', '科研常用']);
+  const box = $('activeFilters');
+  box.hidden = !chips.length;
+  box.innerHTML = chips.map(([k, label]) => `<button type="button" data-clear="${k}" aria-label="移除筛选 ${esc(label)}">${esc(label)}${svgIcon('close')}</button>`).join('');
+}
+
+/* ------------------------------------------------------------------ grid */
+function pageSize() {
+  if (state.tab === 'icon') return PAGE.icon;
+  if (state.tab === 'paper' || state.tab === 'atomic') return PAGE.paper;
+  return PAGE.mixed;
+}
+
+function card(it) {
+  const saved = favorites.has(it.id);
+  const save = `<button type="button" class="save${saved ? ' on' : ''}" data-save="${esc(it.id)}" aria-pressed="${saved}" aria-label="${saved ? '取消收藏' : '收藏'}">${svgIcon('bookmark')}</button>`;
+  if (it.type === 'icon') {
+    const art = it.mono
+      ? `<span class="glyph" style="--src:url('${esc(it.src)}')" role="img" aria-label="${esc(it.name)}"></span>`
+      : `<img src="${esc(it.src)}" alt="${esc(it.name)}" loading="lazy" decoding="async">`;
+    return `<article class="card icon-card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art">${art}</div><div class="card-body"><h3 class="card-title" title="${esc(it.name)} · ${esc(it.en)}">${esc(it.name)}</h3><div class="card-meta">${esc(it.packInfo.name)}</div></div></button></article>`;
+  }
+  const s = it.source || {};
+  const venue = (s.venue || '').replace(/\s*·.*$/, '');
+  return `<article class="card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art"><span class="kind ${it.type}">${it.type === 'atomic' ? '小图元' : esc(shortFigure(it.figure))}</span><img src="${esc(it.thumb)}" alt="${esc(it.name)}" loading="lazy" decoding="async"></div><div class="card-body"><h3 class="card-title">${esc(it.name)}</h3><div class="card-meta"><span class="model">${esc(s.short || '')}</span>${venue ? `<span class="dot"></span><span class="venue">${esc(venue)}</span>` : ''}</div></div></button></article>`;
+}
+
+// Card badge: "Fig. 3" / "Table 1" from labels such as "Figure 3 中间 adaLN-Zero".
+function shortFigure(label) {
+  const m = /(fig(?:ure)?\.?|table)\s*(\d+(?:\.\d+)?(?:\s*\([a-z](?:[-–][a-z])?\))?)/i.exec(label || '');
+  return m ? `${/^t/i.test(m[1]) ? 'Table' : 'Fig.'} ${m[2].replace(/\s+/g, '')}` : '原图';
+}
+
+function render(keepScroll = false) {
+  const base = compute();
+  renderFacets(base);
+  renderActive();
+  const size = pageSize();
+  if (!keepScroll) state.limit = size;
+  const shown = results.slice(0, state.limit);
+  const grid = $('grid');
+  const onlyIcons = shown.length && shown.every(it => it.type === 'icon');
+  grid.classList.toggle('icons', Boolean(onlyIcons));
+  grid.innerHTML = shown.map(card).join('');
+  grid.setAttribute('aria-busy', 'false');
+  $('resultsTitle').textContent = TAB_NAMES[state.tab];
+  const n = results.length;
+  const parts = [`${fmt(n)} 项`];
+  if (state.tab === 'all' && n) {
+    const t = { paper: 0, atomic: 0, icon: 0 };
+    results.forEach(it => { t[it.type] += 1; });
+    parts.push(`论文原图 ${fmt(t.paper)} · 小图元 ${fmt(t.atomic)} · 图标 ${fmt(t.icon)}`);
+  }
+  $('resultsSummary').textContent = n ? parts.join('，') : '没有匹配的素材';
+  $('emptyState').hidden = Boolean(n);
+  if (!n && state.tab === 'favorites' && !state.q) {
+    $('emptyState').querySelector('h3').textContent = '还没有收藏';
+    $('emptyState').querySelector('p').textContent = '在卡片右上角点书签即可收藏，收藏保存在当前浏览器。';
+  } else {
+    $('emptyState').querySelector('h3').textContent = '没有找到匹配的素材';
+    $('emptyState').querySelector('p').textContent = '换个关键词，或清除部分筛选条件。中英文名称、模型名、作者与标签都可以搜索。';
+  }
+  $('moreBar').hidden = shown.length >= n;
+  $('moreHint').textContent = shown.length < n ? `已显示 ${fmt(shown.length)} / ${fmt(n)}` : '';
+  document.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === state.tab)));
+  document.querySelectorAll('[data-tab-link]').forEach(b => b.classList.toggle('active', b.dataset.tabLink === state.tab));
+  $('gridColor').hidden = !(state.tab === 'icon' || state.tab === 'all' || state.tab === 'favorites');
+  writeUrl();
+}
+
+function loadMore() {
+  const grid = $('grid');
+  const start = state.limit;
+  state.limit += pageSize();
+  const extra = results.slice(start, state.limit);
+  grid.insertAdjacentHTML('beforeend', extra.map(card).join(''));
+  if (extra.length && extra.every(it => it.type === 'icon') && !grid.classList.contains('icons') && start === 0) grid.classList.add('icons');
+  $('moreBar').hidden = state.limit >= results.length;
+  $('moreHint').textContent = state.limit < results.length ? `已显示 ${fmt(Math.min(state.limit, results.length))} / ${fmt(results.length)}` : '';
+}
+
+function syncControls() {
+  $('searchInput').value = state.q;
+  $('clearSearch').hidden = !state.q;
+  $('onlyArch').checked = state.arch;
+  $('onlyVector').checked = state.vector;
+  $('onlyMono').checked = state.mono;
+  $('onlyFeatured').checked = state.featured;
+  $('sortSelect').value = state.sort;
+  $('iconColor').value = state.color;
+  document.documentElement.style.setProperty('--icon-color', state.color);
+}
+
+function setTab(tab) {
+  state.tab = tab;
+  state.category = '';
+  if (tab !== 'icon' && tab !== 'all' && tab !== 'favorites') state.pack = '';
+  if (tab === 'icon') { state.arch = false; state.vector = false; }
+  if (tab === 'paper' || tab === 'atomic') { state.mono = false; state.featured = false; }
+  syncControls();
+  render();
+}
+
+/* ------------------------------------------------------------------ detail */
+function openDetail(it, push = true) {
+  current = it;
+  const drawer = $('drawer');
+  const stage = $('stage');
+  const isIcon = it.type === 'icon';
+  stage.classList.toggle('icon', isIcon);
+  setStageBg(isIcon && it.mono ? 'light' : 'light');
+  const img = $('detailImage');
+  img.alt = it.name;
+  img.src = isIcon ? it.src : (it.files.png || it.thumb);
+  $('openOriginal').href = isIcon ? it.src : (it.files.png || it.thumb);
+  $('detailSize').textContent = isIcon ? `${it.packInfo.name} · SVG` : `${fmt(it.width)} × ${fmt(it.height)} px`;
+  $('detailCrumb').textContent = isIcon ? `图标 / ${it.category}` : `${KIND_LABEL[it.type]} / ${it.category}`;
+  $('detailTitle').textContent = it.name;
+  $('detailEnglish').textContent = isIcon ? `${it.en} · ${it.id}` : `${it.en} · ${it.id}`;
+  $('detailDescription').textContent = isIcon ? iconDescription(it) : (it.description || '');
+  const badges = isIcon
+    ? [[it.packInfo.name, 'accent'], [it.packInfo.style, ''], [it.mono ? '可改色' : '彩色', ''], [it.license || it.packInfo.license, '']]
+    : [[KIND_LABEL[it.type], 'accent'], [it.category, ''], [it.figure, ''], [it.source.license_name, licenseClass(it.source.license)]];
+  if (!isIcon && it.architecture) badges.splice(2, 0, ['完整架构', '']);
+  $('detailBadges').innerHTML = badges.filter(([t]) => t).map(([t, c]) => `<span class="${c}">${esc(t)}</span>`).join('');
+  $('recolor').hidden = !(isIcon && it.mono);
+  $('pngSize').hidden = !isIcon;
+  if (isIcon && it.mono) { $('detailColor').value = state.color; renderSwatches(); applyDetailColor(); }
+  renderActions(it);
+  const caption = !isIcon && it.caption;
+  $('detailCaption').hidden = !caption;
+  if (caption) $('captionText').textContent = it.caption;
+  renderSource(it);
+  renderMeta(it);
+  const tags = isIcon ? (it.tagText || '').split(' ').filter(Boolean) : it.tags;
+  $('detailTags').innerHTML = [...new Set(tags)].slice(0, 14).map(t => `<button type="button" data-tag="${esc(t)}">${esc(t)}</button>`).join('');
+  $('scrim').hidden = false;
+  drawer.hidden = false;
+  document.body.style.overflow = 'hidden';
+  $('drawerBody').scrollTop = 0;
+  if (push) history.replaceState(null, '', `${location.pathname}${location.search}#${encodeURIComponent(it.id)}`);
+  $('closeDrawer').focus({ preventScroll: true });
+}
+
+function iconDescription(it) {
+  const pack = it.packInfo;
+  return `${pack.name}（${pack.style}）中的独立图标，分类为「${it.category}」。${it.mono ? '单色图标可改为任意颜色后下载 SVG 或 PNG。' : '彩色图标保留原始配色，可下载 SVG 或 PNG。'}`;
+}
+function licenseClass(id) { return /NC|ND|arXiv|publisher/i.test(id || '') ? 'warn' : ''; }
+
+function renderActions(it) {
+  const box = $('detailActions');
+  const buttons = [];
+  if (it.type === 'icon') {
+    buttons.push(`<button type="button" class="primary-button" data-action="svg">${svgIcon('download')}下载 SVG</button>`);
+    buttons.push(`<button type="button" class="ghost-button" data-action="png">${svgIcon('download')}下载 PNG</button>`);
+    buttons.push(`<button type="button" class="ghost-button" data-action="copy-svg">${svgIcon('copy')}复制 SVG 代码</button>`);
+  } else {
+    buttons.push(`<a class="primary-button" href="${esc(it.files.png)}" download="${esc(fileName(it, 'png'))}">${svgIcon('download')}下载 PNG</a>`);
+    if (it.files.svg) buttons.push(`<a class="ghost-button" href="${esc(it.files.svg)}" download="${esc(fileName(it, 'svg'))}">${svgIcon('download')}SVG${it.svgKind === 'mixed' ? '（含位图）' : ''}</a>`);
+    if (it.files.pdf) buttons.push(`<a class="ghost-button" href="${esc(it.files.pdf)}" download="${esc(fileName(it, 'pdf'))}">${svgIcon('download')}PDF 矢量</a>`);
+  }
+  const saved = favorites.has(it.id);
+  buttons.push(`<button type="button" class="ghost-button" data-action="favorite" aria-pressed="${saved}">${svgIcon('bookmark')}${saved ? '已收藏' : '收藏'}</button>`);
+  box.innerHTML = buttons.join('');
+}
+
+function renderSource(it) {
+  const card = $('sourceCard');
+  if (it.type === 'icon') { card.hidden = true; return; }
+  const s = it.source;
+  card.hidden = false;
+  $('sourceTitle').textContent = s.title;
+  const authors = s.authors || [];
+  const shown = authors.length > 6 ? authors.slice(0, 6).join(', ') + ' 等' : authors.join(', ');
+  $('sourceMeta').textContent = [shown, s.venue].filter(Boolean).join(' · ');
+  const links = [];
+  if (s.url) links.push(`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${svgIcon('link')}论文主页</a>`);
+  if (s.pdf) links.push(`<a href="${esc(s.pdf)}${it.page ? '#page=' + it.page : ''}" target="_blank" rel="noopener noreferrer">${svgIcon('file')}原文 PDF${it.page ? ' 第 ' + it.page + ' 页' : ''}</a>`);
+  if (s.license_url) links.push(`<a href="${esc(s.license_url)}" target="_blank" rel="noopener noreferrer">${svgIcon('external')}${esc(s.license_name)}</a>`);
+  $('sourceLinks').innerHTML = links.join('');
+}
+
+function renderMeta(it) {
+  const rows = [];
+  if (it.type === 'icon') {
+    const p = it.packInfo;
+    rows.push(['图标集', `<a href="${esc(p.homepage)}" target="_blank" rel="noopener noreferrer">${esc(p.name)}</a> · ${esc(p.version)}`]);
+    rows.push(['许可', `<a href="${esc(p.license_file)}" target="_blank" rel="noopener">${esc(it.license || p.license)}</a>`]);
+    if (it.author) rows.push(['作者', `${esc(it.author)}（使用时请署名）`]);
+    rows.push(['文件', `<code>${esc(it.src)}</code>`]);
+  } else {
+    const s = it.source;
+    rows.push(['图号', esc(it.figure || '—')]);
+    rows.push(['许可', `${esc(s.license_name)}${licenseNote(s.license)}`]);
+    rows.push(['裁剪', it.page ? `原文第 ${esc(it.page)} 页，按原样裁剪，未重绘或改色` : '按原样截取，未重绘或改色']);
+    const formats = ['PNG', it.files.svg ? 'SVG' : '', it.files.pdf ? 'PDF' : ''].filter(Boolean).join(' · ');
+    rows.push(['格式', `${formats}（${fmt(it.width)} × ${fmt(it.height)} px）`]);
+  }
+  $('detailMeta').innerHTML = rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${v}</dd>`).join('');
+}
+
+function licenseNote(id) {
+  if (/NC/.test(id)) return '：仅限非商业用途';
+  if (/ND/.test(id)) return '：不得改编';
+  if (id === 'arXiv' || id === 'publisher') return '：版权归作者或出版方，引用时注明出处';
+  if (/CC-BY|CC0|MIT|BSD/.test(id)) return '：署名后可再使用';
+  return '';
+}
+
+function fileName(it, ext) {
+  const base = `${it.id}_${it.name}`.replace(/[<>:"/\\|?*\u0000-\u001f]/g, '_').replace(/\s+/g, '-').slice(0, 120);
+  return `${base}.${ext}`;
+}
+
+function closeDetail() {
+  $('drawer').hidden = true;
+  $('scrim').hidden = true;
+  document.body.style.overflow = '';
+  if (location.hash) history.replaceState(null, '', `${location.pathname}${location.search}`);
+  current = null;
+}
+
+function step(delta) {
+  if (!current) return;
+  const index = results.findIndex(it => it.id === current.id);
+  const next = results[index + delta];
+  if (next) openDetail(next);
+}
+
+function setStageBg(bg) {
+  $('stage').dataset.bg = bg;
+  document.querySelectorAll('#stage [data-bg]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.bg === bg)));
+}
+
+function openFromHash() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (id && byId.has(id)) openDetail(byId.get(id), false);
+}
+
+/* ------------------------------------------------------------------ icon colour & downloads */
 const svgCache = new Map();
-const number = value => Number(value || 0).toLocaleString('zh-CN');
-const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const normalize = value => String(value ?? '').normalize('NFKC').toLocaleLowerCase().replace(/[_-]+/g,' ').trim();
-const isSourceOnly = a => a.source_only === true || a.available === false || (!a.preview && !a.svg && !a.png && !a.pdf);
-const isRecolorable = a => a.type === 'icon' && (['tabler','phosphor'].includes(a.pack) || String(a.style).startsWith('Tabler'));
-const canExportPng = a => !!a.svg && ['icon','architecture'].includes(a.type);
-function pngDimensions(a) {
-  if(a.type !== 'architecture') return {width:512,height:512,padding:16};
-  const width=Number(a.width)||1600,height=Number(a.height)||900;
-  const scale=1984/Math.max(width,height);
-  return {width:Math.round(width*scale)+64,height:Math.round(height*scale)+64,padding:32};
+async function svgText(it) {
+  if (!svgCache.has(it.src)) {
+    svgCache.set(it.src, fetch(it.src).then(r => { if (!r.ok) throw new Error(`SVG ${r.status}`); return r.text(); })
+      .catch(e => { svgCache.delete(it.src); throw e; }));
+  }
+  return svgCache.get(it.src);
 }
-const imagePath = a => a.preview || a.png || a.svg || '';
-function svgLabel(a) {
-  if (!a.svg) return '';
-  if (a.svg_kind === 'raster_container' || String(a.svg_kind).includes('raster_container')) return 'SVG 位图封装';
-  if (a.svg_kind === 'mixed' || String(a.svg_kind).includes('embedded_raster')) return 'SVG 混合内容';
-  if (a.type === 'icon' || a.svg_kind === 'vector' || String(a.svg_kind).includes('vector_paths')) return '矢量 SVG';
-  return 'SVG 文件';
+async function coloredSvg(it, color) {
+  let xml = await svgText(it);
+  if (it.mono && color) xml = xml.replace(/currentColor/gi, color);
+  return xml;
 }
-function showToast(message) {
-  clearTimeout(toastTimer); $('toast').textContent = message; $('toast').hidden = false;
-  toastTimer = setTimeout(() => { $('toast').hidden = true; }, 3200);
+function renderSwatches() {
+  const color = $('detailColor').value.toLowerCase();
+  $('swatches').innerHTML = SWATCHES.map(c => `<button type="button" data-swatch="${c}" style="--c:${c}" aria-label="颜色 ${c}" aria-pressed="${c === color}"></button>`).join('');
 }
-function saveFavorites() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...favorites])); }
-  catch { showToast('收藏已保留在本次浏览中；当前浏览器无法写入本地存储。'); }
+let previewUrl = '';
+async function applyDetailColor() {
+  if (!current || current.type !== 'icon' || !current.mono) return;
+  const it = current;
+  const color = $('detailColor').value;
+  try {
+    const xml = await coloredSvg(it, color);
+    if (current !== it) return;
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = URL.createObjectURL(new Blob([xml], { type: 'image/svg+xml' }));
+    $('detailImage').src = previewUrl;
+    if (color.toLowerCase() === '#ffffff') setStageBg('dark');
+  } catch (e) { console.error(e); }
+}
+function triggerDownload(url, name, revoke = false) {
+  const a = document.createElement('a');
+  a.href = url; a.download = name; a.style.display = 'none';
+  document.body.append(a); a.click(); a.remove();
+  if (revoke) setTimeout(() => URL.revokeObjectURL(url), 30000);
+}
+async function downloadSvg(it) {
+  const xml = await coloredSvg(it, it.mono ? $('detailColor').value : '');
+  triggerDownload(URL.createObjectURL(new Blob([xml], { type: 'image/svg+xml' })), fileName(it, 'svg'), true);
+  toast('已开始下载 SVG');
+}
+async function downloadPng(it) {
+  const xml = await coloredSvg(it, it.mono ? $('detailColor').value : '');
+  const doc = new DOMParser().parseFromString(xml, 'image/svg+xml');
+  const svg = doc.documentElement;
+  const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+  const ratio = vb.length === 4 && vb[2] > 0 && vb[3] > 0 ? vb[2] / vb[3] : 1;
+  const size = pngSize;
+  const w = ratio >= 1 ? size : Math.round(size * ratio);
+  const h = ratio >= 1 ? Math.round(size / ratio) : size;
+  svg.setAttribute('width', w); svg.setAttribute('height', h);
+  const url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)], { type: 'image/svg+xml' }));
+  try {
+    const img = await new Promise((resolve, reject) => { const i = new Image(); i.onload = () => resolve(i); i.onerror = reject; i.src = url; });
+    const canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+    const blob = await new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('PNG')), 'image/png'));
+    triggerDownload(URL.createObjectURL(blob), fileName(it, 'png'), true);
+    toast(`已生成 ${w} × ${h} 透明 PNG`);
+  } finally { URL.revokeObjectURL(url); }
+}
+async function copyText(text, message) {
+  try { await navigator.clipboard.writeText(text); toast(message); }
+  catch {
+    const area = Object.assign(document.createElement('textarea'), { value: text });
+    document.body.append(area); area.select();
+    const ok = document.execCommand('copy'); area.remove();
+    toast(ok ? message : '复制失败，请手动选择文本');
+  }
+}
+
+/* ------------------------------------------------------------------ citations */
+const JOURNAL = /(TPAMI|Nature|Science|JMLR|TMLR|Journal|Letters|Transactions|Computation|Proceedings of the IEEE|npj|ACM TOG|Distill|International Journal)/i;
+function bibtex(it) {
+  const s = it.source;
+  const first = (s.authors?.[0] || 'anon').split(/\s+/).pop().normalize('NFKD').replace(/[^A-Za-z]/g, '').toLowerCase();
+  const word = (s.title || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).find(w => w.length > 3 && !['with', 'from', 'that', 'this', 'using', 'towards'].includes(w)) || 'paper';
+  const key = `${first}${s.year || ''}${word}`;
+  const venue = (s.venue || '').replace(/\s*\d{4}.*$/, '').trim();
+  const lines = [`  title = {${s.title}}`, `  author = {${(s.authors || []).join(' and ')}}`, `  year = {${s.year || ''}}`];
+  let type = 'misc';
+  if (/^arXiv/i.test(s.venue || '') || !venue) {
+    type = 'article';
+    lines.push(`  journal = {arXiv preprint arXiv:${s.arxiv}}`);
+  } else if (JOURNAL.test(venue)) {
+    type = 'article'; lines.push(`  journal = {${venue}}`);
+  } else {
+    type = 'inproceedings'; lines.push(`  booktitle = {${venue.replace(/\s*Workshops?$/i, ' Workshops')}}`);
+  }
+  if (s.arxiv) lines.push(`  eprint = {${s.arxiv}}`, '  archivePrefix = {arXiv}');
+  if (s.url) lines.push(`  url = {${s.url}}`);
+  return `@${type}{${key},\n${lines.join(',\n')}\n}`;
+}
+function citation(it) {
+  const s = it.source;
+  const authors = s.authors || [];
+  const names = authors.length > 3 ? `${authors.slice(0, 3).join(', ')}, et al.` : authors.join(', ');
+  return `${names}. ${s.title}. ${s.venue}. ${s.url}（${it.figure}）`;
+}
+
+/* ------------------------------------------------------------------ misc */
+let toastTimer = 0;
+function toast(message) {
+  clearTimeout(toastTimer);
+  $('toast').textContent = message;
+  $('toast').hidden = false;
+  toastTimer = setTimeout(() => { $('toast').hidden = true; }, 2600);
 }
 function toggleFavorite(id) {
   if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
-  saveFavorites(); updateCounts();
-  document.querySelectorAll('[data-favorite-id]').forEach(button => {
-    if (button.dataset.favoriteId !== id) return;
-    const saved = favorites.has(id); button.classList.toggle('saved',saved);
-    button.setAttribute('aria-pressed',String(saved)); button.setAttribute('aria-label',saved?'取消收藏':'加入收藏');
+  store.set(FAVORITES_KEY, [...favorites]);
+  updateTabCounts();
+  document.querySelectorAll(`[data-save="${CSS.escape(id)}"]`).forEach(b => {
+    const on = favorites.has(id);
+    b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); b.setAttribute('aria-label', on ? '取消收藏' : '收藏');
   });
-  if (activeAsset?.id === id) updateDetailFavorite();
-  if (state.collection === 'favorites') applyFilters();
-}
-function scopeAssets() {
-  switch (state.collection) {
-    case 'featured': return assets.filter(a => a.featured);
-    case 'favorites': return assets.filter(a => favorites.has(a.id));
-    case 'all': return assets;
-    case 'architecture': return assets.filter(a => a.architecture || a.type === 'architecture');
-    default: return assets.filter(a => a.type === state.collection);
-  }
-}
-function updateCounts() {
-  const counts = {all:assets.length,featured:assets.filter(a=>a.featured).length,architecture:assets.filter(a=>a.architecture||a.type==='architecture').length,paper:assets.filter(a=>a.type==='paper').length,atomic:assets.filter(a=>a.type==='atomic').length,icon:assets.filter(a=>a.type==='icon').length,favorites:assets.filter(a=>favorites.has(a.id)).length};
-  document.querySelectorAll('[data-collection]').forEach(button => {
-    const count = button.querySelector('span:not([data-icon])'); if (count) count.textContent = number(counts[button.dataset.collection]);
-  });
-  $('headerFavoriteCount').textContent = number(counts.favorites);
-  $('totalCount').textContent = number(assets.length);
-  const sourceOnly = assets.filter(isSourceOnly).length;
-  $('availabilityNote').hidden = !sourceOnly;
-  $('availabilityNote').textContent = `${number(assets.length-sourceOnly)} 项可下载 · ${number(sourceOnly)} 项论文来源档案（原配图保存在本地版）`;
-}
-function updateTabs() {
-  document.querySelectorAll('[data-collection]').forEach(button => {
-    const active = button.dataset.collection === state.collection;
-    button.classList.toggle('active', active);
-    if (active) button.setAttribute('aria-current','page'); else button.removeAttribute('aria-current');
-  });
-  $('resultsTitle').textContent = COLLECTION_NAMES[state.collection];
-}
-function populateFilters() {
-  const scope = scopeAssets();
-  [['category','categoryFilter','全部分类'],['style','styleFilter','全部风格']].forEach(([key,id,title])=>{
-    const counts = new Map(); scope.forEach(a=>{if(a[key]) counts.set(a[key],(counts.get(a[key])||0)+1);});
-    if (state[key] && !counts.has(state[key])) state[key] = '';
-    const select=$(id); select.replaceChildren(new Option(title,''));
-    [...counts.entries()].sort((a,b)=>a[0].localeCompare(b[0],'zh-CN')).forEach(([value,count])=>select.add(new Option(`${value} · ${number(count)}`,value)));
-    select.value=state[key];
-  });
-}
-function setCollection(value,clear=false) {
-  state.collection=value; state.page=1;
-  if(clear) {state.query=''; state.category='';state.style='';state.svgOnly=false;state.pdfOnly=false;}
-  syncInputs(); updateTabs(); populateFilters(); applyFilters();
-}
-function syncInputs() {
-  $('searchInput').value=state.query; $('clearSearch').hidden=!state.query;
-  $('categoryFilter').value=state.category; $('styleFilter').value=state.style;
-  $('svgOnly').checked=state.svgOnly; $('pdfOnly').checked=state.pdfOnly;
-  $('sortSelect').value=state.sort; $('pageSize').value=String(state.pageSize);
+  if (current?.id === id) renderActions(current);
+  if (state.tab === 'favorites') render(true);
 }
 function resetFilters() {
-  state.query='';state.category='';state.style='';state.svgOnly=false;state.pdfOnly=false;state.page=1;
-  syncInputs(); applyFilters();
-}
-function applyFilters() {
-  const tokens=normalize(state.query).split(/\s+/).filter(Boolean);
-  filtered=scopeAssets().filter(a=>(!state.category||a.category===state.category)&&(!state.style||a.style===state.style)&&(!state.svgOnly||!!a.svg)&&(!state.pdfOnly||!!a.pdf)&&tokens.every(token=>a._search.includes(token)));
-  if(state.sort==='name') filtered.sort((a,b)=>a.name.localeCompare(b.name,'zh-CN'));
-  else filtered.sort((a,b)=>Number(b.featured)-Number(a.featured)||a._order-b._order);
-  state.page=Math.min(state.page,Math.max(1,Math.ceil(filtered.length/state.pageSize)));
-  renderActiveFilters(); renderResults();
-}
-function renderActiveFilters() {
-  const tags=[];
-  if(state.query) tags.push(['query',`搜索：${state.query}`]);
-  if(state.category) tags.push(['category',state.category]);
-  if(state.style) tags.push(['style',state.style]);
-  if(state.svgOnly) tags.push(['svgOnly','包含 SVG']);
-  if(state.pdfOnly) tags.push(['pdfOnly','包含 PDF']);
-  const container=$('activeFilters');container.replaceChildren();container.hidden=!tags.length;
-  tags.forEach(([key,label])=>{const button=document.createElement('button');button.type='button';button.innerHTML=`${escapeHTML(label)}${icon('close')}`;button.setAttribute('aria-label',`移除筛选：${label}`);button.onclick=()=>{state[key]=key.endsWith('Only')?false:'';state.page=1;syncInputs();applyFilters();};container.append(button);});
-}
-function createCard(a) {
-  const sourceOnly=isSourceOnly(a);const saved=favorites.has(a.id);
-  const card=document.createElement('article');card.className=`asset-card${sourceOnly?' source-only':''}`;
-  const formats=sourceOnly?['来源']:['PNG',...(a.svg?['SVG']:[]),...(a.pdf?['PDF']:[])];
-  card.innerHTML=`<button class="card-open" type="button"><div class="card-preview ${escapeHTML(a.type)}"><span class="card-type">${escapeHTML(TYPE_NAMES[a.type]||'素材')}</span>${imagePath(a)?`<img src="${escapeHTML(imagePath(a))}" alt="" loading="lazy" decoding="async">`:`<span class="source-placeholder">${icon('document')}<span>论文来源</span></span>`}</div><div class="card-body"><h3 class="card-name">${escapeHTML(a.name)}</h3><div class="card-category" title="${escapeHTML(a.category+' · '+a.style)}">${escapeHTML(a.category||a.style)}</div></div></button><button class="card-save${saved?' saved':''}" type="button" data-favorite-id="${escapeHTML(a.id)}" aria-label="${saved?'取消收藏':'加入收藏'}" aria-pressed="${saved}">${icon('bookmark')}</button><div class="card-footer"><div class="card-formats">${formats.map(f=>`<span>${f}</span>`).join('')}</div><button class="card-download" type="button" aria-label="${sourceOnly?'查看来源':'下载 '+escapeHTML(a.name)}">${icon(sourceOnly?'external':'download')}</button></div>`;
-  card.querySelector('.card-open').onclick=()=>openDetail(a);
-  card.querySelector('.card-save').onclick=()=>toggleFavorite(a.id);
-  card.querySelector('.card-download').onclick=async event=>{if(sourceOnly){openDetail(a);return;}const button=event.currentTarget;button.disabled=true;try{await downloadAsset(a,canExportPng(a)?'svg':a.png?'png':a.svg?'svg':'pdf');}catch(error){console.error(error);showToast('下载暂时失败，请重试或查看原始来源。');}finally{button.disabled=false;}};
-  const img=card.querySelector('img');if(img) img.addEventListener('error',()=>card.classList.add('is-broken'),{once:true});
-  return card;
-}
-function renderResults() {
-  const start=(state.page-1)*state.pageSize;const items=filtered.slice(start,start+state.pageSize);
-  const grid=$('assetGrid');grid.replaceChildren();grid.setAttribute('aria-busy','false');grid.classList.toggle('architecture-grid',state.collection==='architecture');
-  const fragment=document.createDocumentFragment();items.forEach(a=>fragment.append(createCard(a)));grid.append(fragment);
-  const sourceOnly=filtered.filter(isSourceOnly).length;
-  $('resultsSummary').textContent=filtered.length?`找到 ${number(filtered.length)} 个条目${sourceOnly?` · ${number(sourceOnly)} 项来源档案`:''} · 当前 ${number(start+1)}–${number(start+items.length)}`:'没有匹配的素材';
-  $('emptyState').hidden=!!filtered.length;
-  if(!filtered.length&&state.collection==='favorites'&&!state.query&&!state.category&&!state.style&&!state.svgOnly&&!state.pdfOnly){$('emptyState').querySelector('h3').textContent='把喜欢的图元，留在这里';$('emptyState').querySelector('p').textContent='点击素材右上角的收藏按钮，下次回来就能快速找到。';$('emptyReset').textContent='浏览论文常用';}
-  else {$('emptyState').querySelector('h3').textContent='还没有找到合适的素材';$('emptyState').querySelector('p').textContent='试试更短的关键词，或清除一些筛选条件。';$('emptyReset').textContent='清除筛选';}
-  renderPagination();
-}
-function renderPagination() {
-  const nav=$('pagination');nav.replaceChildren();const total=Math.ceil(filtered.length/state.pageSize);if(total<=1)return;
-  function addPage(label,page,disabled=false,active=false,direction='') {const button=document.createElement('button');button.type='button';button.disabled=disabled;button.className=active?'active':direction?'page-direction':'';button.innerHTML=direction==='left'?icon('left')+label:direction==='right'?label+icon('right'):label;button.setAttribute('aria-label',direction?label:`第 ${page} 页`);if(active)button.setAttribute('aria-current','page');button.onclick=()=>{state.page=page;renderResults();$('resultsPanel').scrollIntoView({behavior:'smooth',block:'start'});};nav.append(button);}
-  addPage('上一页',state.page-1,state.page===1,false,'left');
-  const pages=new Set([1,total,state.page-2,state.page-1,state.page,state.page+1,state.page+2]);let last=0;
-  [...pages].filter(p=>p>=1&&p<=total).sort((a,b)=>a-b).forEach(p=>{if(last&&p-last>1){const dots=document.createElement('span');dots.className='page-dots';dots.textContent='…';nav.append(dots);}addPage(String(p),p,false,p===state.page);last=p;});
-  addPage('下一页',state.page+1,state.page===total,false,'right');
-  const detail=document.createElement('div');detail.className='page-detail';detail.textContent=`第 ${state.page} / ${total} 页 · 每页 ${state.pageSize} 个`;nav.append(detail);
-}
-function fillHero() {
-  const fluent=assets.filter(a=>a.type==='icon'&&String(a.style).includes('Fluent')&&imagePath(a));
-  const needles=['brain','robot','microscope','satellite','cloud with rain','dna'];
-  const selected=needles.map(needle=>fluent.find(a=>normalize(a.english)===needle)).filter(Boolean);
-  if(selected.length<6) for(const a of assets.filter(a=>a.type==='icon'&&a.featured&&imagePath(a))){if(!selected.includes(a))selected.push(a);if(selected.length===6)break;}
-  const art=$('heroArt');art.querySelectorAll('.sample-tile').forEach(el=>el.remove());
-  selected.slice(0,6).forEach(a=>{const tile=document.createElement('div');tile.className='sample-tile';const img=document.createElement('img');img.src=imagePath(a);img.alt='';img.decoding='async';tile.append(img);art.insertBefore(tile,art.querySelector('.art-caption'));});
-}
-function updateDetailFavorite() {
-  if(!activeAsset)return;const button=$('detailFavorite');const saved=favorites.has(activeAsset.id);
-  button.classList.toggle('saved',saved);button.setAttribute('aria-pressed',String(saved));button.querySelector('span:last-child').textContent=saved?'已收藏 · 点击取消':'加入收藏';
-}
-function setPreviewBackground(background) {
-  const stage=$('previewStage');stage.classList.remove('checker','light','dark');stage.classList.add(background);
-  document.querySelectorAll('[data-background]').forEach(b=>{const selected=b.dataset.background===background;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected));});
-}
-function releasePreview() {if(previewBlob){URL.revokeObjectURL(previewBlob);previewBlob='';}}
-async function updateColorPreview() {
-  const a=activeAsset;if(!a||!isRecolorable(a)||!a.svg)return;const sequence=++previewSequence;
-  $('colorValue').textContent=selectedColor;$('iconColor').value=selectedColor;
-  try {const xml=await prepareSvg(a,selectedColor);if(sequence!==previewSequence||activeAsset?.id!==a.id)return;releasePreview();previewBlob=URL.createObjectURL(new Blob([xml],{type:'image/svg+xml;charset=utf-8'}));$('detailImage').src=previewBlob;}
-  catch(error){console.error(error);showToast('颜色预览暂时不可用，仍可下载原始 SVG。');}
-}
-function openDetail(a) {
-  activeAsset=a;previewSequence++;releasePreview();selectedColor='#334155';setPreviewBackground('checker');
-  const sourceOnly=isSourceOnly(a);const stage=$('previewStage');stage.classList.toggle('icon',a.type==='icon');stage.querySelector('.detail-source-placeholder')?.remove();
-  const img=$('detailImage');img.hidden=!imagePath(a);img.alt=a.name;
-  if(imagePath(a))img.src=imagePath(a);else {img.removeAttribute('src');const placeholder=document.createElement('div');placeholder.className='detail-source-placeholder';placeholder.innerHTML=`${icon('document')}<strong>论文来源档案</strong><p>此配图仅保存在本地，<br>公开版本提供论文来源。</p>`;stage.append(placeholder);}
-  $('detailTitle').textContent=a.name;$('detailEnglish').textContent=a.english||a.id;
-  $('detailBreadcrumb').textContent=`${TYPE_NAMES[a.type]||'素材'} / ${a.category||a.style||'来源档案'}`;
-  $('detailDescription').textContent=sourceOnly?'此配图仅保存在本地，公开版本提供论文来源。可通过下方链接查看原论文及使用条件。':a.description||a.usage||(a.type==='icon'?'独立图标，可用于表示对象、设备、数据或应用场景。':'从原论文提取的图元，具体使用条件请查看原始来源。');
-  $('detailBadges').innerHTML=[TYPE_NAMES[a.type],a.style,sourceOnly?'来源档案':svgLabel(a)].filter(Boolean).map(t=>`<span>${escapeHTML(t)}</span>`).join('');
-  $('previewDimensions').textContent=a.width&&a.height&&!sourceOnly?`${a.width} × ${a.height}${canExportPng(a)?' · SVG':' px'}`:'';
-  const tagContainer=$('detailTags');tagContainer.replaceChildren();[...new Set(a.tags||[])].filter(t=>t&&t!==a.name&&t!==a.english).slice(0,10).forEach(tag=>{const button=document.createElement('button');button.type='button';button.textContent=tag;button.title='搜索此标签';button.onclick=()=>{$('assetDialog').close();state.query=tag;state.page=1;syncInputs();applyFilters();$('resultsPanel').scrollIntoView({behavior:'smooth'});};tagContainer.append(button);});
-  const downloads=$('downloadActions');downloads.replaceChildren();downloads.hidden=sourceOnly;
-  if(!sourceOnly) ['png','svg','pdf'].filter(format=>a[format]||(format==='png'&&canExportPng(a))).forEach((format,index)=>{const button=document.createElement('button');button.type='button';button.className='button'+(index===0?' primary':'');button.innerHTML=icon('download')+`下载 ${format.toUpperCase()}`;button.onclick=async()=>{button.disabled=true;try{await downloadAsset(a,format,selectedColor);}catch(error){console.error(error);showToast('下载暂时失败，请重试或查看原始来源。');}finally{button.disabled=false;}};downloads.append(button);});
-  const metadata=[['素材编号',a.id],['分类',a.category],['出处',a.source_title],['论文信息',[a.year,a.figure].filter(Boolean).join(' · ')],['许可',a.license_note||a.license||'以原始来源为准'],['SVG 类型',svgLabel(a)]];
-  const dl=$('detailMetadata');dl.replaceChildren();metadata.filter(([,value])=>value).forEach(([label,value])=>{const dt=document.createElement('dt');dt.textContent=label;const dd=document.createElement('dd');dd.textContent=value;if(label==='许可'&&a.license_url){const link=document.createElement('a');link.href=a.license_url;link.target='_blank';link.rel='noopener';link.textContent=value;dd.replaceChildren(link);}dl.append(dt,dd);});
-  const source=$('detailSource');source.hidden=!a.source_url;if(a.source_url)source.href=a.source_url;else source.removeAttribute('href');
-  let svgNote='';
-  if(a.svg_kind==='raster_container'||String(a.svg_kind).includes('raster_container'))svgNote='此 SVG 是位图封装，用于保持原图外观；放大后的清晰度仍受原 PNG 分辨率限制。';
-  else if(a.svg_kind==='mixed'||String(a.svg_kind).includes('embedded_raster'))svgNote='此 SVG 同时包含矢量与位图内容，其中的位图部分受原始分辨率限制。';
-  if(a.svg_note&&!svgNote)svgNote=a.svg_note;
-  $('svgNote').textContent=svgNote;$('svgNote').hidden=!svgNote;
-  $('colorEditor').hidden=!isRecolorable(a)||sourceOnly;
-  updateDetailFavorite();if(!$('assetDialog').open)$('assetDialog').showModal();$('assetDialog').scrollTop=0;
-  if(isRecolorable(a)&&!sourceOnly)updateColorPreview();
-}
-async function fetchSvg(a) {
-  if(!svgCache.has(a.svg))svgCache.set(a.svg,fetch(a.svg).then(response=>{if(!response.ok)throw new Error(`SVG ${response.status}`);return response.text();}).catch(error=>{svgCache.delete(a.svg);throw error;}));
-  return svgCache.get(a.svg);
-}
-async function prepareSvg(a,color,forPng=false) {
-  let xml=await fetchSvg(a);
-  if(isRecolorable(a)&&color)xml=xml.replace(/currentColor/gi,color);
-  const doc=new DOMParser().parseFromString(xml,'image/svg+xml');
-  if(doc.querySelector('parsererror'))throw new Error('Invalid SVG');
-  const svg=doc.documentElement;
-  if(forPng){const size=pngDimensions(a);svg.setAttribute('width',String(size.width-size.padding*2));svg.setAttribute('height',String(size.height-size.padding*2));}
-  return new XMLSerializer().serializeToString(svg);
-}
-function downloadName(a,format) {return `${a.id}_${a.name||a.english}`.replace(/[<>:"/\\|?*\u0000-\u001f]/g,'_').slice(0,160)+'.'+format;}
-function triggerDownload(url,name,temporary=false) {
-  const link=document.createElement('a');link.href=url;link.download=name;link.style.display='none';document.body.append(link);link.click();link.remove();
-  if(temporary)setTimeout(()=>URL.revokeObjectURL(url),60000);
-}
-async function downloadAsset(a,format,color='') {
-  if(isSourceOnly(a))return;
-  if(format==='png'&&!a.png&&canExportPng(a)) {
-    const xml=await prepareSvg(a,color,true);const url=URL.createObjectURL(new Blob([xml],{type:'image/svg+xml;charset=utf-8'}));
-    try {const image=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('SVG rasterization failed'));img.src=url;});
-      const size=pngDimensions(a);const canvas=document.createElement('canvas');canvas.width=size.width;canvas.height=size.height;const context=canvas.getContext('2d');if(!context)throw new Error('Canvas unavailable');
-      context.clearRect(0,0,size.width,size.height);context.drawImage(image,size.padding,size.padding,size.width-size.padding*2,size.height-size.padding*2);
-      const blob=await new Promise((resolve,reject)=>canvas.toBlob(value=>value?resolve(value):reject(new Error('PNG export failed')),'image/png'));
-      triggerDownload(URL.createObjectURL(blob),downloadName(a,'png'),true);
-    }finally{URL.revokeObjectURL(url);}
-  } else if(format==='svg'&&isRecolorable(a)&&color) {
-    const xml=await prepareSvg(a,color);triggerDownload(URL.createObjectURL(new Blob([xml],{type:'image/svg+xml;charset=utf-8'})),downloadName(a,'svg'),true);
-  } else if(a[format])triggerDownload(a[format],downloadName(a,format));
-  else throw new Error('Format unavailable');
-  const size=pngDimensions(a);showToast(format==='png'&&!a.png?`已生成 ${size.width} × ${size.height} 透明 PNG`:'已开始下载 '+format.toUpperCase());
-}
-function showSkeletons() {
-  $('assetGrid').innerHTML=Array.from({length:18},()=>'<div class="skeleton-card" aria-hidden="true"></div>').join('');$('assetGrid').setAttribute('aria-busy','true');
-}
-async function loadCatalog() {
-  $('loadError').hidden=true;$('emptyState').hidden=true;showSkeletons();
-  try {
-    const response=await fetch('data.json');if(!response.ok)throw new Error(`HTTP ${response.status}`);catalog=await response.json();const rows=Array.isArray(catalog)?catalog:catalog.assets;
-    if(!Array.isArray(rows))throw new Error('素材索引格式不正确');
-    assets=rows.map((row,index)=>{const a={...row,id:String(row.id),name:String(row.name||row.english||row.id),tags:Array.isArray(row.tags)?row.tags:[],_order:index};a._search=normalize([a.id,a.name,a.english,a.category,a.style,a.description,a.usage,a.source_title,a.source_url,a.figure,a.year,...a.tags].filter(Boolean).join(' '));return a;});
-    updateCounts();updateTabs();populateFilters();syncInputs();fillHero();applyFilters();
-  } catch(error) {
-    console.error(error);$('assetGrid').replaceChildren();$('assetGrid').setAttribute('aria-busy','false');$('loadError').hidden=false;$('resultsSummary').textContent='素材加载失败';
-    $('loadErrorMessage').textContent=location.protocol==='file:'?'请通过项目的本地启动网址打开页面，再重新加载。':'请检查网络连接后重试。';
-  }
+  Object.assign(state, { q: '', category: '', pack: '', arch: false, vector: false, mono: false, featured: false, sort: 'relevance' });
+  syncControls();
+  render();
 }
 
-$('collectionTabs').addEventListener('click',event=>{const button=event.target.closest('[data-collection]');if(button)setCollection(button.dataset.collection);});
-$('headerFavorites').onclick=()=>{setCollection('favorites',true);$('resultsPanel').scrollIntoView({behavior:'smooth'});};
-$('searchInput').addEventListener('input',event=>{clearTimeout(searchTimer);state.query=event.target.value;$('clearSearch').hidden=!state.query;searchTimer=setTimeout(()=>{state.page=1;applyFilters();},170);});
-$('clearSearch').onclick=()=>{clearTimeout(searchTimer);state.query='';state.page=1;syncInputs();applyFilters();$('searchInput').focus();};
-document.querySelectorAll('[data-query]').forEach(button=>button.onclick=()=>{clearTimeout(searchTimer);state.query=button.dataset.query;state.page=1;syncInputs();applyFilters();});
-[['categoryFilter','category'],['styleFilter','style']].forEach(([id,key])=>$(id).onchange=event=>{state[key]=event.target.value;state.page=1;applyFilters();});
-[['svgOnly','svgOnly'],['pdfOnly','pdfOnly']].forEach(([id,key])=>$(id).onchange=event=>{state[key]=event.target.checked;state.page=1;applyFilters();});
-$('sortSelect').onchange=event=>{state.sort=event.target.value;state.page=1;applyFilters();};
-$('pageSize').onchange=event=>{state.pageSize=Number(event.target.value);state.page=1;renderResults();};
-$('resetFilters').onclick=resetFilters;
-$('emptyReset').onclick=()=>{if(state.collection==='favorites'&&!favorites.size)setCollection('featured',true);else resetFilters();};
-$('retryLoad').onclick=loadCatalog;
-$('detailFavorite').onclick=()=>{if(activeAsset)toggleFavorite(activeAsset.id);};
-$('closeDialog').onclick=()=>$('assetDialog').close();
-$('assetDialog').addEventListener('click',event=>{if(event.target===$('assetDialog')){const rect=$('assetDialog').getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)$('assetDialog').close();}});
-$('assetDialog').addEventListener('close',()=>{previewSequence++;releasePreview();activeAsset=null;});
-document.querySelectorAll('[data-background]').forEach(button=>button.onclick=()=>setPreviewBackground(button.dataset.background));
-$('iconColor').addEventListener('input',event=>{selectedColor=event.target.value;updateColorPreview();});
-document.querySelectorAll('[data-color]').forEach(button=>button.onclick=()=>{selectedColor=button.dataset.color;updateColorPreview();});
-document.addEventListener('keydown',event=>{if(event.key==='/'&&!$('assetDialog').open&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)&&!document.activeElement?.isContentEditable){event.preventDefault();$('searchInput').focus();}});
-window.addEventListener('storage',event=>{if(event.key===STORAGE_KEY){try{favorites=new Set(JSON.parse(event.newValue||'[]').map(String));updateCounts();applyFilters();updateDetailFavorite();}catch{}}});
-loadCatalog();
+/* ------------------------------------------------------------------ events */
+$('searchInput').addEventListener('input', e => {
+  clearTimeout(searchTimer);
+  state.q = e.target.value.trim();
+  $('clearSearch').hidden = !state.q;
+  searchTimer = setTimeout(() => render(), 140);
+});
+$('searchForm').addEventListener('submit', e => { e.preventDefault(); $('results').scrollIntoView({ behavior: 'smooth' }); });
+$('clearSearch').addEventListener('click', () => { state.q = ''; syncControls(); render(); $('searchInput').focus(); });
+document.querySelectorAll('[data-query]').forEach(b => b.addEventListener('click', () => {
+  state.q = b.dataset.query; syncControls(); render(); $('results').scrollIntoView({ behavior: 'smooth' });
+}));
+document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+document.querySelectorAll('[data-tab-link]').forEach(b => b.addEventListener('click', () => { setTab(b.dataset.tabLink); $('tabs').scrollIntoView({ behavior: 'smooth' }); }));
+$('openFavorites').addEventListener('click', () => { setTab('favorites'); $('tabs').scrollIntoView({ behavior: 'smooth' }); });
+$('categoryFacet').addEventListener('click', e => {
+  const b = e.target.closest('[data-category]'); if (!b) return;
+  state.category = state.category === b.dataset.category ? '' : b.dataset.category; render();
+});
+$('packFacet').addEventListener('click', e => {
+  const b = e.target.closest('[data-pack]'); if (!b) return;
+  state.pack = state.pack === b.dataset.pack ? '' : b.dataset.pack; render();
+});
+[['onlyArch', 'arch'], ['onlyVector', 'vector'], ['onlyMono', 'mono'], ['onlyFeatured', 'featured']].forEach(([id, key]) => {
+  $(id).addEventListener('change', e => { state[key] = e.target.checked; render(); });
+});
+$('sortSelect').addEventListener('change', e => { state.sort = e.target.value; render(); });
+$('iconColor').addEventListener('input', e => {
+  state.color = e.target.value;
+  document.documentElement.style.setProperty('--icon-color', state.color);
+  store.set('figure-atlas-color', state.color);
+});
+$('resetFilters').addEventListener('click', resetFilters);
+$('emptyReset').addEventListener('click', () => { if (state.tab === 'favorites' && !favorites.size) setTab('all'); else resetFilters(); });
+$('retryLoad').addEventListener('click', load);
+$('loadMore').addEventListener('click', loadMore);
+$('activeFilters').addEventListener('click', e => {
+  const b = e.target.closest('[data-clear]'); if (!b) return;
+  const k = b.dataset.clear;
+  if (k === 'q') state.q = ''; else if (typeof state[k] === 'boolean') state[k] = false; else state[k] = '';
+  syncControls(); render();
+});
+$('grid').addEventListener('click', e => {
+  const save = e.target.closest('[data-save]');
+  if (save) { toggleFavorite(save.dataset.save); return; }
+  const open = e.target.closest('[data-open]');
+  if (open) openDetail(byId.get(open.dataset.open));
+});
+$('closeDrawer').addEventListener('click', closeDetail);
+$('scrim').addEventListener('click', () => { closeDetail(); $('sidebar').classList.remove('open'); });
+$('prevItem').addEventListener('click', () => step(-1));
+$('nextItem').addEventListener('click', () => step(1));
+document.querySelectorAll('#stage [data-bg]').forEach(b => b.addEventListener('click', () => setStageBg(b.dataset.bg)));
+$('detailColor').addEventListener('input', () => { renderSwatches(); applyDetailColor(); });
+$('swatches').addEventListener('click', e => {
+  const b = e.target.closest('[data-swatch]'); if (!b) return;
+  $('detailColor').value = b.dataset.swatch; renderSwatches(); applyDetailColor();
+});
+document.querySelectorAll('#pngSize [data-size]').forEach(b => b.addEventListener('click', () => {
+  pngSize = Number(b.dataset.size);
+  document.querySelectorAll('#pngSize [data-size]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+}));
+$('detailActions').addEventListener('click', async e => {
+  const b = e.target.closest('[data-action]'); if (!b || !current) return;
+  const it = current;
+  try {
+    if (b.dataset.action === 'svg') await downloadSvg(it);
+    else if (b.dataset.action === 'png') { b.disabled = true; await downloadPng(it); }
+    else if (b.dataset.action === 'copy-svg') await copyText(await coloredSvg(it, it.mono ? $('detailColor').value : ''), '已复制 SVG 代码');
+    else if (b.dataset.action === 'favorite') toggleFavorite(it.id);
+  } catch (error) { console.error(error); toast('操作失败，请重试'); }
+  finally { b.disabled = false; }
+});
+$('copyBibtex').addEventListener('click', () => current && copyText(bibtex(current), '已复制 BibTeX'));
+$('copyCitation').addEventListener('click', () => current && copyText(citation(current), '已复制引用'));
+$('detailTags').addEventListener('click', e => {
+  const b = e.target.closest('[data-tag]'); if (!b) return;
+  closeDetail(); state.q = b.dataset.tag; syncControls(); render(); $('results').scrollIntoView({ behavior: 'smooth' });
+});
+$('openSidebar').addEventListener('click', () => { $('sidebar').classList.add('open'); $('scrim').hidden = false; });
+$('closeSidebar').addEventListener('click', () => { $('sidebar').classList.remove('open'); if ($('drawer').hidden) $('scrim').hidden = true; });
+document.addEventListener('keydown', e => {
+  const typing = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName);
+  if (e.key === '/' && !typing && $('drawer').hidden) { e.preventDefault(); $('searchInput').focus(); }
+  if (e.key === 'Escape') { if (!$('drawer').hidden) closeDetail(); else if ($('sidebar').classList.contains('open')) $('closeSidebar').click(); }
+  if (!$('drawer').hidden && !typing && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) step(e.key === 'ArrowRight' ? 1 : -1);
+});
+window.addEventListener('hashchange', openFromHash);
+window.addEventListener('storage', e => {
+  if (e.key !== FAVORITES_KEY) return;
+  favorites = new Set((store.get(FAVORITES_KEY, []) || []).map(String));
+  updateTabCounts();
+  if (state.tab === 'favorites') render(true);
+});
+const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+  if (entries.some(en => en.isIntersecting) && !$('moreBar').hidden && results.length > state.limit && state.limit < 2000) loadMore();
+}, { rootMargin: '600px' }) : null;
+if (observer) observer.observe($('moreBar'));
+
+load();

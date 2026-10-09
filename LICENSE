@@ -20,7 +20,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Scope: This license applies to the original application, build code, and
-original schematic diagrams in dist/assets/architectures/ in this repository.
-Third-party icons and paper figures retain their respective rights
-and are excluded from this project's MIT license. See THIRD_PARTY_NOTICES.md.
+Scope: This license applies to the web application (dist/index.html, dist/app.js,
+dist/style.css, dist/favicon.svg), the build and maintenance code in pipeline/ and
+scripts/, and the curated metadata written by this project (Chinese names, categories,
+descriptions and the term list in pipeline/icons/zh_terms.tsv).
+
+Third-party icons in dist/assets/icons/ keep their own open-source licenses, and the
+paper figures in dist/assets/papers/ remain the property of their authors or
+publishers. Neither is licensed under the MIT License above. See
+THIRD_PARTY_NOTICES.md and dist/sources.csv for every item's source and license.

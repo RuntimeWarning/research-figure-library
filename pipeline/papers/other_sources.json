@@ -1,0 +1,66 @@
+{
+ "lenet": {
+  "title": "Gradient-Based Learning Applied to Document Recognition",
+  "authors": ["Yann LeCun", "Léon Bottou", "Yoshua Bengio", "Patrick Haffner"],
+  "venue": "Proceedings of the IEEE 1998", "year": 1998, "short": "LeNet-5",
+  "url": "https://bottou.org/papers/lecun-98h",
+  "pdf": "https://leon.bottou.org/publications/pdf/ieee-1998.pdf",
+  "license": "publisher", "license_name": "出版方版权（IEEE）", "license_url": "https://bottou.org/papers/lecun-98h"
+ },
+ "alexnet": {
+  "title": "ImageNet Classification with Deep Convolutional Neural Networks",
+  "authors": ["Alex Krizhevsky", "Ilya Sutskever", "Geoffrey E. Hinton"],
+  "venue": "NeurIPS 2012", "year": 2012, "short": "AlexNet",
+  "url": "https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html",
+  "pdf": "https://papers.nips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf",
+  "license": "publisher", "license_name": "作者版权（NeurIPS 论文集）", "license_url": "https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html"
+ },
+ "autoencoder": {
+  "title": "Reducing the Dimensionality of Data with Neural Networks",
+  "authors": ["Geoffrey E. Hinton", "Ruslan R. Salakhutdinov"],
+  "venue": "Science 2006", "year": 2006, "short": "Deep Autoencoder",
+  "url": "https://www.science.org/doi/10.1126/science.1127647",
+  "pdf": "https://www.cs.toronto.edu/~hinton/absps/science.pdf",
+  "license": "publisher", "license_name": "出版方版权（AAAS）", "license_url": "https://www.science.org/doi/10.1126/science.1127647"
+ },
+ "lstm1997": {
+  "title": "Long Short-Term Memory",
+  "authors": ["Sepp Hochreiter", "Jürgen Schmidhuber"],
+  "venue": "Neural Computation 1997", "year": 1997, "short": "LSTM",
+  "url": "https://doi.org/10.1162/neco.1997.9.8.1735",
+  "pdf": "https://www.bioinf.jku.at/publications/older/2604.pdf",
+  "license": "publisher", "license_name": "出版方版权（MIT Press）", "license_url": "https://doi.org/10.1162/neco.1997.9.8.1735"
+ },
+ "featurevis": {
+  "title": "Feature Visualization",
+  "authors": ["Chris Olah", "Alexander Mordvintsev", "Ludwig Schubert"],
+  "venue": "Distill 2017", "year": 2017, "short": "Feature Visualization",
+  "url": "https://distill.pub/2017/feature-visualization/",
+  "pdf": "",
+  "license": "CC-BY-4.0", "license_name": "CC BY 4.0", "license_url": "https://creativecommons.org/licenses/by/4.0/"
+ },
+ "raft-repo": {
+  "title": "RAFT: Recurrent All-Pairs Field Transforms for Optical Flow",
+  "authors": ["Zachary Teed", "Jia Deng"],
+  "venue": "ECCV 2020 · 官方代码仓库", "year": 2020, "short": "RAFT",
+  "url": "https://github.com/princeton-vl/RAFT",
+  "pdf": "https://arxiv.org/pdf/2003.12039",
+  "license": "BSD-3-Clause", "license_name": "BSD-3-Clause（官方仓库）", "license_url": "https://github.com/princeton-vl/RAFT/blob/master/LICENSE"
+ },
+ "gfnet-repo": {
+  "title": "Global Filter Networks for Image Classification",
+  "authors": ["Yongming Rao", "Wenliang Zhao", "Zheng Zhu", "Jiwen Lu", "Jie Zhou"],
+  "venue": "NeurIPS 2021 · 官方代码仓库", "year": 2021, "short": "GFNet",
+  "url": "https://github.com/raoyongming/GFNet",
+  "pdf": "https://arxiv.org/pdf/2107.00645",
+  "license": "MIT", "license_name": "MIT（官方仓库）", "license_url": "https://github.com/raoyongming/GFNet/blob/master/LICENSE"
+ },
+ "neuraloperator-docs": {
+  "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+  "authors": ["Zongyi Li", "Nikola Kovachki", "Kamyar Azizzadenesheli", "Burigede Liu", "Kaushik Bhattacharya", "Andrew Stuart", "Anima Anandkumar"],
+  "venue": "ICLR 2021 · neuraloperator 文档", "year": 2021, "short": "FNO",
+  "url": "https://github.com/neuraloperator/neuraloperator",
+  "pdf": "https://arxiv.org/pdf/2010.08895",
+  "license": "MIT", "license_name": "MIT（官方仓库）", "license_url": "https://github.com/neuraloperator/neuraloperator/blob/main/LICENSE"
+ }
+}

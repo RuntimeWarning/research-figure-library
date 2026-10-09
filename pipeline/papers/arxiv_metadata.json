@@ -1,0 +1,4196 @@
+{
+ "acmix": {
+  "arxiv": "2111.14556",
+  "version": "v2",
+  "title": "On the Integration of Self-Attention and Convolution",
+  "authors": [
+   "Xuran Pan",
+   "Chunjiang Ge",
+   "Rui Lu",
+   "Shiji Song",
+   "Guanfu Chen",
+   "Zeyi Huang",
+   "Gao Huang"
+  ],
+  "published": "2021-11-29",
+  "updated": "2022-03-14",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "adapter": {
+  "arxiv": "1902.00751",
+  "version": "v2",
+  "title": "Parameter-Efficient Transfer Learning for NLP",
+  "authors": [
+   "Neil Houlsby",
+   "Andrei Giurgiu",
+   "Stanislaw Jastrzebski",
+   "Bruna Morrone",
+   "Quentin de Laroussilhe",
+   "Andrea Gesmundo",
+   "Mona Attariyan",
+   "Sylvain Gelly"
+  ],
+  "published": "2019-02-02",
+  "updated": "2019-06-13",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "attunet": {
+  "arxiv": "1804.03999",
+  "version": "v3",
+  "title": "Attention U-Net: Learning Where to Look for the Pancreas",
+  "authors": [
+   "Ozan Oktay",
+   "Jo Schlemper",
+   "Loic Le Folgoc",
+   "Matthew Lee",
+   "Mattias Heinrich",
+   "Kazunari Misawa",
+   "Kensaku Mori",
+   "Steven McDonagh",
+   "Nils Y Hammerla",
+   "Bernhard Kainz",
+   "Ben Glocker",
+   "Daniel Rueckert"
+  ],
+  "published": "2018-04-11",
+  "updated": "2018-05-20",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "autoformer": {
+  "arxiv": "2106.13008",
+  "version": "v5",
+  "title": "Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting",
+  "authors": [
+   "Haixu Wu",
+   "Jiehui Xu",
+   "Jianmin Wang",
+   "Mingsheng Long"
+  ],
+  "published": "2021-06-24",
+  "updated": "2022-01-07",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+ },
+ "bahdanau": {
+  "arxiv": "1409.0473",
+  "version": "v7",
+  "title": "Neural Machine Translation by Jointly Learning to Align and Translate",
+  "authors": [
+   "Dzmitry Bahdanau",
+   "Kyunghyun Cho",
+   "Yoshua Bengio"
+  ],
+  "published": "2014-09-01",
+  "updated": "2016-05-19",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "bam": {
+  "arxiv": "1807.06514",
+  "version": "v2",
+  "title": "BAM: Bottleneck Attention Module",
+  "authors": [
+   "Jongchan Park",
+   "Sanghyun Woo",
+   "Joon-Young Lee",
+   "In So Kweon"
+  ],
+  "published": "2018-07-17",
+  "updated": "2018-07-18",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "barlowtwins": {
+  "arxiv": "2103.03230",
+  "version": "v3",
+  "title": "Barlow Twins: Self-Supervised Learning via Redundancy Reduction",
+  "authors": [
+   "Jure Zbontar",
+   "Li Jing",
+   "Ishan Misra",
+   "Yann LeCun",
+   "Stéphane Deny"
+  ],
+  "published": "2021-03-04",
+  "updated": "2021-06-14",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "bart": {
+  "arxiv": "1910.13461",
+  "version": "v1",
+  "title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension",
+  "authors": [
+   "Mike Lewis",
+   "Yinhan Liu",
+   "Naman Goyal",
+   "Marjan Ghazvininejad",
+   "Abdelrahman Mohamed",
+   "Omer Levy",
+   "Ves Stoyanov",
+   "Luke Zettlemoyer"
+  ],
+  "published": "2019-10-29",
+  "updated": "2019-10-29",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "beit": {
+  "arxiv": "2106.08254",
+  "version": "v2",
+  "title": "BEiT: BERT Pre-Training of Image Transformers",
+  "authors": [
+   "Hangbo Bao",
+   "Li Dong",
+   "Songhao Piao",
+   "Furu Wei"
+  ],
+  "published": "2021-06-15",
+  "updated": "2022-09-03",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "bert": {
+  "arxiv": "1810.04805",
+  "version": "v2",
+  "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+  "authors": [
+   "Jacob Devlin",
+   "Ming-Wei Chang",
+   "Kenton Lee",
+   "Kristina Toutanova"
+  ],
+  "published": "2018-10-11",
+  "updated": "2019-05-24",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "bisenet": {
+  "arxiv": "1808.00897",
+  "version": "v1",
+  "title": "BiSeNet: Bilateral Segmentation Network for Real-time Semantic Segmentation",
+  "authors": [
+   "Changqian Yu",
+   "Jingbo Wang",
+   "Chao Peng",
+   "Changxin Gao",
+   "Gang Yu",
+   "Nong Sang"
+  ],
+  "published": "2018-08-02",
+  "updated": "2018-08-02",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "blip": {
+  "arxiv": "2201.12086",
+  "version": "v2",
+  "title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+  "authors": [
+   "Junnan Li",
+   "Dongxu Li",
+   "Caiming Xiong",
+   "Steven Hoi"
+  ],
+  "published": "2022-01-28",
+  "updated": "2022-02-15",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "blip2": {
+  "arxiv": "2301.12597",
+  "version": "v3",
+  "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+  "authors": [
+   "Junnan Li",
+   "Dongxu Li",
+   "Silvio Savarese",
+   "Steven Hoi"
+  ],
+  "published": "2023-01-30",
+  "updated": "2023-06-15",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "byol": {
+  "arxiv": "2006.07733",
+  "version": "v3",
+  "title": "Bootstrap your own latent: A new approach to self-supervised Learning",
+  "authors": [
+   "Jean-Bastien Grill",
+   "Florian Strub",
+   "Florent Altché",
+   "Corentin Tallec",
+   "Pierre H. Richemond",
+   "Elena Buchatskaya",
+   "Carl Doersch",
+   "Bernardo Avila Pires",
+   "Zhaohan Daniel Guo",
+   "Mohammad Gheshlaghi Azar",
+   "Bilal Piot",
+   "Koray Kavukcuoglu",
+   "Rémi Munos",
+   "Michal Valko"
+  ],
+  "published": "2020-06-13",
+  "updated": "2020-09-10",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "capsnet": {
+  "arxiv": "1710.09829",
+  "version": "v2",
+  "title": "Dynamic Routing Between Capsules",
+  "authors": [
+   "Sara Sabour",
+   "Nicholas Frosst",
+   "Geoffrey E Hinton"
+  ],
+  "published": "2017-10-26",
+  "updated": "2017-11-07",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "carafe": {
+  "arxiv": "1905.02188",
+  "version": "v3",
+  "title": "CARAFE: Content-Aware ReAssembly of FEatures",
+  "authors": [
+   "Jiaqi Wang",
+   "Kai Chen",
+   "Rui Xu",
+   "Ziwei Liu",
+   "Chen Change Loy",
+   "Dahua Lin"
+  ],
+  "published": "2019-05-06",
+  "updated": "2019-10-29",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "cascadercnn": {
+  "arxiv": "1712.00726",
+  "version": "v1",
+  "title": "Cascade R-CNN: Delving into High Quality Object Detection",
+  "authors": [
+   "Zhaowei Cai",
+   "Nuno Vasconcelos"
+  ],
+  "published": "2017-12-03",
+  "updated": "2017-12-03",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "cascast": {
+  "arxiv": "2402.04290",
+  "version": "v1",
+  "title": "CasCast: Skillful High-resolution Precipitation Nowcasting via Cascaded Modelling",
+  "authors": [
+   "Junchao Gong",
+   "Lei Bai",
+   "Peng Ye",
+   "Wanghan Xu",
+   "Na Liu",
+   "Jianhua Dai",
+   "Xiaokang Yang",
+   "Wanli Ouyang"
+  ],
+  "published": "2024-02-06",
+  "updated": "2024-02-06",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "cbam": {
+  "arxiv": "1807.06521",
+  "version": "v2",
+  "title": "CBAM: Convolutional Block Attention Module",
+  "authors": [
+   "Sanghyun Woo",
+   "Jongchan Park",
+   "Joon-Young Lee",
+   "In So Kweon"
+  ],
+  "published": "2018-07-17",
+  "updated": "2018-07-18",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "ccnet": {
+  "arxiv": "1811.11721",
+  "version": "v2",
+  "title": "CCNet: Criss-Cross Attention for Semantic Segmentation",
+  "authors": [
+   "Zilong Huang",
+   "Xinggang Wang",
+   "Yunchao Wei",
+   "Lichao Huang",
+   "Humphrey Shi",
+   "Wenyu Liu",
+   "Thomas S. Huang"
+  ],
+  "published": "2018-11-28",
+  "updated": "2020-07-09",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "cgan": {
+  "arxiv": "1411.1784",
+  "version": "v1",
+  "title": "Conditional Generative Adversarial Nets",
+  "authors": [
+   "Mehdi Mirza",
+   "Simon Osindero"
+  ],
+  "published": "2014-11-06",
+  "updated": "2014-11-06",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "climax": {
+  "arxiv": "2301.10343",
+  "version": "v5",
+  "title": "ClimaX: A foundation model for weather and climate",
+  "authors": [
+   "Tung Nguyen",
+   "Johannes Brandstetter",
+   "Ashish Kapoor",
+   "Jayesh K. Gupta",
+   "Aditya Grover"
+  ],
+  "published": "2023-01-24",
+  "updated": "2023-12-18",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "clip": {
+  "arxiv": "2103.00020",
+  "version": "v1",
+  "title": "Learning Transferable Visual Models From Natural Language Supervision",
+  "authors": [
+   "Alec Radford",
+   "Jong Wook Kim",
+   "Chris Hallacy",
+   "Aditya Ramesh",
+   "Gabriel Goh",
+   "Sandhini Agarwal",
+   "Girish Sastry",
+   "Amanda Askell",
+   "Pamela Mishkin",
+   "Jack Clark",
+   "Gretchen Krueger",
+   "Ilya Sutskever"
+  ],
+  "published": "2021-02-26",
+  "updated": "2021-02-26",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "coatnet": {
+  "arxiv": "2106.04803",
+  "version": "v2",
+  "title": "CoAtNet: Marrying Convolution and Attention for All Data Sizes",
+  "authors": [
+   "Zihang Dai",
+   "Hanxiao Liu",
+   "Quoc V. Le",
+   "Mingxing Tan"
+  ],
+  "published": "2021-06-09",
+  "updated": "2021-09-15",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "consistency": {
+  "arxiv": "2303.01469",
+  "version": "v2",
+  "title": "Consistency Models",
+  "authors": [
+   "Yang Song",
+   "Prafulla Dhariwal",
+   "Mark Chen",
+   "Ilya Sutskever"
+  ],
+  "published": "2023-03-02",
+  "updated": "2023-05-31",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "controlnet": {
+  "arxiv": "2302.05543",
+  "version": "v3",
+  "title": "Adding Conditional Control to Text-to-Image Diffusion Models",
+  "authors": [
+   "Lvmin Zhang",
+   "Anyi Rao",
+   "Maneesh Agrawala"
+  ],
+  "published": "2023-02-10",
+  "updated": "2023-11-26",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "convlstm": {
+  "arxiv": "1506.04214",
+  "version": "v2",
+  "title": "Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting",
+  "authors": [
+   "Xingjian Shi",
+   "Zhourong Chen",
+   "Hao Wang",
+   "Dit-Yan Yeung",
+   "Wai-kin Wong",
+   "Wang-chun Woo"
+  ],
+  "published": "2015-06-13",
+  "updated": "2015-09-19",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "convnext": {
+  "arxiv": "2201.03545",
+  "version": "v2",
+  "title": "A ConvNet for the 2020s",
+  "authors": [
+   "Zhuang Liu",
+   "Hanzi Mao",
+   "Chao-Yuan Wu",
+   "Christoph Feichtenhofer",
+   "Trevor Darrell",
+   "Saining Xie"
+  ],
+  "published": "2022-01-10",
+  "updated": "2022-03-02",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "convnextv2": {
+  "arxiv": "2301.00808",
+  "version": "v1",
+  "title": "ConvNeXt V2: Co-designing and Scaling ConvNets with Masked Autoencoders",
+  "authors": [
+   "Sanghyun Woo",
+   "Shoubhik Debnath",
+   "Ronghang Hu",
+   "Xinlei Chen",
+   "Zhuang Liu",
+   "In So Kweon",
+   "Saining Xie"
+  ],
+  "published": "2023-01-02",
+  "updated": "2023-01-02",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+ },
+ "convs2s": {
+  "arxiv": "1705.03122",
+  "version": "v3",
+  "title": "Convolutional Sequence to Sequence Learning",
+  "authors": [
+   "Jonas Gehring",
+   "Michael Auli",
+   "David Grangier",
+   "Denis Yarats",
+   "Yann N. Dauphin"
+  ],
+  "published": "2017-05-08",
+  "updated": "2017-07-25",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "coordatt": {
+  "arxiv": "2103.02907",
+  "version": "v1",
+  "title": "Coordinate Attention for Efficient Mobile Network Design",
+  "authors": [
+   "Qibin Hou",
+   "Daquan Zhou",
+   "Jiashi Feng"
+  ],
+  "published": "2021-03-04",
+  "updated": "2021-03-04",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "cot": {
+  "arxiv": "2201.11903",
+  "version": "v6",
+  "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+  "authors": [
+   "Jason Wei",
+   "Xuezhi Wang",
+   "Dale Schuurmans",
+   "Maarten Bosma",
+   "Brian Ichter",
+   "Fei Xia",
+   "Ed Chi",
+   "Quoc Le",
+   "Denny Zhou"
+  ],
+  "published": "2022-01-28",
+  "updated": "2023-01-10",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "cpc": {
+  "arxiv": "1807.03748",
+  "version": "v2",
+  "title": "Representation Learning with Contrastive Predictive Coding",
+  "authors": [
+   "Aaron van den Oord",
+   "Yazhe Li",
+   "Oriol Vinyals"
+  ],
+  "published": "2018-07-10",
+  "updated": "2019-01-22",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "cspnet": {
+  "arxiv": "1911.11929",
+  "version": "v1",
+  "title": "CSPNet: A New Backbone that can Enhance Learning Capability of CNN",
+  "authors": [
+   "Chien-Yao Wang",
+   "Hong-Yuan Mark Liao",
+   "I-Hau Yeh",
+   "Yueh-Hua Wu",
+   "Ping-Yang Chen",
+   "Jun-Wei Hsieh"
+  ],
+  "published": "2019-11-27",
+  "updated": "2019-11-27",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "cvt": {
+  "arxiv": "2103.15808",
+  "version": "v1",
+  "title": "CvT: Introducing Convolutions to Vision Transformers",
+  "authors": [
+   "Haiping Wu",
+   "Bin Xiao",
+   "Noel Codella",
+   "Mengchen Liu",
+   "Xiyang Dai",
+   "Lu Yuan",
+   "Lei Zhang"
+  ],
+  "published": "2021-03-29",
+  "updated": "2021-03-29",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "cyclegan": {
+  "arxiv": "1703.10593",
+  "version": "v7",
+  "title": "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks",
+  "authors": [
+   "Jun-Yan Zhu",
+   "Taesung Park",
+   "Phillip Isola",
+   "Alexei A. Efros"
+  ],
+  "published": "2017-03-30",
+  "updated": "2020-08-24",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "dalle2": {
+  "arxiv": "2204.06125",
+  "version": "v1",
+  "title": "Hierarchical Text-Conditional Image Generation with CLIP Latents",
+  "authors": [
+   "Aditya Ramesh",
+   "Prafulla Dhariwal",
+   "Alex Nichol",
+   "Casey Chu",
+   "Mark Chen"
+  ],
+  "published": "2022-04-13",
+  "updated": "2022-04-13",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "danet": {
+  "arxiv": "1809.02983",
+  "version": "v4",
+  "title": "Dual Attention Network for Scene Segmentation",
+  "authors": [
+   "Jun Fu",
+   "Jing Liu",
+   "Haijie Tian",
+   "Yong Li",
+   "Yongjun Bao",
+   "Zhiwei Fang",
+   "Hanqing Lu"
+  ],
+  "published": "2018-09-09",
+  "updated": "2019-04-21",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "dcgan": {
+  "arxiv": "1511.06434",
+  "version": "v2",
+  "title": "Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks",
+  "authors": [
+   "Alec Radford",
+   "Luke Metz",
+   "Soumith Chintala"
+  ],
+  "published": "2015-11-19",
+  "updated": "2016-01-07",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "dcn": {
+  "arxiv": "1703.06211",
+  "version": "v3",
+  "title": "Deformable Convolutional Networks",
+  "authors": [
+   "Jifeng Dai",
+   "Haozhi Qi",
+   "Yuwen Xiong",
+   "Yi Li",
+   "Guodong Zhang",
+   "Han Hu",
+   "Yichen Wei"
+  ],
+  "published": "2017-03-17",
+  "updated": "2017-06-05",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "dcrnn": {
+  "arxiv": "1707.01926",
+  "version": "v3",
+  "title": "Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting",
+  "authors": [
+   "Yaguang Li",
+   "Rose Yu",
+   "Cyrus Shahabi",
+   "Yan Liu"
+  ],
+  "published": "2017-07-06",
+  "updated": "2018-02-22",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "ddim": {
+  "arxiv": "2010.02502",
+  "version": "v4",
+  "title": "Denoising Diffusion Implicit Models",
+  "authors": [
+   "Jiaming Song",
+   "Chenlin Meng",
+   "Stefano Ermon"
+  ],
+  "published": "2020-10-06",
+  "updated": "2022-10-05",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "ddpm": {
+  "arxiv": "2006.11239",
+  "version": "v2",
+  "title": "Denoising Diffusion Probabilistic Models",
+  "authors": [
+   "Jonathan Ho",
+   "Ajay Jain",
+   "Pieter Abbeel"
+  ],
+  "published": "2020-06-19",
+  "updated": "2020-12-16",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "deepar": {
+  "arxiv": "1704.04110",
+  "version": "v3",
+  "title": "DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks",
+  "authors": [
+   "David Salinas",
+   "Valentin Flunkert",
+   "Jan Gasthaus"
+  ],
+  "published": "2017-04-13",
+  "updated": "2019-02-22",
+  "primary_category": "cs.AI",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "deeplabv3": {
+  "arxiv": "1706.05587",
+  "version": "v3",
+  "title": "Rethinking Atrous Convolution for Semantic Image Segmentation",
+  "authors": [
+   "Liang-Chieh Chen",
+   "George Papandreou",
+   "Florian Schroff",
+   "Hartwig Adam"
+  ],
+  "published": "2017-06-17",
+  "updated": "2017-12-05",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "deeplabv3plus": {
+  "arxiv": "1802.02611",
+  "version": "v3",
+  "title": "Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation",
+  "authors": [
+   "Liang-Chieh Chen",
+   "Yukun Zhu",
+   "George Papandreou",
+   "Florian Schroff",
+   "Hartwig Adam"
+  ],
+  "published": "2018-02-07",
+  "updated": "2018-08-22",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "deformabledetr": {
+  "arxiv": "2010.04159",
+  "version": "v4",
+  "title": "Deformable DETR: Deformable Transformers for End-to-End Object Detection",
+  "authors": [
+   "Xizhou Zhu",
+   "Weijie Su",
+   "Lewei Lu",
+   "Bin Li",
+   "Xiaogang Wang",
+   "Jifeng Dai"
+  ],
+  "published": "2020-10-08",
+  "updated": "2021-03-18",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "deit": {
+  "arxiv": "2012.12877",
+  "version": "v2",
+  "title": "Training data-efficient image transformers & distillation through attention",
+  "authors": [
+   "Hugo Touvron",
+   "Matthieu Cord",
+   "Matthijs Douze",
+   "Francisco Massa",
+   "Alexandre Sablayrolles",
+   "Hervé Jégou"
+  ],
+  "published": "2020-12-23",
+  "updated": "2021-01-15",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "densenet": {
+  "arxiv": "1608.06993",
+  "version": "v5",
+  "title": "Densely Connected Convolutional Networks",
+  "authors": [
+   "Gao Huang",
+   "Zhuang Liu",
+   "Laurens van der Maaten",
+   "Kilian Q. Weinberger"
+  ],
+  "published": "2016-08-25",
+  "updated": "2018-01-28",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "detr": {
+  "arxiv": "2005.12872",
+  "version": "v3",
+  "title": "End-to-End Object Detection with Transformers",
+  "authors": [
+   "Nicolas Carion",
+   "Francisco Massa",
+   "Gabriel Synnaeve",
+   "Nicolas Usunier",
+   "Alexander Kirillov",
+   "Sergey Zagoruyko"
+  ],
+  "published": "2020-05-26",
+  "updated": "2020-05-28",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/publicdomain/zero/1.0/"
+ },
+ "dgcnn": {
+  "arxiv": "1801.07829",
+  "version": "v2",
+  "title": "Dynamic Graph CNN for Learning on Point Clouds",
+  "authors": [
+   "Yue Wang",
+   "Yongbin Sun",
+   "Ziwei Liu",
+   "Sanjay E. Sarma",
+   "Michael M. Bronstein",
+   "Justin M. Solomon"
+  ],
+  "published": "2018-01-24",
+  "updated": "2019-06-11",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "dgmr": {
+  "arxiv": "2104.00954",
+  "version": "v1",
+  "title": "Skillful Precipitation Nowcasting using Deep Generative Models of Radar",
+  "authors": [
+   "Suman Ravuri",
+   "Karel Lenc",
+   "Matthew Willson",
+   "Dmitry Kangin",
+   "Remi Lam",
+   "Piotr Mirowski",
+   "Megan Fitzsimons",
+   "Maria Athanassiadou",
+   "Sheleem Kashem",
+   "Sam Madge",
+   "Rachel Prudden",
+   "Amol Mandhane",
+   "Aidan Clark",
+   "Andrew Brock",
+   "Karen Simonyan",
+   "Raia Hadsell",
+   "Niall Robinson",
+   "Ellen Clancy",
+   "Alberto Arribas",
+   "Shakir Mohamed"
+  ],
+  "published": "2021-04-02",
+  "updated": "2021-04-02",
+  "primary_category": "cs.LG",
+  "doi": "10.1038/s41586-021-03854-z",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "diffcast": {
+  "arxiv": "2312.06734",
+  "version": "v2",
+  "title": "DiffCast: A Unified Framework via Residual Diffusion for Precipitation Nowcasting",
+  "authors": [
+   "Demin Yu",
+   "Xutao Li",
+   "Yunming Ye",
+   "Baoquan Zhang",
+   "Chuyao Luo",
+   "Kuai Dai",
+   "Rui Wang",
+   "Xunlai Chen"
+  ],
+  "published": "2023-12-11",
+  "updated": "2024-03-26",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "dilated": {
+  "arxiv": "1511.07122",
+  "version": "v3",
+  "title": "Multi-Scale Context Aggregation by Dilated Convolutions",
+  "authors": [
+   "Fisher Yu",
+   "Vladlen Koltun"
+  ],
+  "published": "2015-11-23",
+  "updated": "2016-04-30",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "dino": {
+  "arxiv": "2104.14294",
+  "version": "v2",
+  "title": "Emerging Properties in Self-Supervised Vision Transformers",
+  "authors": [
+   "Mathilde Caron",
+   "Hugo Touvron",
+   "Ishan Misra",
+   "Hervé Jégou",
+   "Julien Mairal",
+   "Piotr Bojanowski",
+   "Armand Joulin"
+  ],
+  "published": "2021-04-29",
+  "updated": "2021-05-24",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "dit": {
+  "arxiv": "2212.09748",
+  "version": "v2",
+  "title": "Scalable Diffusion Models with Transformers",
+  "authors": [
+   "William Peebles",
+   "Saining Xie"
+  ],
+  "published": "2022-12-19",
+  "updated": "2023-03-02",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "dlinear": {
+  "arxiv": "2205.13504",
+  "version": "v3",
+  "title": "Are Transformers Effective for Time Series Forecasting?",
+  "authors": [
+   "Ailing Zeng",
+   "Muxi Chen",
+   "Lei Zhang",
+   "Qiang Xu"
+  ],
+  "published": "2022-05-26",
+  "updated": "2022-08-17",
+  "primary_category": "cs.AI",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "dysample": {
+  "arxiv": "2308.15085",
+  "version": "v1",
+  "title": "Learning to Upsample by Learning to Sample",
+  "authors": [
+   "Wenze Liu",
+   "Hao Lu",
+   "Hongtao Fu",
+   "Zhiguo Cao"
+  ],
+  "published": "2023-08-29",
+  "updated": "2023-08-29",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "earthformer": {
+  "arxiv": "2207.05833",
+  "version": "v2",
+  "title": "Earthformer: Exploring Space-Time Transformers for Earth System Forecasting",
+  "authors": [
+   "Zhihan Gao",
+   "Xingjian Shi",
+   "Hao Wang",
+   "Yi Zhu",
+   "Yuyang Wang",
+   "Mu Li",
+   "Dit-Yan Yeung"
+  ],
+  "published": "2022-07-12",
+  "updated": "2023-03-01",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "eca": {
+  "arxiv": "1910.03151",
+  "version": "v4",
+  "title": "ECA-Net: Efficient Channel Attention for Deep Convolutional Neural Networks",
+  "authors": [
+   "Qilong Wang",
+   "Banggu Wu",
+   "Pengfei Zhu",
+   "Peihua Li",
+   "Wangmeng Zuo",
+   "Qinghua Hu"
+  ],
+  "published": "2019-10-08",
+  "updated": "2020-04-07",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "efficientnet": {
+  "arxiv": "1905.11946",
+  "version": "v5",
+  "title": "EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks",
+  "authors": [
+   "Mingxing Tan",
+   "Quoc V. Le"
+  ],
+  "published": "2019-05-28",
+  "updated": "2020-09-11",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "International Conference on Machine Learning, 2019",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "efficientvit": {
+  "arxiv": "2205.14756",
+  "version": "v6",
+  "title": "EfficientViT: Multi-Scale Linear Attention for High-Resolution Dense Prediction",
+  "authors": [
+   "Han Cai",
+   "Junyan Li",
+   "Muyan Hu",
+   "Chuang Gan",
+   "Song Han"
+  ],
+  "published": "2022-05-29",
+  "updated": "2024-02-06",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "electra": {
+  "arxiv": "2003.10555",
+  "version": "v1",
+  "title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators",
+  "authors": [
+   "Kevin Clark",
+   "Minh-Thang Luong",
+   "Quoc V. Le",
+   "Christopher D. Manning"
+  ],
+  "published": "2020-03-23",
+  "updated": "2020-03-23",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "espcn": {
+  "arxiv": "1609.05158",
+  "version": "v2",
+  "title": "Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network",
+  "authors": [
+   "Wenzhe Shi",
+   "Jose Caballero",
+   "Ferenc Huszár",
+   "Johannes Totz",
+   "Andrew P. Aitken",
+   "Rob Bishop",
+   "Daniel Rueckert",
+   "Zehan Wang"
+  ],
+  "published": "2016-09-16",
+  "updated": "2016-09-23",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "esrgan": {
+  "arxiv": "1809.00219",
+  "version": "v2",
+  "title": "ESRGAN: Enhanced Super-Resolution Generative Adversarial Networks",
+  "authors": [
+   "Xintao Wang",
+   "Ke Yu",
+   "Shixiang Wu",
+   "Jinjin Gu",
+   "Yihao Liu",
+   "Chao Dong",
+   "Chen Change Loy",
+   "Yu Qiao",
+   "Xiaoou Tang"
+  ],
+  "published": "2018-09-01",
+  "updated": "2018-09-17",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "facenet": {
+  "arxiv": "1503.03832",
+  "version": "v3",
+  "title": "FaceNet: A Unified Embedding for Face Recognition and Clustering",
+  "authors": [
+   "Florian Schroff",
+   "Dmitry Kalenichenko",
+   "James Philbin"
+  ],
+  "published": "2015-03-12",
+  "updated": "2015-06-17",
+  "primary_category": "cs.CV",
+  "doi": "10.1109/CVPR.2015.7298682",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "fasterrcnn": {
+  "arxiv": "1506.01497",
+  "version": "v3",
+  "title": "Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks",
+  "authors": [
+   "Shaoqing Ren",
+   "Kaiming He",
+   "Ross Girshick",
+   "Jian Sun"
+  ],
+  "published": "2015-06-04",
+  "updated": "2016-01-06",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "fastrcnn": {
+  "arxiv": "1504.08083",
+  "version": "v2",
+  "title": "Fast R-CNN",
+  "authors": [
+   "Ross Girshick"
+  ],
+  "published": "2015-04-30",
+  "updated": "2015-09-27",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "fcanet": {
+  "arxiv": "2012.11879",
+  "version": "v4",
+  "title": "FcaNet: Frequency Channel Attention Networks",
+  "authors": [
+   "Zequn Qin",
+   "Pengyi Zhang",
+   "Fei Wu",
+   "Xi Li"
+  ],
+  "published": "2020-12-22",
+  "updated": "2021-07-23",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "fcn": {
+  "arxiv": "1411.4038",
+  "version": "v2",
+  "title": "Fully Convolutional Networks for Semantic Segmentation",
+  "authors": [
+   "Jonathan Long",
+   "Evan Shelhamer",
+   "Trevor Darrell"
+  ],
+  "published": "2014-11-14",
+  "updated": "2015-03-08",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "fcos": {
+  "arxiv": "1904.01355",
+  "version": "v5",
+  "title": "FCOS: Fully Convolutional One-Stage Object Detection",
+  "authors": [
+   "Zhi Tian",
+   "Chunhua Shen",
+   "Hao Chen",
+   "Tong He"
+  ],
+  "published": "2019-04-02",
+  "updated": "2019-08-20",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-sa/4.0/"
+ },
+ "fedformer": {
+  "arxiv": "2201.12740",
+  "version": "v3",
+  "title": "FEDformer: Frequency Enhanced Decomposed Transformer for Long-term Series Forecasting",
+  "authors": [
+   "Tian Zhou",
+   "Ziqing Ma",
+   "Qingsong Wen",
+   "Xue Wang",
+   "Liang Sun",
+   "Rong Jin"
+  ],
+  "published": "2022-01-30",
+  "updated": "2022-06-16",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-sa/4.0/"
+ },
+ "fengwu": {
+  "arxiv": "2304.02948",
+  "version": "v1",
+  "title": "FengWu: Pushing the Skillful Global Medium-range Weather Forecast beyond 10 Days Lead",
+  "authors": [
+   "Kang Chen",
+   "Tao Han",
+   "Junchao Gong",
+   "Lei Bai",
+   "Fenghua Ling",
+   "Jing-Jia Luo",
+   "Xi Chen",
+   "Leiming Ma",
+   "Tianning Zhang",
+   "Rui Su",
+   "Yuanzheng Ci",
+   "Bin Li",
+   "Xiaokang Yang",
+   "Wanli Ouyang"
+  ],
+  "published": "2023-04-06",
+  "updated": "2023-04-06",
+  "primary_category": "cs.AI",
+  "doi": "10.1038/s43247-025-02502-y",
+  "journal_ref": "Commun. Earth Environ. 6, 518 (2025)",
+  "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+ },
+ "fftformer": {
+  "arxiv": "2211.12250",
+  "version": "v1",
+  "title": "Efficient Frequency Domain-based Transformers for High-Quality Image Deblurring",
+  "authors": [
+   "Lingshun Kong",
+   "Jiangxin Dong",
+   "Mingqiang Li",
+   "Jianjun Ge",
+   "Jinshan Pan"
+  ],
+  "published": "2022-11-22",
+  "updated": "2022-11-22",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "flamingo": {
+  "arxiv": "2204.14198",
+  "version": "v2",
+  "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+  "authors": [
+   "Jean-Baptiste Alayrac",
+   "Jeff Donahue",
+   "Pauline Luc",
+   "Antoine Miech",
+   "Iain Barr",
+   "Yana Hasson",
+   "Karel Lenc",
+   "Arthur Mensch",
+   "Katie Millican",
+   "Malcolm Reynolds",
+   "Roman Ring",
+   "Eliza Rutherford",
+   "Serkan Cabi",
+   "Tengda Han",
+   "Zhitao Gong",
+   "Sina Samangooei",
+   "Marianne Monteiro",
+   "Jacob Menick",
+   "Sebastian Borgeaud",
+   "Andrew Brock",
+   "Aida Nematzadeh",
+   "Sahand Sharifzadeh",
+   "Mikolaj Binkowski",
+   "Ricardo Barreira",
+   "Oriol Vinyals",
+   "Andrew Zisserman",
+   "Karen Simonyan"
+  ],
+  "published": "2022-04-29",
+  "updated": "2022-11-15",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "flashattention": {
+  "arxiv": "2205.14135",
+  "version": "v2",
+  "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+  "authors": [
+   "Tri Dao",
+   "Daniel Y. Fu",
+   "Stefano Ermon",
+   "Atri Rudra",
+   "Christopher Ré"
+  ],
+  "published": "2022-05-27",
+  "updated": "2022-06-23",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "fno": {
+  "arxiv": "2010.08895",
+  "version": "v3",
+  "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+  "authors": [
+   "Zongyi Li",
+   "Nikola Kovachki",
+   "Kamyar Azizzadenesheli",
+   "Burigede Liu",
+   "Kaushik Bhattacharya",
+   "Andrew Stuart",
+   "Anima Anandkumar"
+  ],
+  "published": "2020-10-18",
+  "updated": "2021-05-17",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "fourcastnet": {
+  "arxiv": "2202.11214",
+  "version": "v1",
+  "title": "FourCastNet: A Global Data-driven High-resolution Weather Model using Adaptive Fourier Neural Operators",
+  "authors": [
+   "Jaideep Pathak",
+   "Shashank Subramanian",
+   "Peter Harrington",
+   "Sanjeev Raja",
+   "Ashesh Chattopadhyay",
+   "Morteza Mardani",
+   "Thorsten Kurth",
+   "David Hall",
+   "Zongyi Li",
+   "Kamyar Azizzadenesheli",
+   "Pedram Hassanzadeh",
+   "Karthik Kashinath",
+   "Animashree Anandkumar"
+  ],
+  "published": "2022-02-22",
+  "updated": "2022-02-22",
+  "primary_category": "physics.ao-ph",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "fpn": {
+  "arxiv": "1612.03144",
+  "version": "v2",
+  "title": "Feature Pyramid Networks for Object Detection",
+  "authors": [
+   "Tsung-Yi Lin",
+   "Piotr Dollár",
+   "Ross Girshick",
+   "Kaiming He",
+   "Bharath Hariharan",
+   "Serge Belongie"
+  ],
+  "published": "2016-12-09",
+  "updated": "2017-04-19",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "frets": {
+  "arxiv": "2311.06184",
+  "version": "v1",
+  "title": "Frequency-domain MLPs are More Effective Learners in Time Series Forecasting",
+  "authors": [
+   "Kun Yi",
+   "Qi Zhang",
+   "Wei Fan",
+   "Shoujin Wang",
+   "Pengyang Wang",
+   "Hui He",
+   "Defu Lian",
+   "Ning An",
+   "Longbing Cao",
+   "Zhendong Niu"
+  ],
+  "published": "2023-11-10",
+  "updated": "2023-11-10",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "fuxi": {
+  "arxiv": "2306.12873",
+  "version": "v3",
+  "title": "FuXi: A cascade machine learning forecasting system for 15-day global weather forecast",
+  "authors": [
+   "Lei Chen",
+   "Xiaohui Zhong",
+   "Feng Zhang",
+   "Yuan Cheng",
+   "Yinghui Xu",
+   "Yuan Qi",
+   "Hao Li"
+  ],
+  "published": "2023-06-22",
+  "updated": "2023-10-20",
+  "primary_category": "physics.ao-ph",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "gan": {
+  "arxiv": "1406.2661",
+  "version": "v1",
+  "title": "Generative Adversarial Networks",
+  "authors": [
+   "Ian J. Goodfellow",
+   "Jean Pouget-Abadie",
+   "Mehdi Mirza",
+   "Bing Xu",
+   "David Warde-Farley",
+   "Sherjil Ozair",
+   "Aaron Courville",
+   "Yoshua Bengio"
+  ],
+  "published": "2014-06-10",
+  "updated": "2014-06-10",
+  "primary_category": "stat.ML",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "gat": {
+  "arxiv": "1710.10903",
+  "version": "v3",
+  "title": "Graph Attention Networks",
+  "authors": [
+   "Petar Veličković",
+   "Guillem Cucurull",
+   "Arantxa Casanova",
+   "Adriana Romero",
+   "Pietro Liò",
+   "Yoshua Bengio"
+  ],
+  "published": "2017-10-30",
+  "updated": "2018-02-04",
+  "primary_category": "stat.ML",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "gaussiansplatting": {
+  "arxiv": "2308.04079",
+  "version": "v1",
+  "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+  "authors": [
+   "Bernhard Kerbl",
+   "Georgios Kopanas",
+   "Thomas Leimkühler",
+   "George Drettakis"
+  ],
+  "published": "2023-08-08",
+  "updated": "2023-08-08",
+  "primary_category": "cs.GR",
+  "doi": "",
+  "journal_ref": "ACM Transactions on Graphics, volume 42(4), July 2023",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "gcn": {
+  "arxiv": "1609.02907",
+  "version": "v4",
+  "title": "Semi-Supervised Classification with Graph Convolutional Networks",
+  "authors": [
+   "Thomas N. Kipf",
+   "Max Welling"
+  ],
+  "published": "2016-09-09",
+  "updated": "2017-02-22",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "gcnet": {
+  "arxiv": "1904.11492",
+  "version": "v1",
+  "title": "GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond",
+  "authors": [
+   "Yue Cao",
+   "Jiarui Xu",
+   "Stephen Lin",
+   "Fangyun Wei",
+   "Han Hu"
+  ],
+  "published": "2019-04-25",
+  "updated": "2019-04-25",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "gfnet": {
+  "arxiv": "2107.00645",
+  "version": "v2",
+  "title": "Global Filter Networks for Image Classification",
+  "authors": [
+   "Yongming Rao",
+   "Wenliang Zhao",
+   "Zheng Zhu",
+   "Jiwen Lu",
+   "Jie Zhou"
+  ],
+  "published": "2021-07-01",
+  "updated": "2021-10-26",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "ghostnet": {
+  "arxiv": "1911.11907",
+  "version": "v2",
+  "title": "GhostNet: More Features from Cheap Operations",
+  "authors": [
+   "Kai Han",
+   "Yunhe Wang",
+   "Qi Tian",
+   "Jianyuan Guo",
+   "Chunjing Xu",
+   "Chang Xu"
+  ],
+  "published": "2019-11-27",
+  "updated": "2020-03-13",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "glow": {
+  "arxiv": "1807.03039",
+  "version": "v2",
+  "title": "Glow: Generative Flow with Invertible 1x1 Convolutions",
+  "authors": [
+   "Diederik P. Kingma",
+   "Prafulla Dhariwal"
+  ],
+  "published": "2018-07-09",
+  "updated": "2018-07-10",
+  "primary_category": "stat.ML",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "gnmt": {
+  "arxiv": "1609.08144",
+  "version": "v2",
+  "title": "Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation",
+  "authors": [
+   "Yonghui Wu",
+   "Mike Schuster",
+   "Zhifeng Chen",
+   "Quoc V. Le",
+   "Mohammad Norouzi",
+   "Wolfgang Macherey",
+   "Maxim Krikun",
+   "Yuan Cao",
+   "Qin Gao",
+   "Klaus Macherey",
+   "Jeff Klingner",
+   "Apurva Shah",
+   "Melvin Johnson",
+   "Xiaobing Liu",
+   "Łukasz Kaiser",
+   "Stephan Gouws",
+   "Yoshikiyo Kato",
+   "Taku Kudo",
+   "Hideto Kazawa",
+   "Keith Stevens",
+   "George Kurian",
+   "Nishant Patil",
+   "Wei Wang",
+   "Cliff Young",
+   "Jason Smith",
+   "Jason Riesa",
+   "Alex Rudnick",
+   "Oriol Vinyals",
+   "Greg Corrado",
+   "Macduff Hughes",
+   "Jeffrey Dean"
+  ],
+  "published": "2016-09-26",
+  "updated": "2016-10-08",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "googlenet": {
+  "arxiv": "1409.4842",
+  "version": "v1",
+  "title": "Going Deeper with Convolutions",
+  "authors": [
+   "Christian Szegedy",
+   "Wei Liu",
+   "Yangqing Jia",
+   "Pierre Sermanet",
+   "Scott Reed",
+   "Dragomir Anguelov",
+   "Dumitru Erhan",
+   "Vincent Vanhoucke",
+   "Andrew Rabinovich"
+  ],
+  "published": "2014-09-17",
+  "updated": "2014-09-17",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "gpt3": {
+  "arxiv": "2005.14165",
+  "version": "v4",
+  "title": "Language Models are Few-Shot Learners",
+  "authors": [
+   "Tom B. Brown",
+   "Benjamin Mann",
+   "Nick Ryder",
+   "Melanie Subbiah",
+   "Jared Kaplan",
+   "Prafulla Dhariwal",
+   "Arvind Neelakantan",
+   "Pranav Shyam",
+   "Girish Sastry",
+   "Amanda Askell",
+   "Sandhini Agarwal",
+   "Ariel Herbert-Voss",
+   "Gretchen Krueger",
+   "Tom Henighan",
+   "Rewon Child",
+   "Aditya Ramesh",
+   "Daniel M. Ziegler",
+   "Jeffrey Wu",
+   "Clemens Winter",
+   "Christopher Hesse",
+   "Mark Chen",
+   "Eric Sigler",
+   "Mateusz Litwin",
+   "Scott Gray",
+   "Benjamin Chess",
+   "Jack Clark",
+   "Christopher Berner",
+   "Sam McCandlish",
+   "Alec Radford",
+   "Ilya Sutskever",
+   "Dario Amodei"
+  ],
+  "published": "2020-05-28",
+  "updated": "2020-07-22",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "graphcast": {
+  "arxiv": "2212.12794",
+  "version": "v2",
+  "title": "GraphCast: Learning skillful medium-range global weather forecasting",
+  "authors": [
+   "Remi Lam",
+   "Alvaro Sanchez-Gonzalez",
+   "Matthew Willson",
+   "Peter Wirnsberger",
+   "Meire Fortunato",
+   "Ferran Alet",
+   "Suman Ravuri",
+   "Timo Ewalds",
+   "Zach Eaton-Rosen",
+   "Weihua Hu",
+   "Alexander Merose",
+   "Stephan Hoyer",
+   "George Holland",
+   "Oriol Vinyals",
+   "Jacklynn Stott",
+   "Alexander Pritzel",
+   "Shakir Mohamed",
+   "Peter Battaglia"
+  ],
+  "published": "2022-12-24",
+  "updated": "2023-08-04",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "graphormer": {
+  "arxiv": "2106.05234",
+  "version": "v5",
+  "title": "Do Transformers Really Perform Bad for Graph Representation?",
+  "authors": [
+   "Chengxuan Ying",
+   "Tianle Cai",
+   "Shengjie Luo",
+   "Shuxin Zheng",
+   "Guolin Ke",
+   "Di He",
+   "Yanming Shen",
+   "Tie-Yan Liu"
+  ],
+  "published": "2021-06-09",
+  "updated": "2021-11-24",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "NeurIPS 2021",
+  "license": "http://creativecommons.org/licenses/by-sa/4.0/"
+ },
+ "graphsage": {
+  "arxiv": "1706.02216",
+  "version": "v4",
+  "title": "Inductive Representation Learning on Large Graphs",
+  "authors": [
+   "William L. Hamilton",
+   "Rex Ying",
+   "Jure Leskovec"
+  ],
+  "published": "2017-06-07",
+  "updated": "2018-09-10",
+  "primary_category": "cs.SI",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "graphwavenet": {
+  "arxiv": "1906.00121",
+  "version": "v1",
+  "title": "Graph WaveNet for Deep Spatial-Temporal Graph Modeling",
+  "authors": [
+   "Zonghan Wu",
+   "Shirui Pan",
+   "Guodong Long",
+   "Jing Jiang",
+   "Chengqi Zhang"
+  ],
+  "published": "2019-05-31",
+  "updated": "2019-05-31",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "groundingdino": {
+  "arxiv": "2303.05499",
+  "version": "v5",
+  "title": "Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection",
+  "authors": [
+   "Shilong Liu",
+   "Zhaoyang Zeng",
+   "Tianhe Ren",
+   "Feng Li",
+   "Hao Zhang",
+   "Jie Yang",
+   "Qing Jiang",
+   "Chunyuan Li",
+   "Jianwei Yang",
+   "Hang Su",
+   "Jun Zhu",
+   "Lei Zhang"
+  ],
+  "published": "2023-03-09",
+  "updated": "2024-07-19",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "groupnorm": {
+  "arxiv": "1803.08494",
+  "version": "v3",
+  "title": "Group Normalization",
+  "authors": [
+   "Yuxin Wu",
+   "Kaiming He"
+  ],
+  "published": "2018-03-22",
+  "updated": "2018-06-11",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "gru": {
+  "arxiv": "1406.1078",
+  "version": "v3",
+  "title": "Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation",
+  "authors": [
+   "Kyunghyun Cho",
+   "Bart van Merrienboer",
+   "Caglar Gulcehre",
+   "Dzmitry Bahdanau",
+   "Fethi Bougares",
+   "Holger Schwenk",
+   "Yoshua Bengio"
+  ],
+  "published": "2014-06-03",
+  "updated": "2014-09-03",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "hrnet": {
+  "arxiv": "1908.07919",
+  "version": "v2",
+  "title": "Deep High-Resolution Representation Learning for Visual Recognition",
+  "authors": [
+   "Jingdong Wang",
+   "Ke Sun",
+   "Tianheng Cheng",
+   "Borui Jiang",
+   "Chaorui Deng",
+   "Yang Zhao",
+   "Dong Liu",
+   "Yadong Mu",
+   "Mingkui Tan",
+   "Xinggang Wang",
+   "Wenyu Liu",
+   "Bin Xiao"
+  ],
+  "published": "2019-08-20",
+  "updated": "2020-03-13",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "inceptionv3": {
+  "arxiv": "1512.00567",
+  "version": "v3",
+  "title": "Rethinking the Inception Architecture for Computer Vision",
+  "authors": [
+   "Christian Szegedy",
+   "Vincent Vanhoucke",
+   "Sergey Ioffe",
+   "Jonathon Shlens",
+   "Zbigniew Wojna"
+  ],
+  "published": "2015-12-02",
+  "updated": "2015-12-11",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "inceptionv4": {
+  "arxiv": "1602.07261",
+  "version": "v2",
+  "title": "Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning",
+  "authors": [
+   "Christian Szegedy",
+   "Sergey Ioffe",
+   "Vincent Vanhoucke",
+   "Alex Alemi"
+  ],
+  "published": "2016-02-23",
+  "updated": "2016-08-23",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "informer": {
+  "arxiv": "2012.07436",
+  "version": "v3",
+  "title": "Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting",
+  "authors": [
+   "Haoyi Zhou",
+   "Shanghang Zhang",
+   "Jieqi Peng",
+   "Shuai Zhang",
+   "Jianxin Li",
+   "Hui Xiong",
+   "Wancai Zhang"
+  ],
+  "published": "2020-12-14",
+  "updated": "2021-03-28",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "instructgpt": {
+  "arxiv": "2203.02155",
+  "version": "v1",
+  "title": "Training language models to follow instructions with human feedback",
+  "authors": [
+   "Long Ouyang",
+   "Jeff Wu",
+   "Xu Jiang",
+   "Diogo Almeida",
+   "Carroll L. Wainwright",
+   "Pamela Mishkin",
+   "Chong Zhang",
+   "Sandhini Agarwal",
+   "Katarina Slama",
+   "Alex Ray",
+   "John Schulman",
+   "Jacob Hilton",
+   "Fraser Kelton",
+   "Luke Miller",
+   "Maddie Simens",
+   "Amanda Askell",
+   "Peter Welinder",
+   "Paul Christiano",
+   "Jan Leike",
+   "Ryan Lowe"
+  ],
+  "published": "2022-03-04",
+  "updated": "2022-03-04",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "itransformer": {
+  "arxiv": "2310.06625",
+  "version": "v4",
+  "title": "iTransformer: Inverted Transformers Are Effective for Time Series Forecasting",
+  "authors": [
+   "Yong Liu",
+   "Tengge Hu",
+   "Haoran Zhang",
+   "Haixu Wu",
+   "Shiyu Wang",
+   "Lintao Ma",
+   "Mingsheng Long"
+  ],
+  "published": "2023-10-10",
+  "updated": "2024-03-14",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+ },
+ "ldcast": {
+  "arxiv": "2304.12891",
+  "version": "v1",
+  "title": "Latent diffusion models for generative precipitation nowcasting with accurate uncertainty quantification",
+  "authors": [
+   "Jussi Leinonen",
+   "Ulrich Hamann",
+   "Daniele Nerini",
+   "Urs Germann",
+   "Gabriele Franch"
+  ],
+  "published": "2023-04-25",
+  "updated": "2023-04-25",
+  "primary_category": "physics.ao-ph",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-sa/4.0/"
+ },
+ "ldm": {
+  "arxiv": "2112.10752",
+  "version": "v2",
+  "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+  "authors": [
+   "Robin Rombach",
+   "Andreas Blattmann",
+   "Dominik Lorenz",
+   "Patrick Esser",
+   "Björn Ommer"
+  ],
+  "published": "2021-12-20",
+  "updated": "2022-04-13",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "llava": {
+  "arxiv": "2304.08485",
+  "version": "v2",
+  "title": "Visual Instruction Tuning",
+  "authors": [
+   "Haotian Liu",
+   "Chunyuan Li",
+   "Qingyang Wu",
+   "Yong Jae Lee"
+  ],
+  "published": "2023-04-17",
+  "updated": "2023-12-11",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "longformer": {
+  "arxiv": "2004.05150",
+  "version": "v2",
+  "title": "Longformer: The Long-Document Transformer",
+  "authors": [
+   "Iz Beltagy",
+   "Matthew E. Peters",
+   "Arman Cohan"
+  ],
+  "published": "2020-04-10",
+  "updated": "2020-12-02",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "lora": {
+  "arxiv": "2106.09685",
+  "version": "v2",
+  "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+  "authors": [
+   "Edward J. Hu",
+   "Yelong Shen",
+   "Phillip Wallis",
+   "Zeyuan Allen-Zhu",
+   "Yuanzhi Li",
+   "Shean Wang",
+   "Lu Wang",
+   "Weizhu Chen"
+  ],
+  "published": "2021-06-17",
+  "updated": "2021-10-16",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "lstm_gru_chung": {
+  "arxiv": "1412.3555",
+  "version": "v1",
+  "title": "Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling",
+  "authors": [
+   "Junyoung Chung",
+   "Caglar Gulcehre",
+   "KyungHyun Cho",
+   "Yoshua Bengio"
+  ],
+  "published": "2014-12-11",
+  "updated": "2014-12-11",
+  "primary_category": "cs.NE",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "mae": {
+  "arxiv": "2111.06377",
+  "version": "v3",
+  "title": "Masked Autoencoders Are Scalable Vision Learners",
+  "authors": [
+   "Kaiming He",
+   "Xinlei Chen",
+   "Saining Xie",
+   "Yanghao Li",
+   "Piotr Dollár",
+   "Ross Girshick"
+  ],
+  "published": "2021-11-11",
+  "updated": "2021-12-19",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "mamba": {
+  "arxiv": "2312.00752",
+  "version": "v2",
+  "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+  "authors": [
+   "Albert Gu",
+   "Tri Dao"
+  ],
+  "published": "2023-12-01",
+  "updated": "2024-05-31",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "maml": {
+  "arxiv": "1703.03400",
+  "version": "v3",
+  "title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+  "authors": [
+   "Chelsea Finn",
+   "Pieter Abbeel",
+   "Sergey Levine"
+  ],
+  "published": "2017-03-09",
+  "updated": "2017-07-18",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "mask2former": {
+  "arxiv": "2112.01527",
+  "version": "v3",
+  "title": "Masked-attention Mask Transformer for Universal Image Segmentation",
+  "authors": [
+   "Bowen Cheng",
+   "Ishan Misra",
+   "Alexander G. Schwing",
+   "Alexander Kirillov",
+   "Rohit Girdhar"
+  ],
+  "published": "2021-12-02",
+  "updated": "2022-06-15",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "maskrcnn": {
+  "arxiv": "1703.06870",
+  "version": "v3",
+  "title": "Mask R-CNN",
+  "authors": [
+   "Kaiming He",
+   "Georgia Gkioxari",
+   "Piotr Dollár",
+   "Ross Girshick"
+  ],
+  "published": "2017-03-20",
+  "updated": "2018-01-24",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "maxvit": {
+  "arxiv": "2204.01697",
+  "version": "v4",
+  "title": "MaxViT: Multi-Axis Vision Transformer",
+  "authors": [
+   "Zhengzhong Tu",
+   "Hossein Talebi",
+   "Han Zhang",
+   "Feng Yang",
+   "Peyman Milanfar",
+   "Alan Bovik",
+   "Yinxiao Li"
+  ],
+  "published": "2022-04-04",
+  "updated": "2022-09-09",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+ },
+ "metnet": {
+  "arxiv": "2003.12140",
+  "version": "v2",
+  "title": "MetNet: A Neural Weather Model for Precipitation Forecasting",
+  "authors": [
+   "Casper Kaae Sønderby",
+   "Lasse Espeholt",
+   "Jonathan Heek",
+   "Mostafa Dehghani",
+   "Avital Oliver",
+   "Tim Salimans",
+   "Shreya Agrawal",
+   "Jason Hickey",
+   "Nal Kalchbrenner"
+  ],
+  "published": "2020-03-24",
+  "updated": "2020-03-30",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "mlpmixer": {
+  "arxiv": "2105.01601",
+  "version": "v4",
+  "title": "MLP-Mixer: An all-MLP Architecture for Vision",
+  "authors": [
+   "Ilya Tolstikhin",
+   "Neil Houlsby",
+   "Alexander Kolesnikov",
+   "Lucas Beyer",
+   "Xiaohua Zhai",
+   "Thomas Unterthiner",
+   "Jessica Yung",
+   "Andreas Steiner",
+   "Daniel Keysers",
+   "Jakob Uszkoreit",
+   "Mario Lucic",
+   "Alexey Dosovitskiy"
+  ],
+  "published": "2021-05-04",
+  "updated": "2021-06-11",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "mobilenetv1": {
+  "arxiv": "1704.04861",
+  "version": "v1",
+  "title": "MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications",
+  "authors": [
+   "Andrew G. Howard",
+   "Menglong Zhu",
+   "Bo Chen",
+   "Dmitry Kalenichenko",
+   "Weijun Wang",
+   "Tobias Weyand",
+   "Marco Andreetto",
+   "Hartwig Adam"
+  ],
+  "published": "2017-04-17",
+  "updated": "2017-04-17",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "mobilenetv2": {
+  "arxiv": "1801.04381",
+  "version": "v4",
+  "title": "MobileNetV2: Inverted Residuals and Linear Bottlenecks",
+  "authors": [
+   "Mark Sandler",
+   "Andrew Howard",
+   "Menglong Zhu",
+   "Andrey Zhmoginov",
+   "Liang-Chieh Chen"
+  ],
+  "published": "2018-01-13",
+  "updated": "2019-03-21",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018, pp. 4510-4520",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "mobilenetv3": {
+  "arxiv": "1905.02244",
+  "version": "v5",
+  "title": "Searching for MobileNetV3",
+  "authors": [
+   "Andrew Howard",
+   "Mark Sandler",
+   "Grace Chu",
+   "Liang-Chieh Chen",
+   "Bo Chen",
+   "Mingxing Tan",
+   "Weijun Wang",
+   "Yukun Zhu",
+   "Ruoming Pang",
+   "Vijay Vasudevan",
+   "Quoc V. Le",
+   "Hartwig Adam"
+  ],
+  "published": "2019-05-06",
+  "updated": "2019-11-20",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "mobilevit": {
+  "arxiv": "2110.02178",
+  "version": "v2",
+  "title": "MobileViT: Light-weight, General-purpose, and Mobile-friendly Vision Transformer",
+  "authors": [
+   "Sachin Mehta",
+   "Mohammad Rastegari"
+  ],
+  "published": "2021-10-05",
+  "updated": "2022-03-04",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "moco": {
+  "arxiv": "1911.05722",
+  "version": "v3",
+  "title": "Momentum Contrast for Unsupervised Visual Representation Learning",
+  "authors": [
+   "Kaiming He",
+   "Haoqi Fan",
+   "Yuxin Wu",
+   "Saining Xie",
+   "Ross Girshick"
+  ],
+  "published": "2019-11-13",
+  "updated": "2020-03-23",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "moe": {
+  "arxiv": "1701.06538",
+  "version": "v1",
+  "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+  "authors": [
+   "Noam Shazeer",
+   "Azalia Mirhoseini",
+   "Krzysztof Maziarz",
+   "Andy Davis",
+   "Quoc Le",
+   "Geoffrey Hinton",
+   "Jeff Dean"
+  ],
+  "published": "2017-01-23",
+  "updated": "2017-01-23",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "nasnet": {
+  "arxiv": "1707.07012",
+  "version": "v4",
+  "title": "Learning Transferable Architectures for Scalable Image Recognition",
+  "authors": [
+   "Barret Zoph",
+   "Vijay Vasudevan",
+   "Jonathon Shlens",
+   "Quoc V. Le"
+  ],
+  "published": "2017-07-21",
+  "updated": "2018-04-11",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "nbeats": {
+  "arxiv": "1905.10437",
+  "version": "v4",
+  "title": "N-BEATS: Neural basis expansion analysis for interpretable time series forecasting",
+  "authors": [
+   "Boris N. Oreshkin",
+   "Dmitri Carpov",
+   "Nicolas Chapados",
+   "Yoshua Bengio"
+  ],
+  "published": "2019-05-24",
+  "updated": "2020-02-20",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "nerf": {
+  "arxiv": "2003.08934",
+  "version": "v2",
+  "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+  "authors": [
+   "Ben Mildenhall",
+   "Pratul P. Srinivasan",
+   "Matthew Tancik",
+   "Jonathan T. Barron",
+   "Ravi Ramamoorthi",
+   "Ren Ng"
+  ],
+  "published": "2020-03-19",
+  "updated": "2020-08-03",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "neuralode": {
+  "arxiv": "1806.07366",
+  "version": "v5",
+  "title": "Neural Ordinary Differential Equations",
+  "authors": [
+   "Ricky T. Q. Chen",
+   "Yulia Rubanova",
+   "Jesse Bettencourt",
+   "David Duvenaud"
+  ],
+  "published": "2018-06-19",
+  "updated": "2019-12-14",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "nonlocal": {
+  "arxiv": "1711.07971",
+  "version": "v3",
+  "title": "Non-local Neural Networks",
+  "authors": [
+   "Xiaolong Wang",
+   "Ross Girshick",
+   "Abhinav Gupta",
+   "Kaiming He"
+  ],
+  "published": "2017-11-21",
+  "updated": "2018-04-13",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "panguweather": {
+  "arxiv": "2211.02556",
+  "version": "v1",
+  "title": "Pangu-Weather: A 3D High-Resolution Model for Fast and Accurate Global Weather Forecast",
+  "authors": [
+   "Kaifeng Bi",
+   "Lingxi Xie",
+   "Hengheng Zhang",
+   "Xin Chen",
+   "Xiaotao Gu",
+   "Qi Tian"
+  ],
+  "published": "2022-11-03",
+  "updated": "2022-11-03",
+  "primary_category": "physics.ao-ph",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "patchtst": {
+  "arxiv": "2211.14730",
+  "version": "v2",
+  "title": "A Time Series is Worth 64 Words: Long-term Forecasting with Transformers",
+  "authors": [
+   "Yuqi Nie",
+   "Nam H. Nguyen",
+   "Phanwadee Sinthong",
+   "Jayant Kalagnanam"
+  ],
+  "published": "2022-11-27",
+  "updated": "2023-03-05",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "phydnet": {
+  "arxiv": "2003.01460",
+  "version": "v2",
+  "title": "Disentangling Physical Dynamics from Unknown Factors for Unsupervised Video Prediction",
+  "authors": [
+   "Vincent Le Guen",
+   "Nicolas Thome"
+  ],
+  "published": "2020-03-03",
+  "updated": "2020-03-16",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "pix2pix": {
+  "arxiv": "1611.07004",
+  "version": "v3",
+  "title": "Image-to-Image Translation with Conditional Adversarial Networks",
+  "authors": [
+   "Phillip Isola",
+   "Jun-Yan Zhu",
+   "Tinghui Zhou",
+   "Alexei A. Efros"
+  ],
+  "published": "2016-11-21",
+  "updated": "2018-11-26",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "pointernet": {
+  "arxiv": "1506.03134",
+  "version": "v2",
+  "title": "Pointer Networks",
+  "authors": [
+   "Oriol Vinyals",
+   "Meire Fortunato",
+   "Navdeep Jaitly"
+  ],
+  "published": "2015-06-09",
+  "updated": "2017-01-02",
+  "primary_category": "stat.ML",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "pointnet": {
+  "arxiv": "1612.00593",
+  "version": "v2",
+  "title": "PointNet: Deep Learning on Point Sets for 3D Classification and Segmentation",
+  "authors": [
+   "Charles R. Qi",
+   "Hao Su",
+   "Kaichun Mo",
+   "Leonidas J. Guibas"
+  ],
+  "published": "2016-12-02",
+  "updated": "2017-04-10",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "pointnetpp": {
+  "arxiv": "1706.02413",
+  "version": "v1",
+  "title": "PointNet++: Deep Hierarchical Feature Learning on Point Sets in a Metric Space",
+  "authors": [
+   "Charles R. Qi",
+   "Li Yi",
+   "Hao Su",
+   "Leonidas J. Guibas"
+  ],
+  "published": "2017-06-07",
+  "updated": "2017-06-07",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "poolformer": {
+  "arxiv": "2111.11418",
+  "version": "v3",
+  "title": "MetaFormer Is Actually What You Need for Vision",
+  "authors": [
+   "Weihao Yu",
+   "Mi Luo",
+   "Pan Zhou",
+   "Chenyang Si",
+   "Yichen Zhou",
+   "Xinchao Wang",
+   "Jiashi Feng",
+   "Shuicheng Yan"
+  ],
+  "published": "2021-11-22",
+  "updated": "2022-07-04",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "prediff": {
+  "arxiv": "2307.10422",
+  "version": "v2",
+  "title": "PreDiff: Precipitation Nowcasting with Latent Diffusion Models",
+  "authors": [
+   "Zhihan Gao",
+   "Xingjian Shi",
+   "Boran Han",
+   "Hao Wang",
+   "Xiaoyong Jin",
+   "Danielle Maddix",
+   "Yi Zhu",
+   "Mu Li",
+   "Yuyang Wang"
+  ],
+  "published": "2023-07-19",
+  "updated": "2023-12-28",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "predrnn": {
+  "arxiv": "2103.09504",
+  "version": "v4",
+  "title": "PredRNN: A Recurrent Neural Network for Spatiotemporal Predictive Learning",
+  "authors": [
+   "Yunbo Wang",
+   "Haixu Wu",
+   "Jianjin Zhang",
+   "Zhifeng Gao",
+   "Jianmin Wang",
+   "Philip S. Yu",
+   "Mingsheng Long"
+  ],
+  "published": "2021-03-17",
+  "updated": "2022-04-09",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "prefixtuning": {
+  "arxiv": "2101.00190",
+  "version": "v1",
+  "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+  "authors": [
+   "Xiang Lisa Li",
+   "Percy Liang"
+  ],
+  "published": "2021-01-01",
+  "updated": "2021-01-01",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "progan": {
+  "arxiv": "1710.10196",
+  "version": "v3",
+  "title": "Progressive Growing of GANs for Improved Quality, Stability, and Variation",
+  "authors": [
+   "Tero Karras",
+   "Timo Aila",
+   "Samuli Laine",
+   "Jaakko Lehtinen"
+  ],
+  "published": "2017-10-27",
+  "updated": "2018-02-26",
+  "primary_category": "cs.NE",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "protonet": {
+  "arxiv": "1703.05175",
+  "version": "v2",
+  "title": "Prototypical Networks for Few-shot Learning",
+  "authors": [
+   "Jake Snell",
+   "Kevin Swersky",
+   "Richard S. Zemel"
+  ],
+  "published": "2017-03-15",
+  "updated": "2017-06-19",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "pspnet": {
+  "arxiv": "1612.01105",
+  "version": "v2",
+  "title": "Pyramid Scene Parsing Network",
+  "authors": [
+   "Hengshuang Zhao",
+   "Jianping Shi",
+   "Xiaojuan Qi",
+   "Xiaogang Wang",
+   "Jiaya Jia"
+  ],
+  "published": "2016-12-04",
+  "updated": "2017-04-27",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "pvt": {
+  "arxiv": "2102.12122",
+  "version": "v2",
+  "title": "Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions",
+  "authors": [
+   "Wenhai Wang",
+   "Enze Xie",
+   "Xiang Li",
+   "Deng-Ping Fan",
+   "Kaitao Song",
+   "Ding Liang",
+   "Tong Lu",
+   "Ping Luo",
+   "Ling Shao"
+  ],
+  "published": "2021-02-24",
+  "updated": "2021-08-11",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "pwcnet": {
+  "arxiv": "1709.02371",
+  "version": "v3",
+  "title": "PWC-Net: CNNs for Optical Flow Using Pyramid, Warping, and Cost Volume",
+  "authors": [
+   "Deqing Sun",
+   "Xiaodong Yang",
+   "Ming-Yu Liu",
+   "Jan Kautz"
+  ],
+  "published": "2017-09-07",
+  "updated": "2018-06-25",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "raft": {
+  "arxiv": "2003.12039",
+  "version": "v3",
+  "title": "RAFT: Recurrent All-Pairs Field Transforms for Optical Flow",
+  "authors": [
+   "Zachary Teed",
+   "Jia Deng"
+  ],
+  "published": "2020-03-26",
+  "updated": "2020-08-25",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "rag": {
+  "arxiv": "2005.11401",
+  "version": "v4",
+  "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+  "authors": [
+   "Patrick Lewis",
+   "Ethan Perez",
+   "Aleksandra Piktus",
+   "Fabio Petroni",
+   "Vladimir Karpukhin",
+   "Naman Goyal",
+   "Heinrich Küttler",
+   "Mike Lewis",
+   "Wen-tau Yih",
+   "Tim Rocktäschel",
+   "Sebastian Riedel",
+   "Douwe Kiela"
+  ],
+  "published": "2020-05-22",
+  "updated": "2021-04-12",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "rcnn": {
+  "arxiv": "1311.2524",
+  "version": "v5",
+  "title": "Rich feature hierarchies for accurate object detection and semantic segmentation",
+  "authors": [
+   "Ross Girshick",
+   "Jeff Donahue",
+   "Trevor Darrell",
+   "Jitendra Malik"
+  ],
+  "published": "2013-11-11",
+  "updated": "2014-10-22",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "realnvp": {
+  "arxiv": "1605.08803",
+  "version": "v3",
+  "title": "Density estimation using Real NVP",
+  "authors": [
+   "Laurent Dinh",
+   "Jascha Sohl-Dickstein",
+   "Samy Bengio"
+  ],
+  "published": "2016-05-27",
+  "updated": "2017-02-27",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "repvgg": {
+  "arxiv": "2101.03697",
+  "version": "v3",
+  "title": "RepVGG: Making VGG-style ConvNets Great Again",
+  "authors": [
+   "Xiaohan Ding",
+   "Xiangyu Zhang",
+   "Ningning Ma",
+   "Jungong Han",
+   "Guiguang Ding",
+   "Jian Sun"
+  ],
+  "published": "2021-01-11",
+  "updated": "2021-03-29",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "res2net": {
+  "arxiv": "1904.01169",
+  "version": "v3",
+  "title": "Res2Net: A New Multi-scale Backbone Architecture",
+  "authors": [
+   "Shang-Hua Gao",
+   "Ming-Ming Cheng",
+   "Kai Zhao",
+   "Xin-Yu Zhang",
+   "Ming-Hsuan Yang",
+   "Philip Torr"
+  ],
+  "published": "2019-04-02",
+  "updated": "2021-01-27",
+  "primary_category": "cs.CV",
+  "doi": "10.1109/TPAMI.2019.2938758",
+  "journal_ref": "IEEE TPAMI 2021",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "resattention": {
+  "arxiv": "1704.06904",
+  "version": "v1",
+  "title": "Residual Attention Network for Image Classification",
+  "authors": [
+   "Fei Wang",
+   "Mengqing Jiang",
+   "Chen Qian",
+   "Shuo Yang",
+   "Cheng Li",
+   "Honggang Zhang",
+   "Xiaogang Wang",
+   "Xiaoou Tang"
+  ],
+  "published": "2017-04-23",
+  "updated": "2017-04-23",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "resnet": {
+  "arxiv": "1512.03385",
+  "version": "v1",
+  "title": "Deep Residual Learning for Image Recognition",
+  "authors": [
+   "Kaiming He",
+   "Xiangyu Zhang",
+   "Shaoqing Ren",
+   "Jian Sun"
+  ],
+  "published": "2015-12-10",
+  "updated": "2015-12-10",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "resnext": {
+  "arxiv": "1611.05431",
+  "version": "v2",
+  "title": "Aggregated Residual Transformations for Deep Neural Networks",
+  "authors": [
+   "Saining Xie",
+   "Ross Girshick",
+   "Piotr Dollár",
+   "Zhuowen Tu",
+   "Kaiming He"
+  ],
+  "published": "2016-11-16",
+  "updated": "2017-04-11",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "restormer": {
+  "arxiv": "2111.09881",
+  "version": "v2",
+  "title": "Restormer: Efficient Transformer for High-Resolution Image Restoration",
+  "authors": [
+   "Syed Waqas Zamir",
+   "Aditya Arora",
+   "Salman Khan",
+   "Munawar Hayat",
+   "Fahad Shahbaz Khan",
+   "Ming-Hsuan Yang"
+  ],
+  "published": "2021-11-18",
+  "updated": "2022-03-11",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-sa/4.0/"
+ },
+ "retinanet": {
+  "arxiv": "1708.02002",
+  "version": "v2",
+  "title": "Focal Loss for Dense Object Detection",
+  "authors": [
+   "Tsung-Yi Lin",
+   "Priya Goyal",
+   "Ross Girshick",
+   "Kaiming He",
+   "Piotr Dollár"
+  ],
+  "published": "2017-08-07",
+  "updated": "2018-02-07",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "retnet": {
+  "arxiv": "2307.08621",
+  "version": "v4",
+  "title": "Retentive Network: A Successor to Transformer for Large Language Models",
+  "authors": [
+   "Yutao Sun",
+   "Li Dong",
+   "Shaohan Huang",
+   "Shuming Ma",
+   "Yuqing Xia",
+   "Jilong Xue",
+   "Jianyong Wang",
+   "Furu Wei"
+  ],
+  "published": "2023-07-17",
+  "updated": "2023-08-09",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "rtdetr": {
+  "arxiv": "2304.08069",
+  "version": "v3",
+  "title": "DETRs Beat YOLOs on Real-time Object Detection",
+  "authors": [
+   "Yian Zhao",
+   "Wenyu Lv",
+   "Shangliang Xu",
+   "Jinman Wei",
+   "Guanzhong Wang",
+   "Qingqing Dang",
+   "Yi Liu",
+   "Jie Chen"
+  ],
+  "published": "2023-04-17",
+  "updated": "2024-04-03",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "rwkv": {
+  "arxiv": "2305.13048",
+  "version": "v2",
+  "title": "RWKV: Reinventing RNNs for the Transformer Era",
+  "authors": [
+   "Bo Peng",
+   "Eric Alcaide",
+   "Quentin Anthony",
+   "Alon Albalak",
+   "Samuel Arcadinho",
+   "Stella Biderman",
+   "Huanqi Cao",
+   "Xin Cheng",
+   "Michael Chung",
+   "Matteo Grella",
+   "Kranthi Kiran GV",
+   "Xuzheng He",
+   "Haowen Hou",
+   "Jiaju Lin",
+   "Przemyslaw Kazienko",
+   "Jan Kocon",
+   "Jiaming Kong",
+   "Bartlomiej Koptyra",
+   "Hayden Lau",
+   "Krishna Sri Ipsit Mantri",
+   "Ferdinand Mom",
+   "Atsushi Saito",
+   "Guangyu Song",
+   "Xiangru Tang",
+   "Bolun Wang",
+   "Johan S. Wind",
+   "Stanislaw Wozniak",
+   "Ruichong Zhang",
+   "Zhenyuan Zhang",
+   "Qihang Zhao",
+   "Peng Zhou",
+   "Qinghua Zhou",
+   "Jian Zhu",
+   "Rui-Jie Zhu"
+  ],
+  "published": "2023-05-22",
+  "updated": "2023-12-11",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "sam": {
+  "arxiv": "2304.02643",
+  "version": "v1",
+  "title": "Segment Anything",
+  "authors": [
+   "Alexander Kirillov",
+   "Eric Mintun",
+   "Nikhila Ravi",
+   "Hanzi Mao",
+   "Chloe Rolland",
+   "Laura Gustafson",
+   "Tete Xiao",
+   "Spencer Whitehead",
+   "Alexander C. Berg",
+   "Wan-Yen Lo",
+   "Piotr Dollár",
+   "Ross Girshick"
+  ],
+  "published": "2023-04-05",
+  "updated": "2023-04-05",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "sam2": {
+  "arxiv": "2408.00714",
+  "version": "v2",
+  "title": "SAM 2: Segment Anything in Images and Videos",
+  "authors": [
+   "Nikhila Ravi",
+   "Valentin Gabeur",
+   "Yuan-Ting Hu",
+   "Ronghang Hu",
+   "Chaitanya Ryali",
+   "Tengyu Ma",
+   "Haitham Khedr",
+   "Roman Rädle",
+   "Chloe Rolland",
+   "Laura Gustafson",
+   "Eric Mintun",
+   "Junting Pan",
+   "Kalyan Vasudev Alwala",
+   "Nicolas Carion",
+   "Chao-Yuan Wu",
+   "Ross Girshick",
+   "Piotr Dollár",
+   "Christoph Feichtenhofer"
+  ],
+  "published": "2024-08-01",
+  "updated": "2024-10-28",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "scoresde": {
+  "arxiv": "2011.13456",
+  "version": "v2",
+  "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+  "authors": [
+   "Yang Song",
+   "Jascha Sohl-Dickstein",
+   "Diederik P. Kingma",
+   "Abhishek Kumar",
+   "Stefano Ermon",
+   "Ben Poole"
+  ],
+  "published": "2020-11-26",
+  "updated": "2021-02-10",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "segformer": {
+  "arxiv": "2105.15203",
+  "version": "v3",
+  "title": "SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers",
+  "authors": [
+   "Enze Xie",
+   "Wenhai Wang",
+   "Zhiding Yu",
+   "Anima Anandkumar",
+   "Jose M. Alvarez",
+   "Ping Luo"
+  ],
+  "published": "2021-05-31",
+  "updated": "2021-10-28",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "segnet": {
+  "arxiv": "1511.00561",
+  "version": "v3",
+  "title": "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+  "authors": [
+   "Vijay Badrinarayanan",
+   "Alex Kendall",
+   "Roberto Cipolla"
+  ],
+  "published": "2015-11-02",
+  "updated": "2016-10-10",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "senet": {
+  "arxiv": "1709.01507",
+  "version": "v4",
+  "title": "Squeeze-and-Excitation Networks",
+  "authors": [
+   "Jie Hu",
+   "Li Shen",
+   "Samuel Albanie",
+   "Gang Sun",
+   "Enhua Wu"
+  ],
+  "published": "2017-09-05",
+  "updated": "2019-05-16",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "seq2seq": {
+  "arxiv": "1409.3215",
+  "version": "v3",
+  "title": "Sequence to Sequence Learning with Neural Networks",
+  "authors": [
+   "Ilya Sutskever",
+   "Oriol Vinyals",
+   "Quoc V. Le"
+  ],
+  "published": "2014-09-10",
+  "updated": "2014-12-14",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "showattendtell": {
+  "arxiv": "1502.03044",
+  "version": "v3",
+  "title": "Show, Attend and Tell: Neural Image Caption Generation with Visual Attention",
+  "authors": [
+   "Kelvin Xu",
+   "Jimmy Ba",
+   "Ryan Kiros",
+   "Kyunghyun Cho",
+   "Aaron Courville",
+   "Ruslan Salakhutdinov",
+   "Richard Zemel",
+   "Yoshua Bengio"
+  ],
+  "published": "2015-02-10",
+  "updated": "2016-04-19",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "shufflenet": {
+  "arxiv": "1707.01083",
+  "version": "v2",
+  "title": "ShuffleNet: An Extremely Efficient Convolutional Neural Network for Mobile Devices",
+  "authors": [
+   "Xiangyu Zhang",
+   "Xinyu Zhou",
+   "Mengxiao Lin",
+   "Jian Sun"
+  ],
+  "published": "2017-07-04",
+  "updated": "2017-12-07",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "shufflenetv2": {
+  "arxiv": "1807.11164",
+  "version": "v1",
+  "title": "ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design",
+  "authors": [
+   "Ningning Ma",
+   "Xiangyu Zhang",
+   "Hai-Tao Zheng",
+   "Jian Sun"
+  ],
+  "published": "2018-07-30",
+  "updated": "2018-07-30",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "simclr": {
+  "arxiv": "2002.05709",
+  "version": "v3",
+  "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+  "authors": [
+   "Ting Chen",
+   "Simon Kornblith",
+   "Mohammad Norouzi",
+   "Geoffrey Hinton"
+  ],
+  "published": "2020-02-13",
+  "updated": "2020-07-01",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "simsiam": {
+  "arxiv": "2011.10566",
+  "version": "v1",
+  "title": "Exploring Simple Siamese Representation Learning",
+  "authors": [
+   "Xinlei Chen",
+   "Kaiming He"
+  ],
+  "published": "2020-11-20",
+  "updated": "2020-11-20",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "simvp": {
+  "arxiv": "2206.05099",
+  "version": "v1",
+  "title": "SimVP: Simpler yet Better Video Prediction",
+  "authors": [
+   "Zhangyang Gao",
+   "Cheng Tan",
+   "Lirong Wu",
+   "Stan Z. Li"
+  ],
+  "published": "2022-06-09",
+  "updated": "2022-06-09",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "sknet": {
+  "arxiv": "1903.06586",
+  "version": "v2",
+  "title": "Selective Kernel Networks",
+  "authors": [
+   "Xiang Li",
+   "Wenhai Wang",
+   "Xiaolin Hu",
+   "Jian Yang"
+  ],
+  "published": "2019-03-15",
+  "updated": "2019-03-18",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "smaatunet": {
+  "arxiv": "2007.04417",
+  "version": "v2",
+  "title": "SmaAt-UNet: Precipitation Nowcasting using a Small Attention-UNet Architecture",
+  "authors": [
+   "Kevin Trebing",
+   "Tomasz Stanczyk",
+   "Siamak Mehrkanoon"
+  ],
+  "published": "2020-07-08",
+  "updated": "2021-01-24",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-sa/4.0/"
+ },
+ "sparsetransformer": {
+  "arxiv": "1904.10509",
+  "version": "v1",
+  "title": "Generating Long Sequences with Sparse Transformers",
+  "authors": [
+   "Rewon Child",
+   "Scott Gray",
+   "Alec Radford",
+   "Ilya Sutskever"
+  ],
+  "published": "2019-04-23",
+  "updated": "2019-04-23",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "squeezenet": {
+  "arxiv": "1602.07360",
+  "version": "v4",
+  "title": "SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size",
+  "authors": [
+   "Forrest N. Iandola",
+   "Song Han",
+   "Matthew W. Moskewicz",
+   "Khalid Ashraf",
+   "William J. Dally",
+   "Kurt Keutzer"
+  ],
+  "published": "2016-02-24",
+  "updated": "2016-11-04",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "srcnn": {
+  "arxiv": "1501.00092",
+  "version": "v3",
+  "title": "Image Super-Resolution Using Deep Convolutional Networks",
+  "authors": [
+   "Chao Dong",
+   "Chen Change Loy",
+   "Kaiming He",
+   "Xiaoou Tang"
+  ],
+  "published": "2014-12-31",
+  "updated": "2015-07-31",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "srgan": {
+  "arxiv": "1609.04802",
+  "version": "v5",
+  "title": "Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network",
+  "authors": [
+   "Christian Ledig",
+   "Lucas Theis",
+   "Ferenc Huszar",
+   "Jose Caballero",
+   "Andrew Cunningham",
+   "Alejandro Acosta",
+   "Andrew Aitken",
+   "Alykhan Tejani",
+   "Johannes Totz",
+   "Zehan Wang",
+   "Wenzhe Shi"
+  ],
+  "published": "2016-09-15",
+  "updated": "2017-05-25",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "ssd": {
+  "arxiv": "1512.02325",
+  "version": "v5",
+  "title": "SSD: Single Shot MultiBox Detector",
+  "authors": [
+   "Wei Liu",
+   "Dragomir Anguelov",
+   "Dumitru Erhan",
+   "Christian Szegedy",
+   "Scott Reed",
+   "Cheng-Yang Fu",
+   "Alexander C. Berg"
+  ],
+  "published": "2015-12-08",
+  "updated": "2016-12-29",
+  "primary_category": "cs.CV",
+  "doi": "10.1007/978-3-319-46448-0_2",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "stgcn": {
+  "arxiv": "1709.04875",
+  "version": "v4",
+  "title": "Spatio-Temporal Graph Convolutional Networks: A Deep Learning Framework for Traffic Forecasting",
+  "authors": [
+   "Bing Yu",
+   "Haoteng Yin",
+   "Zhanxing Zhu"
+  ],
+  "published": "2017-09-14",
+  "updated": "2018-07-12",
+  "primary_category": "cs.LG",
+  "doi": "10.24963/ijcai.2018/505",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "stn": {
+  "arxiv": "1506.02025",
+  "version": "v3",
+  "title": "Spatial Transformer Networks",
+  "authors": [
+   "Max Jaderberg",
+   "Karen Simonyan",
+   "Andrew Zisserman",
+   "Koray Kavukcuoglu"
+  ],
+  "published": "2015-06-05",
+  "updated": "2016-02-04",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "stylegan": {
+  "arxiv": "1812.04948",
+  "version": "v3",
+  "title": "A Style-Based Generator Architecture for Generative Adversarial Networks",
+  "authors": [
+   "Tero Karras",
+   "Samuli Laine",
+   "Timo Aila"
+  ],
+  "published": "2018-12-12",
+  "updated": "2019-03-29",
+  "primary_category": "cs.NE",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "stylegan2": {
+  "arxiv": "1912.04958",
+  "version": "v2",
+  "title": "Analyzing and Improving the Image Quality of StyleGAN",
+  "authors": [
+   "Tero Karras",
+   "Samuli Laine",
+   "Miika Aittala",
+   "Janne Hellsten",
+   "Jaakko Lehtinen",
+   "Timo Aila"
+  ],
+  "published": "2019-12-03",
+  "updated": "2020-03-23",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "styletransfer": {
+  "arxiv": "1508.06576",
+  "version": "v2",
+  "title": "A Neural Algorithm of Artistic Style",
+  "authors": [
+   "Leon A. Gatys",
+   "Alexander S. Ecker",
+   "Matthias Bethge"
+  ],
+  "published": "2015-08-26",
+  "updated": "2015-09-02",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "swin": {
+  "arxiv": "2103.14030",
+  "version": "v2",
+  "title": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+  "authors": [
+   "Ze Liu",
+   "Yutong Lin",
+   "Yue Cao",
+   "Han Hu",
+   "Yixuan Wei",
+   "Zheng Zhang",
+   "Stephen Lin",
+   "Baining Guo"
+  ],
+  "published": "2021-03-25",
+  "updated": "2021-08-17",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "swinunet": {
+  "arxiv": "2105.05537",
+  "version": "v1",
+  "title": "Swin-Unet: Unet-like Pure Transformer for Medical Image Segmentation",
+  "authors": [
+   "Hu Cao",
+   "Yueyue Wang",
+   "Joy Chen",
+   "Dongsheng Jiang",
+   "Xiaopeng Zhang",
+   "Qi Tian",
+   "Manning Wang"
+  ],
+  "published": "2021-05-12",
+  "updated": "2021-05-12",
+  "primary_category": "eess.IV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "switch": {
+  "arxiv": "2101.03961",
+  "version": "v3",
+  "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+  "authors": [
+   "William Fedus",
+   "Barret Zoph",
+   "Noam Shazeer"
+  ],
+  "published": "2021-01-11",
+  "updated": "2022-06-16",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "t5": {
+  "arxiv": "1910.10683",
+  "version": "v4",
+  "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+  "authors": [
+   "Colin Raffel",
+   "Noam Shazeer",
+   "Adam Roberts",
+   "Katherine Lee",
+   "Sharan Narang",
+   "Michael Matena",
+   "Yanqi Zhou",
+   "Wei Li",
+   "Peter J. Liu"
+  ],
+  "published": "2019-10-23",
+  "updated": "2023-09-19",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "tcn": {
+  "arxiv": "1803.01271",
+  "version": "v2",
+  "title": "An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling",
+  "authors": [
+   "Shaojie Bai",
+   "J. Zico Kolter",
+   "Vladlen Koltun"
+  ],
+  "published": "2018-03-04",
+  "updated": "2018-04-19",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "tft": {
+  "arxiv": "1912.09363",
+  "version": "v3",
+  "title": "Temporal Fusion Transformers for Interpretable Multi-horizon Time Series Forecasting",
+  "authors": [
+   "Bryan Lim",
+   "Sercan O. Arik",
+   "Nicolas Loeff",
+   "Tomas Pfister"
+  ],
+  "published": "2019-12-19",
+  "updated": "2020-09-27",
+  "primary_category": "stat.ML",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "timesnet": {
+  "arxiv": "2210.02186",
+  "version": "v3",
+  "title": "TimesNet: Temporal 2D-Variation Modeling for General Time Series Analysis",
+  "authors": [
+   "Haixu Wu",
+   "Tengge Hu",
+   "Yong Liu",
+   "Hang Zhou",
+   "Jianmin Wang",
+   "Mingsheng Long"
+  ],
+  "published": "2022-10-05",
+  "updated": "2023-04-12",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+ },
+ "trajgru": {
+  "arxiv": "1706.03458",
+  "version": "v2",
+  "title": "Deep Learning for Precipitation Nowcasting: A Benchmark and A New Model",
+  "authors": [
+   "Xingjian Shi",
+   "Zhihan Gao",
+   "Leonard Lausen",
+   "Hao Wang",
+   "Dit-Yan Yeung",
+   "Wai-kin Wong",
+   "Wang-chun Woo"
+  ],
+  "published": "2017-06-12",
+  "updated": "2017-10-05",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "transformer": {
+  "arxiv": "1706.03762",
+  "version": "v7",
+  "title": "Attention Is All You Need",
+  "authors": [
+   "Ashish Vaswani",
+   "Noam Shazeer",
+   "Niki Parmar",
+   "Jakob Uszkoreit",
+   "Llion Jones",
+   "Aidan N. Gomez",
+   "Lukasz Kaiser",
+   "Illia Polosukhin"
+  ],
+  "published": "2017-06-12",
+  "updated": "2023-08-02",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "transformerxl": {
+  "arxiv": "1901.02860",
+  "version": "v3",
+  "title": "Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context",
+  "authors": [
+   "Zihang Dai",
+   "Zhilin Yang",
+   "Yiming Yang",
+   "Jaime Carbonell",
+   "Quoc V. Le",
+   "Ruslan Salakhutdinov"
+  ],
+  "published": "2019-01-09",
+  "updated": "2019-06-02",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-sa/4.0/"
+ },
+ "transunet": {
+  "arxiv": "2102.04306",
+  "version": "v1",
+  "title": "TransUNet: Transformers Make Strong Encoders for Medical Image Segmentation",
+  "authors": [
+   "Jieneng Chen",
+   "Yongyi Lu",
+   "Qihang Yu",
+   "Xiangde Luo",
+   "Ehsan Adeli",
+   "Yan Wang",
+   "Le Lu",
+   "Alan L. Yuille",
+   "Yuyin Zhou"
+  ],
+  "published": "2021-02-08",
+  "updated": "2021-02-08",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "tripletattention": {
+  "arxiv": "2010.03045",
+  "version": "v2",
+  "title": "Rotate to Attend: Convolutional Triplet Attention Module",
+  "authors": [
+   "Diganta Misra",
+   "Trikay Nalamada",
+   "Ajay Uppili Arasanipalai",
+   "Qibin Hou"
+  ],
+  "published": "2020-10-06",
+  "updated": "2020-11-05",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "unet": {
+  "arxiv": "1505.04597",
+  "version": "v1",
+  "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+  "authors": [
+   "Olaf Ronneberger",
+   "Philipp Fischer",
+   "Thomas Brox"
+  ],
+  "published": "2015-05-18",
+  "updated": "2015-05-18",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "unet3d": {
+  "arxiv": "1606.06650",
+  "version": "v1",
+  "title": "3D U-Net: Learning Dense Volumetric Segmentation from Sparse Annotation",
+  "authors": [
+   "Özgün Çiçek",
+   "Ahmed Abdulkadir",
+   "Soeren S. Lienkamp",
+   "Thomas Brox",
+   "Olaf Ronneberger"
+  ],
+  "published": "2016-06-21",
+  "updated": "2016-06-21",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "unetpp": {
+  "arxiv": "1807.10165",
+  "version": "v1",
+  "title": "UNet++: A Nested U-Net Architecture for Medical Image Segmentation",
+  "authors": [
+   "Zongwei Zhou",
+   "Md Mahfuzur Rahman Siddiquee",
+   "Nima Tajbakhsh",
+   "Jianming Liang"
+  ],
+  "published": "2018-07-18",
+  "updated": "2018-07-18",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "unetr": {
+  "arxiv": "2103.10504",
+  "version": "v3",
+  "title": "UNETR: Transformers for 3D Medical Image Segmentation",
+  "authors": [
+   "Ali Hatamizadeh",
+   "Yucheng Tang",
+   "Vishwesh Nath",
+   "Dong Yang",
+   "Andriy Myronenko",
+   "Bennett Landman",
+   "Holger Roth",
+   "Daguang Xu"
+  ],
+  "published": "2021-03-18",
+  "updated": "2021-10-09",
+  "primary_category": "eess.IV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+ },
+ "vae": {
+  "arxiv": "1312.6114",
+  "version": "v11",
+  "title": "Auto-Encoding Variational Bayes",
+  "authors": [
+   "Diederik P Kingma",
+   "Max Welling"
+  ],
+  "published": "2013-12-20",
+  "updated": "2022-12-10",
+  "primary_category": "stat.ML",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "vgg": {
+  "arxiv": "1409.1556",
+  "version": "v6",
+  "title": "Very Deep Convolutional Networks for Large-Scale Image Recognition",
+  "authors": [
+   "Karen Simonyan",
+   "Andrew Zisserman"
+  ],
+  "published": "2014-09-04",
+  "updated": "2015-04-10",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "vilt": {
+  "arxiv": "2102.03334",
+  "version": "v2",
+  "title": "ViLT: Vision-and-Language Transformer Without Convolution or Region Supervision",
+  "authors": [
+   "Wonjae Kim",
+   "Bokyung Son",
+   "Ildoo Kim"
+  ],
+  "published": "2021-02-05",
+  "updated": "2021-06-10",
+  "primary_category": "stat.ML",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "vim": {
+  "arxiv": "2401.09417",
+  "version": "v3",
+  "title": "Vision Mamba: Efficient Visual Representation Learning with Bidirectional State Space Model",
+  "authors": [
+   "Lianghui Zhu",
+   "Bencheng Liao",
+   "Qian Zhang",
+   "Xinlong Wang",
+   "Wenyu Liu",
+   "Xinggang Wang"
+  ],
+  "published": "2024-01-17",
+  "updated": "2024-11-14",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "vit": {
+  "arxiv": "2010.11929",
+  "version": "v2",
+  "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+  "authors": [
+   "Alexey Dosovitskiy",
+   "Lucas Beyer",
+   "Alexander Kolesnikov",
+   "Dirk Weissenborn",
+   "Xiaohua Zhai",
+   "Thomas Unterthiner",
+   "Mostafa Dehghani",
+   "Matthias Minderer",
+   "Georg Heigold",
+   "Sylvain Gelly",
+   "Jakob Uszkoreit",
+   "Neil Houlsby"
+  ],
+  "published": "2020-10-22",
+  "updated": "2021-06-03",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "vnet": {
+  "arxiv": "1606.04797",
+  "version": "v1",
+  "title": "V-Net: Fully Convolutional Neural Networks for Volumetric Medical Image Segmentation",
+  "authors": [
+   "Fausto Milletari",
+   "Nassir Navab",
+   "Seyed-Ahmad Ahmadi"
+  ],
+  "published": "2016-06-15",
+  "updated": "2016-06-15",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "voxelnet": {
+  "arxiv": "1711.06396",
+  "version": "v1",
+  "title": "VoxelNet: End-to-End Learning for Point Cloud Based 3D Object Detection",
+  "authors": [
+   "Yin Zhou",
+   "Oncel Tuzel"
+  ],
+  "published": "2017-11-17",
+  "updated": "2017-11-17",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "vqgan": {
+  "arxiv": "2012.09841",
+  "version": "v3",
+  "title": "Taming Transformers for High-Resolution Image Synthesis",
+  "authors": [
+   "Patrick Esser",
+   "Robin Rombach",
+   "Björn Ommer"
+  ],
+  "published": "2020-12-17",
+  "updated": "2021-06-23",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "vqvae": {
+  "arxiv": "1711.00937",
+  "version": "v2",
+  "title": "Neural Discrete Representation Learning",
+  "authors": [
+   "Aaron van den Oord",
+   "Oriol Vinyals",
+   "Koray Kavukcuoglu"
+  ],
+  "published": "2017-11-02",
+  "updated": "2018-05-30",
+  "primary_category": "cs.LG",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "wavediff": {
+  "arxiv": "2211.16152",
+  "version": "v2",
+  "title": "Wavelet Diffusion Models are fast and scalable Image Generators",
+  "authors": [
+   "Hao Phung",
+   "Quan Dao",
+   "Anh Tran"
+  ],
+  "published": "2022-11-29",
+  "updated": "2023-03-22",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "wavenet": {
+  "arxiv": "1609.03499",
+  "version": "v2",
+  "title": "WaveNet: A Generative Model for Raw Audio",
+  "authors": [
+   "Aaron van den Oord",
+   "Sander Dieleman",
+   "Heiga Zen",
+   "Karen Simonyan",
+   "Oriol Vinyals",
+   "Alex Graves",
+   "Nal Kalchbrenner",
+   "Andrew Senior",
+   "Koray Kavukcuoglu"
+  ],
+  "published": "2016-09-12",
+  "updated": "2016-09-19",
+  "primary_category": "cs.SD",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "word2vec": {
+  "arxiv": "1301.3781",
+  "version": "v3",
+  "title": "Efficient Estimation of Word Representations in Vector Space",
+  "authors": [
+   "Tomas Mikolov",
+   "Kai Chen",
+   "Greg Corrado",
+   "Jeffrey Dean"
+  ],
+  "published": "2013-01-16",
+  "updated": "2013-09-07",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "wrn": {
+  "arxiv": "1605.07146",
+  "version": "v4",
+  "title": "Wide Residual Networks",
+  "authors": [
+   "Sergey Zagoruyko",
+   "Nikos Komodakis"
+  ],
+  "published": "2016-05-23",
+  "updated": "2017-06-14",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "wtconv": {
+  "arxiv": "2407.05848",
+  "version": "v2",
+  "title": "Wavelet Convolutions for Large Receptive Fields",
+  "authors": [
+   "Shahaf E. Finder",
+   "Roy Amoyal",
+   "Eran Treister",
+   "Oren Freifeld"
+  ],
+  "published": "2024-07-08",
+  "updated": "2024-07-15",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "xception": {
+  "arxiv": "1610.02357",
+  "version": "v3",
+  "title": "Xception: Deep Learning with Depthwise Separable Convolutions",
+  "authors": [
+   "François Chollet"
+  ],
+  "published": "2016-10-07",
+  "updated": "2017-04-04",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "xlnet": {
+  "arxiv": "1906.08237",
+  "version": "v2",
+  "title": "XLNet: Generalized Autoregressive Pretraining for Language Understanding",
+  "authors": [
+   "Zhilin Yang",
+   "Zihang Dai",
+   "Yiming Yang",
+   "Jaime Carbonell",
+   "Ruslan Salakhutdinov",
+   "Quoc V. Le"
+  ],
+  "published": "2019-06-19",
+  "updated": "2020-01-02",
+  "primary_category": "cs.CL",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ "yolo": {
+  "arxiv": "1506.02640",
+  "version": "v5",
+  "title": "You Only Look Once: Unified, Real-Time Object Detection",
+  "authors": [
+   "Joseph Redmon",
+   "Santosh Divvala",
+   "Ross Girshick",
+   "Ali Farhadi"
+  ],
+  "published": "2015-06-08",
+  "updated": "2016-05-09",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "yolov4": {
+  "arxiv": "2004.10934",
+  "version": "v1",
+  "title": "YOLOv4: Optimal Speed and Accuracy of Object Detection",
+  "authors": [
+   "Alexey Bochkovskiy",
+   "Chien-Yao Wang",
+   "Hong-Yuan Mark Liao"
+  ],
+  "published": "2020-04-23",
+  "updated": "2020-04-23",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ },
+ "yolov7": {
+  "arxiv": "2207.02696",
+  "version": "v1",
+  "title": "YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors",
+  "authors": [
+   "Chien-Yao Wang",
+   "Alexey Bochkovskiy",
+   "Hong-Yuan Mark Liao"
+  ],
+  "published": "2022-07-06",
+  "updated": "2022-07-06",
+  "primary_category": "cs.CV",
+  "doi": "",
+  "journal_ref": "",
+  "license": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+ }
+}

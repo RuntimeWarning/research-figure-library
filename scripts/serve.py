@@ -1,74 +1,77 @@
 #!/usr/bin/env python3
-"""Serve the local, complete asset library. Python standard library only."""
+"""Serve the figure library locally (Python standard library only)."""
 from __future__ import annotations
+
 import argparse
 import functools
-import json
+import gzip
 import sys
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 
-ROOT = Path(__file__).resolve().parents[1]
-if hasattr(sys.stdout,'reconfigure'):
-    sys.stdout.reconfigure(encoding='utf-8')
+ROOT = Path(__file__).resolve().parents[1] / "dist"
+COMPRESS = {".json", ".js", ".css", ".csv", ".svg", ".html"}
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
-class AssetHandler(SimpleHTTPRequestHandler):
-    catalog_bytes = b''
+
+class Handler(SimpleHTTPRequestHandler):
     extensions_map = {
         **SimpleHTTPRequestHandler.extensions_map,
-        '.svg': 'image/svg+xml',
-        '.json': 'application/json; charset=utf-8',
-        '.js': 'text/javascript; charset=utf-8',
-        '.css': 'text/css; charset=utf-8',
-        '.csv': 'text/csv; charset=utf-8',
+        ".svg": "image/svg+xml", ".webp": "image/webp", ".json": "application/json; charset=utf-8",
+        ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8",
+        ".csv": "text/csv; charset=utf-8", ".html": "text/html; charset=utf-8",
     }
+    cache: dict[Path, bytes] = {}
+
     def end_headers(self):
-        self.send_header('Cache-Control', 'no-cache')
+        self.send_header("Cache-Control", "no-cache")
         super().end_headers()
+
     def do_GET(self):
-        if urlsplit(self.path).path=='/data.json':
+        path = Path(self.translate_path(urlsplit(self.path).path))
+        if path.is_dir():
+            path = path / "index.html"
+        if (path.suffix in COMPRESS and path.is_file() and "gzip" in self.headers.get("Accept-Encoding", "")
+                and path.stat().st_size > 2048):
+            data = self.cache.get(path)
+            if data is None:
+                data = gzip.compress(path.read_bytes(), 6)
+                if path.name == "data.json":
+                    self.cache[path] = data
             self.send_response(200)
-            self.send_header('Content-Type','application/json; charset=utf-8')
-            self.send_header('Content-Length',str(len(self.catalog_bytes)))
+            self.send_header("Content-Type", self.guess_type(str(path)))
+            self.send_header("Content-Encoding", "gzip")
+            self.send_header("Content-Length", str(len(data)))
             self.end_headers()
-            self.wfile.write(self.catalog_bytes)
-        else:
-            super().do_GET()
+            self.wfile.write(data)
+            return
+        super().do_GET()
+
+    def log_message(self, format, *args):  # quiet console
+        pass
+
 
 def main():
-    parser=argparse.ArgumentParser(description='论文素材统一检索 · 本地服务')
-    parser.add_argument('--port', type=int, default=8766)
-    args=parser.parse_args()
-    directory=ROOT/'dist'
-    if not (directory/'index.html').is_file() or not (directory/'data.json').is_file():
-        parser.error('dist/index.html 或 dist/data.json 不存在，请检查项目是否完整。')
-    catalog=json.loads((directory/'data.json').read_text(encoding='utf-8-sig'))
-    source_only=0
-    for item in catalog['assets']:
-        item['available']=True
-        if item['type'] in ('paper','atomic'):
-            preview=item.get('preview','')
-            if not preview or not (directory/preview).is_file():
-                for key in ('preview','svg','png','pdf'):item[key]=''
-                item['available']=False;item['source_only']=True;source_only+=1
-    catalog['counts']['available']=len(catalog['assets'])-source_only
-    catalog['counts']['source_only']=source_only
-    for field in ('png','svg','pdf'):
-        catalog['counts']['paper_'+field]=sum(bool(a.get(field)) for a in catalog['assets'] if a['type'] in ('paper','atomic'))
-    AssetHandler.catalog_bytes=json.dumps(catalog,ensure_ascii=False,separators=(',',':')).encode('utf-8')
-    handler=functools.partial(AssetHandler,directory=str(directory))
+    parser = argparse.ArgumentParser(description="图元仓 · 本地检索服务")
+    parser.add_argument("--port", type=int, default=8766)
+    args = parser.parse_args()
+    if not (ROOT / "index.html").is_file() or not (ROOT / "data.json").is_file():
+        parser.error("dist/index.html 或 dist/data.json 不存在，请确认项目完整。")
+    handler = functools.partial(Handler, directory=str(ROOT))
     try:
-        server=ThreadingHTTPServer(('127.0.0.1',args.port),handler)
-    except OSError as e:
-        parser.exit(1,f'无法启动本地服务：{e}\n若已有服务运行，直接打开 http://127.0.0.1:{args.port}/\n')
-    print(f'\n论文素材统一检索\n打开网址：http://127.0.0.1:{args.port}/\n按 Ctrl+C 关闭服务。\n',flush=True)
+        server = ThreadingHTTPServer(("127.0.0.1", args.port), handler)
+    except OSError as error:
+        parser.exit(1, f"无法启动本地服务：{error}\n如果服务已在运行，请直接打开 http://127.0.0.1:{args.port}/\n")
+    print(f"\n图元仓 · 论文配图素材库\n打开：http://127.0.0.1:{args.port}/\n按 Ctrl+C 停止服务。\n", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print('\n服务已关闭。',flush=True)
+        print("\n服务已停止。", flush=True)
     finally:
         server.server_close()
 
-if __name__=='__main__':
+
+if __name__ == "__main__":
     main()

@@ -25,14 +25,12 @@ jobs:
           persist-credentials: false
       - name: Configure Pages
         uses: actions/configure-pages@v6.0.0
-      - name: Build public site without local paper images
-        run: python3 scripts/build.py --public --output _site
-      - name: Validate public resources and source records
-        run: python3 scripts/validate.py _site
-      - name: Upload public site only
+      - name: Validate catalog, files, SVG safety and hashes
+        run: python3 scripts/validate.py dist --hashes
+      - name: Upload site
         uses: actions/upload-pages-artifact@v5.0.0
         with:
-          path: _site
+          path: dist
 
   deploy:
     runs-on: ubuntu-latest
