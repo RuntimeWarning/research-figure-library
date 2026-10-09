@@ -54,7 +54,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="图元仓 · 本地检索服务")
+    parser = argparse.ArgumentParser(description="研图 · 本地检索服务")
     parser.add_argument("--port", type=int, default=8766)
     args = parser.parse_args()
     if not (ROOT / "index.html").is_file() or not (ROOT / "data.json").is_file():
@@ -64,7 +64,7 @@ def main():
         server = ThreadingHTTPServer(("127.0.0.1", args.port), handler)
     except OSError as error:
         parser.exit(1, f"无法启动本地服务：{error}\n如果服务已在运行，请直接打开 http://127.0.0.1:{args.port}/\n")
-    print(f"\n图元仓 · 论文配图素材库\n打开：http://127.0.0.1:{args.port}/\n按 Ctrl+C 停止服务。\n", flush=True)
+    print(f"\n研图 · 论文原图与科研图标素材库\n打开：http://127.0.0.1:{args.port}/\n按 Ctrl+C 停止服务。\n", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

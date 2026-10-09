@@ -1,6 +1,6 @@
 'use strict';
 
-/* 图元仓 · Figure Atlas — static search page over data.json (catalog version 3). */
+/* 研图 · Figure Atlas — static search page over data.json (catalog version 3). */
 
 const ICONS = {
   search: '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',

@@ -1,10 +1,14 @@
-# 图元仓 · 论文配图素材库
+<p align="center"><img src="dist/favicon.svg" width="76" alt="研图标志"></p>
 
-**Figure Atlas** — 为深度学习论文配图准备的素材库：从 227 篇经典论文中按原样裁出的结构图，加上 10 个开源图标集的 28,102 个科研图标。一个页面完成中英文检索、筛选、预览、改色与下载，每张论文原图都附有原文图注、作者、出处与许可。
+<h1 align="center">研图 · Figure Atlas</h1>
+
+<p align="center">论文原图与科研图标素材库</p>
+
+为深度学习论文配图准备的素材库：从 227 篇经典论文中按原样裁出的结构图，加上 10 个开源图标集的 28,102 个科研图标。一个页面完成中英文检索、筛选、预览、改色与下载，每张论文原图都附有原文图注、作者、出处与许可。
 
 [在线检索](https://runtimewarning.github.io/research-figure-library/) · [GitHub 仓库](https://github.com/RuntimeWarning/research-figure-library) · [完整来源清单](dist/sources.csv)
 
-![图元仓首页](docs/screenshot-home.jpg)
+![研图首页](docs/screenshot-home.jpg)
 
 ## 素材规模
 
@@ -97,7 +101,7 @@ Windows 可直接双击根目录的 **`启动检索.cmd`**。浏览器打开 <ht
 ```text
 research-figure-library/
 ├── dist/                         # 发布到 GitHub Pages 的静态站点
-│   ├── index.html · style.css · app.js · favicon.svg
+│   ├── index.html · style.css · app.js · favicon.svg · og-image.jpg（分享卡片）
 │   ├── data.json                 # 页面索引：论文原图记录 + 图标表
 │   ├── sources.csv               # 每项素材的文件、来源、作者、许可与 SHA-256
 │   ├── licenses/                 # 各图标集的许可原文

@@ -1,4 +1,4 @@
-/* 图元仓 · Figure Atlas */
+/* 研图 · Figure Atlas */
 :root {
   --bg: #f6f7f9;
   --surface: #ffffff;
@@ -70,12 +70,10 @@ img { display: block; }
 .topbar { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
 .topbar-inner { max-width: 1480px; margin: 0 auto; height: 64px; padding: 0 28px; display: flex; align-items: center; gap: 28px; }
 .brand { display: flex; align-items: center; gap: 11px; }
-.brand-mark { display: grid; grid-template-columns: repeat(2, 9px); gap: 3px; padding: 8px; border-radius: 11px; background: var(--accent); box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--accent) 70%, transparent); }
-.brand-mark i { width: 9px; height: 9px; border-radius: 2.5px; background: #fff; }
-.brand-mark i:nth-child(2), .brand-mark i:nth-child(3) { background: #b8c6ff; }
-.brand-mark i:nth-child(4) { opacity: .55; }
+.brand-mark { display: block; width: 38px; height: 38px; border-radius: 10px; box-shadow: 0 6px 16px -6px rgba(66, 99, 235, .7); transition: transform .2s ease; }
+.brand:hover .brand-mark { transform: rotate(-4deg) scale(1.04); }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
-.brand-text strong { font-size: 17px; letter-spacing: .5px; }
+.brand-text strong { font-size: 19px; letter-spacing: 1.5px; }
 .brand-text small { font-size: 10px; color: var(--muted); letter-spacing: 1.6px; text-transform: uppercase; margin-top: 3px; }
 .topnav { display: flex; gap: 4px; }
 .topnav button { padding: 7px 12px; border-radius: 8px; color: var(--ink-2); font-weight: 550; }
