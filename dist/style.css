@@ -332,3 +332,10 @@ button.stat:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--li
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* 图元 is the lead collection */
+.stat.lead { background: linear-gradient(135deg, #4263eb, #7048e8); border-color: transparent; color: #fff; box-shadow: 0 10px 24px -12px rgba(66, 99, 235, .8); }
+.stat.lead span { color: rgba(255, 255, 255, .82); }
+button.stat.lead:hover { border-color: transparent; filter: brightness(1.06); }
+.card-art .kind.atomic { background: rgba(59, 91, 219, .88); }
+.empty-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -4px 0 16px; }

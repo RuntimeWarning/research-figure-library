@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" width="40.78" height="54.62" viewBox="0 0 40.78 54.62">
+<path transform="matrix(1,0,0,-1,0,54.62)" d="M1.73666 1.50357H22.6419V8.9426H1.73666Z" fill="#c2e8f7" fill-opacity=".8"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" d="M22.64191 8.9426 39.28137 25.58213V18.14304L22.64191 1.50357V8.9426" fill="#9cbbc7" fill-opacity=".8" fill-rule="evenodd"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" d="M1.73666 8.9426 18.37616 25.58213H39.28137L22.64191 8.9426H1.73666" fill="#ceedf9" fill-opacity=".8" fill-rule="evenodd"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" stroke-width=".39598" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#a5a5a5" d="M1.73666 8.94262 18.37613 25.58213H39.28137V18.14305L22.64188 1.50354H1.73666V8.94262H22.64188L39.28137 25.58213M22.64188 8.94262V1.50354"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" d="M1.50436 15.58518H22.40957V23.02425H1.50436Z" fill="#c2e8f7" fill-opacity=".8"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" d="M22.40958 23.02425 39.04904 39.66376V32.22467L22.40958 15.58518V23.02425" fill="#9cbbc7" fill-opacity=".8" fill-rule="evenodd"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" d="M1.50436 23.02425 18.14383 39.66376H39.04904L22.40958 23.02425H1.50436" fill="#ceedf9" fill-opacity=".8" fill-rule="evenodd"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" stroke-width=".39598" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#a5a5a5" d="M1.50436 23.02425 18.14383 39.66376H39.04907V32.22469L22.40958 15.58518H1.50436V23.02425H22.40958L39.04907 39.66376M22.40958 23.02425V15.58518"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" d="M1.50436 29.04145H22.40957V36.480524H1.50436Z" fill="#c2e8f7" fill-opacity=".8"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" d="M22.40958 36.48052 39.04904 53.12003V45.68096L22.40958 29.04145V36.48052" fill="#9cbbc7" fill-opacity=".8" fill-rule="evenodd"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" d="M1.50436 36.48052 18.14383 53.12003H39.04904L22.40958 36.48052H1.50436" fill="#ceedf9" fill-opacity=".8" fill-rule="evenodd"/>
+<path transform="matrix(1,0,0,-1,0,54.62)" stroke-width=".39598" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#a5a5a5" d="M1.50436 36.48052 18.14383 53.12003H39.04907V45.68096L22.40958 29.04145H1.50436V36.48052H22.40958L39.04907 53.12003M22.40958 36.48052V29.04145"/>
+</svg>

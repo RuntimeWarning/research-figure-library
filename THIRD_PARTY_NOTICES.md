@@ -2,12 +2,12 @@
 
 本项目代码与数据整理采用 [MIT](LICENSE) 许可，该许可**不替代**下列素材的原始许可。逐项来源、作者、许可与 SHA-256 见 [`dist/sources.csv`](dist/sources.csv)，许可原文见 [`dist/licenses/`](dist/licenses/)。
 
-## 论文原图与小图元
+## 论文图元与原图
 
-`dist/assets/papers/` 中的 289 张论文原图与 43 个小图元，按原样从论文 PDF（个别来自论文的官方代码仓库或文档）裁剪，未重绘、未改色。它们不是本项目的原创作品，版权属于原作者或出版方。
+`dist/assets/elements/` 中的 361 个图元和 `dist/assets/papers/` 中的 289 张论文原图、30 个早期图元，均取自论文 PDF（个别来自论文的官方代码仓库或文档）：原图按原样裁剪；矢量图元是从原插图中分离出的一组原始路径，位图图元按嵌入位图的原始分辨率导出，均未重绘、未改色。它们不是本项目的原创作品，版权属于原作者或出版方。
 
-- 每张图对应的论文、作者、出处、arXiv 版本与页码记录在 `dist/data.json` 的 `sources` 中，页面详情可直接打开原文 PDF 对应页。
-- 许可按论文在 arXiv 上由作者选择的许可记录：264 张为 [arXiv 非独占分发许可](https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html)（作者保留版权，仅授权 arXiv 分发），42 张为 CC BY 4.0，10 张为 CC BY-NC-ND 4.0，5 张为 CC BY-NC-SA 4.0，3 张为 CC BY-SA 4.0，1 张为 CC0 1.0；其余 7 张来自期刊、会议论文集或官方代码仓库（IEEE、MIT Press、AAAS、NeurIPS 论文集版权，或仓库的 MIT / BSD-3-Clause 许可）。
+- 每项对应的论文、作者、出处、arXiv 版本与页码记录在 `dist/data.json` 的 `sources` 中，页面详情可直接打开原文 PDF 对应页。
+- 许可按论文在 arXiv 上由作者选择的许可记录：图元与原图共 680 项，其中 553 项为 [arXiv 非独占分发许可](https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html)（作者保留版权，仅授权 arXiv 分发），61 项为 CC BY 4.0，35 项为 CC BY-NC-ND 4.0，13 项为 CC BY-NC-SA 4.0，9 项为 CC BY-SA 4.0，2 项为 CC0 1.0；其余 7 项来自期刊、会议论文集或官方代码仓库（IEEE、MIT Press、AAAS、NeurIPS 论文集版权，或仓库的 MIT / BSD-3-Clause 许可）。
 - 本仓库收录这些图，用于学术检索、比较与介绍，并在每一项标明出处。再次使用（论文、课件、出版物等）时，请引用原论文，并按原许可或出版方规定使用：NC 表示仅限非商业用途，ND 表示不得改编，arXiv 非独占许可与出版方版权的图片需要按出版方规定取得授权。arXiv 的说明见 [Reuse of arXiv content](https://info.arxiv.org/help/license/reuse.html)。
 - 权利人如希望调整署名或移除某张图，请在 [Issues](https://github.com/RuntimeWarning/research-figure-library/issues) 中说明，我们会尽快处理。
 

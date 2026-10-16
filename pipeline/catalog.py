@@ -26,7 +26,6 @@ PAPER_CATEGORIES = [
     "大语言模型", "多模态", "生成模型", "扩散模型", "自监督学习", "图神经网络", "时空预测", "气象大模型",
     "时间序列", "频域与小波", "三维视觉", "光流与运动", "超分辨率与复原", "基础组件",
 ]
-ATOMIC_CATEGORIES = ["张量与特征图", "通道与 Token", "卷积核与采样", "频谱、小波与噪声", "权重条与纹理"]
 ICON_FIELDS = ["id", "pack", "file", "zh", "en", "cat", "tags", "flags", "author", "license"]
 FEATURED, MONO = 1, 2
 
@@ -43,6 +42,10 @@ def search_tags(tags, limit=90):
 
 def main():
     papers = read_json(MANIFESTS / "papers.json")
+    elements = read_json(MANIFESTS / "elements.json")
+    ATOMIC_CATEGORIES = elements["categories"]
+    papers["sources"] = {**elements["sources"], **papers["sources"]}
+    papers["assets"] = papers["assets"] + elements["assets"]
     packs, rows, csv_rows = {}, [], []
     for key in PACK_ORDER:
         manifest = read_json(MANIFESTS / f"icons-{key}.json")
@@ -64,15 +67,16 @@ def main():
     paper_rows = []
     for p in papers["assets"]:
         source = papers["sources"][p["source"]]
-        record = {k: p[k] for k in ("id", "kind", "name", "category", "tags", "description", "figure", "caption",
+        record = {k: p.get(k, "") for k in ("id", "kind", "name", "category", "tags", "description", "figure", "caption",
                                     "source", "year", "page", "files", "width", "height", "svg_kind",
                                     "architecture", "has_alpha")}
         paper_rows.append(record)
         csv_rows.append({
-            "id": p["id"], "type": p["kind"], "name": p["name"], "english": f"{source['short']} · {p['figure']}",
-            "collection": "论文原图" if p["kind"] == "paper" else "论文小图元", "category": p["category"],
+            "id": p["id"], "type": p["kind"], "name": p["name"], "english": f"{source['short']} · {p['figure']}" if p.get('figure') else source['short'],
+            "collection": "论文原图" if p["kind"] == "paper" else "论文图元", "category": p["category"],
             "featured": 1, "files": " ".join(v for k, v in p["files"].items() if k != "thumb"),
-            "source_title": f"{source['title']} ({source['venue']})", "source_url": source["url"],
+            "source_title": f"{source['title']} ({source['venue']})" + (f", p. {p['page']}" if p.get("page") else ""),
+            "source_url": source["url"],
             "authors": "; ".join(source["authors"]), "license": source["license_name"],
             "license_url": source["license_url"],
             "sha256": " ".join(f"{k}:{v}" for k, v in p["hashes"].items()),

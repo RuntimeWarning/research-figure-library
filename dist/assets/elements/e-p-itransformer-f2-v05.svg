@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" width="35.17" height="53.51" viewBox="0 0 35.17 53.51">
+<path transform="matrix(1,0,0,-1,0,53.51)" d="M1.49966 1.4973H22.611962V40.95239H1.49966Z" fill="#ffe2bb" fill-opacity=".8"/>
+<path transform="matrix(1,0,0,-1,0,53.51)" d="M22.61197 40.9524 33.66541 52.00583V12.55074L22.61197 1.4973V40.9524" fill="#cdb696" fill-opacity=".8" fill-rule="evenodd"/>
+<path transform="matrix(1,0,0,-1,0,53.51)" d="M1.49966 40.9524 12.55313 52.00583H33.66541L22.61197 40.9524H1.49966" fill="#ffe8c8" fill-opacity=".8" fill-rule="evenodd"/>
+<path transform="matrix(1,0,0,-1,0,53.51)" stroke-width=".39598" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#a5a5a5" d="M1.49966 40.9524 12.5531 52.00583H33.66541V12.55072L22.61197 1.4973H1.49966V40.9524H22.61197L33.66541 52.00583M22.61197 40.9524V1.4973"/>
+</svg>

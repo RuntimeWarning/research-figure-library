@@ -32,14 +32,15 @@ const store = {
   set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ } }
 };
 
-const TAB_NAMES = { all: '全部素材', paper: '论文原图', atomic: '论文小图元', icon: '科研图标', favorites: '我的收藏' };
-const KIND_LABEL = { paper: '论文原图', atomic: '小图元', icon: '图标' };
+const TAB_NAMES = { atomic: '论文图元', paper: '论文原图', icon: '科研图标', all: '全部素材', favorites: '我的收藏' };
+const DEFAULT_TAB = 'atomic';
+const KIND_LABEL = { paper: '论文原图', atomic: '图元', icon: '图标' };
 const SWATCHES = ['#1f2937', '#3b5bdb', '#0f8a5f', '#d9480f', '#c2255c', '#7048e8', '#0b7285', '#ffffff'];
 const FAVORITES_KEY = 'paper-elements-favorites-v1';
 const PAGE = { paper: 48, icon: 180, mixed: 96 };
 
 const state = {
-  tab: 'all', q: '', category: '', pack: '', arch: false, vector: false, mono: false, featured: false,
+  tab: DEFAULT_TAB, q: '', category: '', pack: '', arch: false, vector: false, mono: false, featured: false,
   sort: 'relevance', limit: 0, color: store.get('figure-atlas-color', '#1f2937')
 };
 let catalog = null, items = [], byId = new Map(), results = [], current = null, pngSize = 512, searchTimer = 0;
@@ -130,26 +131,36 @@ function fillCounts() {
   updateTabCounts();
 }
 
+// Tab counts follow the current search so matches in other collections stay visible.
+let tabCounts = {};
 function updateTabCounts() {
-  const counts = { all: items.length, paper: 0, atomic: 0, icon: 0, favorites: favorites.size };
-  for (const it of items) counts[it.type] += 1;
-  counts.favorites = items.filter(it => favorites.has(it.id)).length;
+  const toks = state.q ? tokens() : [];
+  const counts = { all: 0, paper: 0, atomic: 0, icon: 0, favorites: 0 };
+  for (const it of items) {
+    if (toks.length && !matches(it, toks)) continue;
+    counts[it.type] += 1;
+    counts.all += 1;
+    if (favorites.has(it.id)) counts.favorites += 1;
+  }
+  tabCounts = counts;
   document.querySelectorAll('[data-tab]').forEach(btn => {
     const span = [...btn.querySelectorAll('span')].find(s => !s.dataset.icon);
     if (span) span.textContent = fmt(counts[btn.dataset.tab]);
   });
-  $('favoriteCount').textContent = fmt(counts.favorites);
+  $('favoriteCount').textContent = fmt(toks.length ? items.filter(it => favorites.has(it.id)).length : counts.favorites);
 }
 
 function heroArt() {
-  const picks = ['arch-paper-transformer', 'arch-paper-unet', 'p-resnet-f2', 'arch-paper-vit', 'p-ldm-f3'];
-  const labels = picks.map(id => byId.get(id)).filter(Boolean);
+  // Elements lead; one original figure shows where they come from.
+  const picks = ['e-earthformer-f4-v03', 'e-p-sparsetransformer-f3-v03', 'e-acmix-f3-v11', 'e-p-fengwu-f2-i05',
+    'e-p-senet-f1-v02'];
+  const tiles = picks.map(id => byId.get(id)).filter(Boolean);
   const art = $('heroArt');
-  art.innerHTML = labels.map((it, i) => `<div class="tile t${i + 1}"><img src="${esc(it.thumb)}" alt="" decoding="async"><span>${esc(it.en)}</span></div>`).join('')
-    + chipFor('IP0297', 'c1') + chipFor('bio-pyramidal-neuron', 'c2', 'Bioicons 科研插图');
+  art.innerHTML = tiles.map((it, i) => `<div class="tile t${i + 1}"><img src="${esc(it.thumb)}" alt="" decoding="async"><span>${esc(it.name)}</span></div>`).join('')
+    + chipFor('arch-paper-unet', 'c1', '附论文原图') + chipFor('e-pointnetpp-f8-i16', 'c2', '点云 · 气象场 · 热图');
   function chipFor(id, cls, label) {
-    const it = byId.get(id) || items.find(x => x.type === 'icon' && x.pack === 'bioicons');
-    return it ? `<div class="chip ${cls}"><img src="${esc(it.src)}" alt="">${esc(label || it.packInfo.name)}</div>` : '';
+    const it = byId.get(id);
+    return it ? `<div class="chip ${cls}"><img src="${esc(it.thumb)}" alt="">${esc(label)}</div>` : '';
   }
 }
 
@@ -163,7 +174,7 @@ function readUrl() {
 }
 function writeUrl() {
   const p = new URLSearchParams();
-  if (state.tab !== 'all') p.set('tab', state.tab);
+  if (state.tab !== DEFAULT_TAB) p.set('tab', state.tab);
   if (state.q) p.set('q', state.q);
   if (state.category) p.set('cat', state.category);
   if (state.pack) p.set('pack', state.pack);
@@ -195,7 +206,7 @@ function tokens() { return norm(state.q).split(/\s+/).filter(Boolean); }
 function matches(it, toks) { return toks.every(t => it.search.includes(t)); }
 
 function score(it, toks) {
-  let s = it.type === 'paper' ? 300 : it.type === 'atomic' ? 200 : (it.featured ? 120 : 0);
+  let s = it.type === 'atomic' ? 320 : it.type === 'paper' ? 260 : (it.featured ? 120 : 0);
   if (it.type === 'icon') s -= PACK_RANK[it.pack] || 0;
   if (!toks.length) return s;
   const name = it.nName, en = it.nEn, cName = it.cName, cEn = it.cEn;
@@ -254,7 +265,8 @@ function renderFacets(base) {
     .join('');
   document.querySelectorAll('#optionBlock [data-scope]').forEach(el => {
     const scope = el.dataset.scope;
-    el.hidden = !(state.tab === 'all' || state.tab === 'favorites' || state.tab === scope || (scope === 'paper' && state.tab === 'atomic'));
+    const any = state.tab === 'all' || state.tab === 'favorites';
+    el.hidden = !(any || state.tab === scope || (scope === 'figure' && (state.tab === 'paper' || state.tab === 'atomic')));
   });
 }
 
@@ -290,7 +302,7 @@ function card(it) {
   }
   const s = it.source || {};
   const venue = (s.venue || '').replace(/\s*·.*$/, '');
-  return `<article class="card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art"><span class="kind ${it.type}">${it.type === 'atomic' ? '小图元' : esc(shortFigure(it.figure))}</span><img src="${esc(it.thumb)}" alt="${esc(it.name)}" loading="lazy" decoding="async"></div><div class="card-body"><h3 class="card-title">${esc(it.name)}</h3><div class="card-meta"><span class="model">${esc(s.short || '')}</span>${venue ? `<span class="dot"></span><span class="venue">${esc(venue)}</span>` : ''}</div></div></button></article>`;
+  return `<article class="card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art"><span class="kind ${it.type}">${it.type === 'atomic' ? (it.files.svg ? 'SVG' : '位图') : esc(shortFigure(it.figure))}</span><img src="${esc(it.thumb)}" alt="${esc(it.name)}" loading="lazy" decoding="async"></div><div class="card-body"><h3 class="card-title" title="${esc(it.name)}">${esc(it.type === 'atomic' ? it.name.replace(/\s·\s.*$/, '') : it.name)}</h3><div class="card-meta"><span class="model">${esc(s.short || '')}</span>${venue ? `<span class="dot"></span><span class="venue">${esc(venue)}</span>` : ''}</div></div></button></article>`;
 }
 
 // Card badge: "Fig. 3" / "Table 1" from labels such as "Figure 3 中间 adaLN-Zero".
@@ -317,10 +329,14 @@ function render(keepScroll = false) {
   if (state.tab === 'all' && n) {
     const t = { paper: 0, atomic: 0, icon: 0 };
     results.forEach(it => { t[it.type] += 1; });
-    parts.push(`论文原图 ${fmt(t.paper)} · 小图元 ${fmt(t.atomic)} · 图标 ${fmt(t.icon)}`);
+    parts.push(`图元 ${fmt(t.atomic)} · 论文原图 ${fmt(t.paper)} · 图标 ${fmt(t.icon)}`);
   }
   $('resultsSummary').textContent = n ? parts.join('，') : '没有匹配的素材';
   $('emptyState').hidden = Boolean(n);
+  updateTabCounts();
+  const elsewhere = Object.entries(tabCounts).filter(([tab, count]) => count && tab !== state.tab && tab !== 'all' && tab !== 'favorites');
+  $('emptyJump').innerHTML = !n && state.q ? elsewhere.map(([tab, count]) =>
+    `<button type="button" class="ghost-button" data-jump="${tab}">在「${TAB_NAMES[tab]}」中查看 ${fmt(count)} 项</button>`).join('') : '';
   if (!n && state.tab === 'favorites' && !state.q) {
     $('emptyState').querySelector('h3').textContent = '还没有收藏';
     $('emptyState').querySelector('p').textContent = '在卡片右上角点书签即可收藏，收藏保存在当前浏览器。';
@@ -459,9 +475,14 @@ function renderMeta(it) {
     rows.push(['文件', `<code>${esc(it.src)}</code>`]);
   } else {
     const s = it.source;
-    rows.push(['图号', esc(it.figure || '—')]);
+    if (it.figure) rows.push(['图号', esc(it.figure)]);
     rows.push(['许可', `${esc(s.license_name)}${licenseNote(s.license)}`]);
-    rows.push(['裁剪', it.page ? `原文第 ${esc(it.page)} 页，按原样裁剪，未重绘或改色` : '按原样截取，未重绘或改色']);
+    if (it.type === 'atomic') {
+      rows.push(['来源位置', it.page ? `原文第 ${esc(it.page)} 页插图` : '原文插图']);
+      rows.push(['处理', it.files.svg ? '从原图中分离出这一组矢量路径，配色与形状未改动' : '按论文 PDF 中嵌入位图的原始分辨率导出，未重绘']);
+    } else {
+      rows.push(['裁剪', it.page ? `原文第 ${esc(it.page)} 页，按原样裁剪，未重绘或改色` : '按原样截取，未重绘或改色']);
+    }
     const formats = ['PNG', it.files.svg ? 'SVG' : '', it.files.pdf ? 'PDF' : ''].filter(Boolean).join(' · ');
     rows.push(['格式', `${formats}（${fmt(it.width)} × ${fmt(it.height)} px）`]);
   }
@@ -667,6 +688,10 @@ $('iconColor').addEventListener('input', e => {
   store.set('figure-atlas-color', state.color);
 });
 $('resetFilters').addEventListener('click', resetFilters);
+$('emptyJump').addEventListener('click', e => {
+  const b = e.target.closest('[data-jump]'); if (!b) return;
+  const q = state.q; setTab(b.dataset.jump); state.q = q; syncControls(); render();
+});
 $('emptyReset').addEventListener('click', () => { if (state.tab === 'favorites' && !favorites.size) setTab('all'); else resetFilters(); });
 $('retryLoad').addEventListener('click', load);
 $('loadMore').addEventListener('click', loadMore);
