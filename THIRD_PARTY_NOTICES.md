@@ -4,7 +4,21 @@
 
 ## 原创图元（不属于第三方素材）
 
-`dist/assets/elements/` 中的 290 个图元由本项目用 `pipeline/elements/` 中的脚本绘制，不含任何第三方图形，采用 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)：可自由复制、修改、分发和商用，无需署名。
+`dist/assets/elements/` 中的 248 个图元由本项目用 `pipeline/elements/` 中的脚本绘制，不含任何第三方图形，采用 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)：可自由复制、修改、分发和商用，无需署名。
+
+## 收集的图元
+
+`dist/assets/collected/` 中的 175 个图元来自下列开源图库，保留原许可。逐项的原始文件链接见 `dist/sources.csv` 的 `source_url` 列。
+
+| 来源 | 版本 | 许可 | 收录与处理 | 署名 |
+| --- | --- | --- | --- | --- |
+| [Dive into Deep Learning](https://github.com/d2l-ai/d2l-en)（Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola） | 提交 `23d7a5ae` | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | 75 张 `img/*.svg`，内容未改动，只把根元素的 pt 尺寸换成像素 | Figure from Zhang, Lipton, Li & Smola, Dive into Deep Learning (https://d2l.ai), CC BY-SA 4.0. |
+| [Deep Learning Visuals](https://github.com/dvgodoy/dl-visuals)（Daniel Voigt Godoy） | 提交 `95f792b3` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | 48 张 PNG，只裁去四周空白 | Figure by Daniel Voigt Godoy, Deep Learning Visuals (https://github.com/dvgodoy/dl-visuals), CC BY 4.0. |
+| [ML Visuals](https://github.com/dair-ai/ml-visuals)（dair.ai 社区） | 仓库提交 `e1e81c67`，幻灯片 2026-10-20 导出 | MIT（Copyright (c) 2020 dair.ai） | 37 个，从幻灯片导出的 PDF 中按原样裁出并转为 SVG / PNG | Visual from ML Visuals by dair.ai (https://github.com/dair-ai/ml-visuals), MIT License. |
+| [NN-SVG](https://github.com/alexlenail/NN-SVG)（Alexander LeNail） | 提交 `d72cf124` | MIT（Copyright (c) 2018 Alexander Lenail） | 15 个，由 `pipeline/collected/nnsvg.mjs` 调用 NN-SVG 生成 | Drawn with NN-SVG (LeNail, JOSS 2019, https://github.com/alexlenail/NN-SVG), MIT License. |
+
+- 使用 CC BY / CC BY-SA 图元时请注明署名；改编 d2l 的图后再发布，须同样采用 CC BY-SA 4.0。
+- MIT 来源的版权声明与许可原文在 `dist/licenses/ml-visuals-LICENSE.txt` 与 `dist/licenses/nn-svg-LICENSE.txt`；CC 许可原文在 `dist/licenses/d2l-LICENSE.txt` 与 `dist/licenses/dl-visuals-LICENSE.txt`。
 
 ## 论文原图
 

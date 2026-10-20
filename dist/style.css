@@ -277,6 +277,8 @@ button.stat:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--li
 .meta dd { margin: 0; color: var(--ink-2); overflow-wrap: anywhere; }
 .meta dd a { color: var(--accent); }
 .meta dd a:hover { text-decoration: underline; }
+.meta dd code { display: block; margin-bottom: 4px; font: 12px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; color: var(--ink-2); }
+.meta dd .link-button { color: var(--accent); font-weight: 600; }
 .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
 .tags button { padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-2); font-size: 12px; }
 .tags button:hover { border-color: var(--accent); color: var(--accent); }

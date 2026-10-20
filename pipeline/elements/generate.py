@@ -27,12 +27,14 @@ from style import PALETTES as P, ORDER  # noqa: E402
 OUT = ASSETS / "elements"
 PNG_SIDE = 1024
 THUMB_SIDE = 420
-CATEGORIES = ["特征图", "张量与通道", "卷积与采样", "Token 与向量", "注意力与矩阵", "网络层与模块",
-              "运算符与箭头", "图与点云", "时空与气象", "信号与噪声"]
+# Shared by every element source (originals here, collected ones in ``pipeline/collected``).
+CATEGORIES = ["特征图", "张量与通道", "卷积与采样", "Token 与嵌入", "注意力与 Transformer", "循环网络", "神经元与全连接",
+              "网络结构与模块", "视觉任务与图像", "训练与优化", "运算符", "图与点云", "时空与气象", "信号与噪声"]
 SPECS = []          # (id, builder, kwargs, meta)
 
 
 def add(eid, category, zh, en, tags, fn, desc="", **kw):
+    assert category in CATEGORIES, category
     SPECS.append((eid, fn, kw, {"id": eid, "category": category, "name": zh, "english": en, "tags": tags,
                                 "description": desc}))
 
@@ -396,26 +398,6 @@ def b_neuron(title, pal):
     return s.to_svg(title)
 
 
-def b_block(title, pal, label, h=1.15, d=1.0):
-    p = P[pal]
-    s = st.Scene()
-    w = max(3.0, 0.3 * len(label) + 1.2)
-    txt = st.face_text(label, w / 2, h / 2, 0, 0.5, "#ffffff")
-    st.extrude(s, st.rect(w, h), 0, d, p, front_svg=txt)
-    return s.to_svg(title)
-
-
-def b_trapezoid(title, pal, mode="encoder"):
-    p = P[pal]
-    if mode == "encoder":
-        outline = [(0, 0), (3.0, 0.75), (3.0, 2.25), (0, 3.0)]
-    else:
-        outline = [(0, 0.75), (3.0, 0), (3.0, 3.0), (0, 2.25)]
-    s = st.Scene()
-    st.extrude(s, outline, 0, 1.1, p)
-    return s.to_svg(title)
-
-
 def b_residual(title, pal):
     p = P[pal]
     s = st.Scene()
@@ -432,34 +414,6 @@ def b_residual(title, pal):
 def b_operator(title, pal, glyph):
     s = st.Scene()
     st.disc(s, P[pal], 0, 0, 0, 1.0, thick=0.35, glyph=glyph)
-    return s.to_svg(title)
-
-
-ARROWS = {
-    "right": [(0, -0.28), (1.7, -0.28), (1.7, -0.62), (2.6, 0), (1.7, 0.62), (1.7, 0.28), (0, 0.28)],
-    "down": [(-0.28, 0), (-0.28, -1.7), (-0.62, -1.7), (0, -2.6), (0.62, -1.7), (0.28, -1.7), (0.28, 0)][::-1],
-    "double": [(0, 0), (0.8, -0.62), (0.8, -0.28), (2.0, -0.28), (2.0, -0.62), (2.8, 0), (2.0, 0.62), (2.0, 0.28),
-               (0.8, 0.28), (0.8, 0.62)],
-    "bend": [(0, 0), (0.56, 0), (0.56, 1.1), (1.5, 1.1), (1.5, 0.76), (2.3, 1.38), (1.5, 2.0), (1.5, 1.66), (0, 1.66)],
-    "split": [(0, -0.28), (1.0, -0.28), (1.5, -0.9), (1.5, -1.22), (2.3, -0.62), (1.62, -0.06), (1.62, -0.38),
-              (1.24, 0.0), (1.62, 0.38), (1.62, 0.06), (2.3, 0.62), (1.5, 1.22), (1.5, 0.9), (1.0, 0.28), (0, 0.28)],
-    "merge": [(0, -0.9), (0.4, -1.2), (1.2, -0.28), (1.9, -0.28), (1.9, -0.62), (2.8, 0), (1.9, 0.62), (1.9, 0.28),
-              (1.2, 0.28), (0.4, 1.2), (0, 0.9), (0.62, 0.0)],
-}
-ARROW_ZH = {"right": "右向箭头", "down": "向下箭头", "double": "双向箭头", "bend": "折线箭头", "split": "分流箭头", "merge": "汇合箭头"}
-ARROW_EN = {"right": "right arrow", "down": "down arrow", "double": "double arrow", "bend": "bent arrow",
-            "split": "split arrow", "merge": "merge arrow"}
-
-
-def _ccw(points):
-    area = sum(points[i][0] * points[(i + 1) % len(points)][1] - points[(i + 1) % len(points)][0] * points[i][1]
-               for i in range(len(points)))
-    return points if area > 0 else points[::-1]
-
-
-def b_arrow(title, pal, kind):
-    s = st.Scene()
-    st.extrude(s, _ccw(ARROWS[kind]), 0, 0.42, P[pal])
     return s.to_svg(title)
 
 
@@ -803,73 +757,55 @@ def build_specs():
         b_depthwise)
 
     for k in ORDER:
-        add(f"tokens-{k}", "Token 与向量", f"{PZ[k]} Token 序列", f"{k} token sequence", ["Token", "序列", "sequence", "嵌入"],
+        add(f"tokens-{k}", "Token 与嵌入", f"{PZ[k]} Token 序列", f"{k} token sequence", ["Token", "序列", "sequence", "嵌入"],
             b_tokens, pals=[k])
-        add(f"vector-{k}", "Token 与向量", f"{PZ[k]}特征向量（竖）", f"{k} feature vector", ["向量", "vector", "嵌入", "embedding"],
+        add(f"vector-{k}", "Token 与嵌入", f"{PZ[k]}特征向量（竖）", f"{k} feature vector", ["向量", "vector", "嵌入", "embedding"],
             b_vector, pal=k, seed=ORDER.index(k))
     for k, first in (("blue", "orange"), ("teal", "coral"), ("purple", "amber"), ("slate", "blue")):
-        add(f"tokens-cls-{k}", "Token 与向量", f"带分类 Token 的序列（{PZ[k]}）", f"token sequence with class token ({k})",
+        add(f"tokens-cls-{k}", "Token 与嵌入", f"带分类 Token 的序列（{PZ[k]}）", f"token sequence with class token ({k})",
             ["CLS", "class token", "Token", "ViT"], b_tokens, pals=[k], first=first)
-    add("tokens-multimodal", "Token 与向量", "多模态 Token 序列", "multimodal tokens", ["多模态", "multimodal", "Token", "图文"],
+    add("tokens-multimodal", "Token 与嵌入", "多模态 Token 序列", "multimodal tokens", ["多模态", "multimodal", "Token", "图文"],
         b_tokens, pals=["blue", "blue", "blue", "orange", "orange", "orange"])
-    add("tokens-rainbow", "Token 与向量", "彩色 Token 序列", "colourful tokens", ["Token", "序列", "彩色"], b_tokens, pals=ORDER, n=8)
+    add("tokens-rainbow", "Token 与嵌入", "彩色 Token 序列", "colourful tokens", ["Token", "序列", "彩色"], b_tokens, pals=ORDER, n=8)
     for k in ("blue", "teal", "orange", "purple"):
-        add(f"vector-h-{k}", "Token 与向量", f"{PZ[k]}特征向量（横）", f"{k} feature vector (row)", ["向量", "vector", "行向量"],
+        add(f"vector-h-{k}", "Token 与嵌入", f"{PZ[k]}特征向量（横）", f"{k} feature vector (row)", ["向量", "vector", "行向量"],
             b_vector, pal=k, vertical=False, n=8, seed=3)
-        add(f"embedding-{k}", "Token 与向量", f"{PZ[k]}嵌入矩阵", f"{k} embedding matrix", ["嵌入", "embedding", "矩阵"],
+        add(f"embedding-{k}", "Token 与嵌入", f"{PZ[k]}嵌入矩阵", f"{k} embedding matrix", ["嵌入", "embedding", "矩阵"],
             b_embedding, pal=k)
-    add("qkv", "Token 与向量", "Q / K / V 向量", "query key value", ["QKV", "注意力", "query", "key", "value"], b_qkv)
+    add("qkv", "Token 与嵌入", "Q / K / V 向量", "query key value", ["QKV", "注意力", "query", "key", "value"], b_qkv)
 
     for kind in MASKS:
         for k in ("blue", "purple"):
-            add(f"mask-{kind}-{k}", "注意力与矩阵", f"{PZ[k]}{MASK_ZH[kind]}", f"{k} {MASK_EN[kind]}",
+            add(f"mask-{kind}-{k}", "注意力与 Transformer", f"{PZ[k]}{MASK_ZH[kind]}", f"{k} {MASK_EN[kind]}",
                 ["注意力", "掩码", "mask", "attention", "稀疏注意力" if kind not in ("full", "causal") else "Transformer"],
                 b_mask, pal=k, kind=kind)
     for k in ("blue", "purple", "orange", "teal", "coral", "green"):
-        add(f"attn-{k}", "注意力与矩阵", f"{PZ[k]}注意力热图", f"{k} attention map", ["注意力", "attention map", "热图", "矩阵"],
+        add(f"attn-{k}", "注意力与 Transformer", f"{PZ[k]}注意力热图", f"{k} attention map", ["注意力", "attention map", "热图", "矩阵"],
             b_attention, pal=k, seed=ORDER.index(k))
     for k in ("blue", "teal"):
-        add(f"sim-{k}", "注意力与矩阵", f"{PZ[k]}相似度矩阵", f"{k} similarity matrix", ["相似度", "similarity", "相关矩阵"],
+        add(f"sim-{k}", "注意力与 Transformer", f"{PZ[k]}相似度矩阵", f"{k} similarity matrix", ["相似度", "similarity", "相关矩阵"],
             b_attention, pal=k, seed=9, mode="sym")
     for a, b in (("blue", "orange"), ("purple", "teal")):
-        add(f"tokattn-{a}-{b}", "注意力与矩阵", f"Token 间注意力连接（{PZ[a]}{PZ[b]}）", f"token-to-token attention {a} {b}",
+        add(f"tokattn-{a}-{b}", "注意力与 Transformer", f"Token 间注意力连接（{PZ[a]}{PZ[b]}）", f"token-to-token attention {a} {b}",
             ["注意力", "attention", "Token", "交叉注意力"], b_token_attention, pal_a=a, pal_b=b)
 
-    add("mlp-1", "网络层与模块", "全连接网络 3-5-4-2", "MLP 3-5-4-2", ["MLP", "全连接", "神经网络", "neurons"], b_mlp,
+    add("mlp-1", "神经元与全连接", "全连接网络 3-5-4-2", "MLP 3-5-4-2", ["MLP", "全连接", "神经网络", "neurons"], b_mlp,
         layers=[3, 5, 4, 2], pals=["teal", "blue", "blue", "orange"])
-    add("mlp-2", "网络层与模块", "全连接网络 4-6-6-3", "MLP 4-6-6-3", ["MLP", "全连接", "神经网络"], b_mlp,
+    add("mlp-2", "神经元与全连接", "全连接网络 4-6-6-3", "MLP 4-6-6-3", ["MLP", "全连接", "神经网络"], b_mlp,
         layers=[4, 6, 6, 3], pals=["slate", "purple", "purple", "coral"])
-    add("mlp-3", "网络层与模块", "单隐层网络 3-4-1", "MLP 3-4-1", ["MLP", "感知机", "神经网络"], b_mlp, layers=[3, 4, 1],
+    add("mlp-3", "神经元与全连接", "单隐层网络 3-4-1", "MLP 3-4-1", ["MLP", "感知机", "神经网络"], b_mlp, layers=[3, 4, 1],
         pals=["green", "green", "amber"])
-    add("neuron", "网络层与模块", "单个神经元", "single neuron", ["神经元", "neuron", "激活函数"], b_neuron, pal="blue")
-    blocks = [("conv", "Conv 3×3", "blue"), ("bn", "BatchNorm", "teal"), ("relu", "ReLU", "orange"), ("pool", "Pooling", "purple"),
-              ("linear", "Linear", "slate"), ("attention", "Attention", "coral"), ("mha", "Multi-Head Attention", "coral"),
-              ("mlp", "MLP", "blue"), ("ln", "LayerNorm", "amber"), ("softmax", "Softmax", "green"), ("embed", "Embedding", "teal"),
-              ("dropout", "Dropout", "slate"), ("ffn", "Feed Forward", "blue"), ("encoder", "Encoder", "purple"),
-              ("decoder", "Decoder", "orange"), ("upsample", "Upsample", "green"), ("concat", "Concat", "slate"),
-              ("pe", "Positional Encoding", "amber")]
-    for key, label, k in blocks:
-        add(f"block-{key}", "网络层与模块", f"{label} 模块", f"{label} block", [label, "模块", "block", "网络层"],
-            b_block, pal=k, label=label)
-    for k in ("blue", "teal", "purple", "orange"):
-        add(f"encoder-{k}", "网络层与模块", f"{PZ[k]}编码器梯形", f"{k} encoder", ["编码器", "encoder", "梯形", "下采样"],
-            b_trapezoid, pal=k, mode="encoder")
-        add(f"decoder-{k}", "网络层与模块", f"{PZ[k]}解码器梯形", f"{k} decoder", ["解码器", "decoder", "梯形", "上采样"],
-            b_trapezoid, pal=k, mode="decoder")
+    add("neuron", "神经元与全连接", "单个神经元", "single neuron", ["神经元", "neuron", "激活函数"], b_neuron, pal="blue")
     for k in ("blue", "teal"):
-        add(f"residual-{k}", "网络层与模块", f"{PZ[k]}残差连接单元", f"{k} residual unit", ["残差", "residual", "跳跃连接", "ResNet"],
+        add(f"residual-{k}", "网络结构与模块", f"{PZ[k]}残差连接单元", f"{k} residual unit", ["残差", "residual", "跳跃连接", "ResNet"],
             b_residual, pal=k)
 
     ops = [("add", "+", "加法"), ("mul", "x", "乘法"), ("hadamard", "dot", "逐元素乘"), ("sigmoid", "sigmoid", "Sigmoid"),
            ("relu", "relu", "ReLU"), ("concat", "C", "拼接"), ("sum", "Σ", "求和"), ("softmax", "S", "Softmax")]
     for key, glyph, zh in ops:
-        for k in ("slate", "blue", "coral"):
-            add(f"op-{key}-{k}", "运算符与箭头", f"{zh}运算符（{PZ[k]}）", f"{key} operator ({k})", ["运算符", "operator", zh, key],
-                b_operator, pal=k, glyph=glyph)
-    for kind in ("right", "down", "double", "bend"):
         for k in ("slate", "blue"):
-            add(f"arrow-{kind}-{k}", "运算符与箭头", f"{PZ[k]}{ARROW_ZH[kind]}", f"{k} {ARROW_EN[kind]}", ["箭头", "arrow", "流程"],
-                b_arrow, pal=k, kind=kind)
+            add(f"op-{key}-{k}", "运算符", f"{zh}运算符（{PZ[k]}）", f"{key} operator ({k})", ["运算符", "operator", zh, key],
+                b_operator, pal=k, glyph=glyph)
 
     for i, (a, b) in enumerate((("blue", "orange"), ("teal", "coral"), ("purple", "amber"))):
         add(f"graph-{i + 1}", "图与点云", f"图结构（{PZ[a]}）", f"graph ({a})", ["图", "graph", "GNN", "节点"], b_graph,
@@ -883,14 +819,14 @@ def build_specs():
 
 
     for sc, zh in (("day", "白天"), ("sunset", "黄昏"), ("night", "夜晚")):
-        add(f"image-{sc}", "卷积与采样", f"输入图像（{zh}风景）", f"input image ({sc})", ["输入图像", "image", "图片", "输入"],
+        add(f"image-{sc}", "视觉任务与图像", f"输入图像（{zh}风景）", f"input image ({sc})", ["输入图像", "image", "图片", "输入"],
             b_image, scene=sc)
-    add("image-patches", "卷积与采样", "输入图像分块网格", "image split into patches", ["图像分块", "patch", "ViT", "输入图像"],
+    add("image-patches", "视觉任务与图像", "输入图像分块网格", "image split into patches", ["图像分块", "patch", "ViT", "输入图像"],
         b_image, scene="day", patches=True)
-    add("image-seg", "卷积与采样", "语义分割掩码", "semantic segmentation mask", ["语义分割", "segmentation", "掩码", "标签图"],
+    add("image-seg", "视觉任务与图像", "语义分割掩码", "semantic segmentation mask", ["语义分割", "segmentation", "掩码", "标签图"],
         b_image, mode="seg")
-    add("image-depth", "卷积与采样", "深度图", "depth map", ["深度图", "depth", "深度估计"], b_image, mode="depth")
-    add("image-detect", "卷积与采样", "目标检测框", "detection boxes", ["目标检测", "检测框", "bounding box", "detection"],
+    add("image-depth", "视觉任务与图像", "深度图", "depth map", ["深度图", "depth", "深度估计"], b_image, mode="depth")
+    add("image-detect", "视觉任务与图像", "目标检测框", "detection boxes", ["目标检测", "检测框", "bounding box", "detection"],
         b_image, mode="detect")
     add("embed-space-3", "图与点云", "嵌入空间聚类（三类）", "embedding space, three clusters", ["嵌入空间", "聚类", "对比学习", "特征分布"],
         b_embedding_space, clusters=["blue", "orange", "teal"], seed=1)

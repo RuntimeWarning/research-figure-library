@@ -32,7 +32,7 @@ const store = {
   set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ } }
 };
 
-const TAB_NAMES = { atomic: '原创图元', paper: '论文原图', icon: '科研图标', all: '全部素材', favorites: '我的收藏' };
+const TAB_NAMES = { atomic: '图元', paper: '论文原图', icon: '科研图标', all: '全部素材', favorites: '我的收藏' };
 const DEFAULT_TAB = 'atomic';
 const KIND_LABEL = { paper: '论文原图', atomic: '图元', icon: '图标' };
 const SWATCHES = ['#1f2937', '#3b5bdb', '#0f8a5f', '#d9480f', '#c2255c', '#7048e8', '#0b7285', '#ffffff'];
@@ -40,7 +40,7 @@ const FAVORITES_KEY = 'paper-elements-favorites-v1';
 const PAGE = { paper: 48, icon: 180, mixed: 96 };
 
 const state = {
-  tab: DEFAULT_TAB, q: '', category: '', pack: '', arch: false, vector: false, mono: false, featured: false,
+  tab: DEFAULT_TAB, q: '', category: '', pack: '', from: '', arch: false, vector: false, mono: false, featured: false,
   sort: 'relevance', limit: 0, color: store.get('figure-atlas-color', '#1f2937')
 };
 let catalog = null, items = [], byId = new Map(), results = [], current = null, pngSize = 512, searchTimer = 0;
@@ -71,9 +71,10 @@ function buildItems(data) {
       figure: p.figure, caption: p.caption, source: s, sourceKey: p.source, year: p.year || s.year, page: p.page,
       files: p.files, thumb: p.files.thumb || p.files.png, width: p.width, height: p.height, svgKind: p.svg_kind,
       architecture: p.architecture, hasAlpha: p.has_alpha, vector: Boolean(p.files.svg || p.files.pdf), featured: true,
-      original: Boolean(p.original)
+      original: Boolean(p.original), collection: p.collection || '', upstream: p.upstream || '',
+      from: p.kind === 'atomic' ? (p.original ? p.source : p.collection || p.source) : ''
     };
-    it.en = p.original ? p.english : `${s.short || ''}${p.figure ? ' · ' + p.figure : ''}`;
+    it.en = p.original || p.collection ? p.english : `${s.short || ''}${p.figure ? ' · ' + p.figure : ''}`;
     it.search = norm([it.id, it.name, it.en, it.category, it.description, it.tags.join(' '), s.title, s.short,
       s.venue, (s.authors || []).join(' '), it.caption, it.year].join(' ')) + ' ' + compact(it.name, it.en, s.short, it.tags.join(' '));
     out.push(it);
@@ -157,7 +158,7 @@ function heroArt() {
   const tiles = picks.map(id => byId.get(id)).filter(Boolean);
   const art = $('heroArt');
   art.innerHTML = tiles.map((it, i) => `<div class="tile t${i + 1}"><img src="${esc(it.thumb)}" alt="" decoding="async"><span>${esc(it.name)}</span></div>`).join('')
-    + chipFor('el-op-add-blue', 'c1', '运算符 · 箭头 · 模块') + chipFor('el-radar-1', 'c2', '雷达回波 · 地球 · 点云');
+    + chipFor('mlv-cube-3x3', 'c1', 'LSTM · Transformer · U-Net') + chipFor('el-radar-1', 'c2', '雷达回波 · 地球 · 点云');
   function chipFor(id, cls, label) {
     const it = byId.get(id);
     return it ? `<div class="chip ${cls}"><img src="${esc(it.thumb)}" alt="">${esc(label)}</div>` : '';
@@ -171,6 +172,7 @@ function readUrl() {
   state.q = p.get('q') || '';
   state.category = p.get('cat') || '';
   state.pack = p.get('pack') || '';
+  state.from = p.get('from') || '';
 }
 function writeUrl() {
   const p = new URLSearchParams();
@@ -178,6 +180,7 @@ function writeUrl() {
   if (state.q) p.set('q', state.q);
   if (state.category) p.set('cat', state.category);
   if (state.pack) p.set('pack', state.pack);
+  if (state.from) p.set('from', state.from);
   const qs = p.toString();
   history.replaceState(null, '', `${location.pathname}${qs ? '?' + qs : ''}${location.hash}`);
 }
@@ -199,6 +202,7 @@ function passOptions(it, skip = '') {
   if (state.mono && !(it.type === 'icon' && it.mono)) return false;
   if (state.featured && it.type === 'icon' && !it.featured) return false;
   if (skip !== 'pack' && state.pack && it.pack !== state.pack) return false;
+  if (skip !== 'from' && state.from && it.from !== state.from) return false;
   if (skip !== 'category' && state.category && it.category !== state.category) return false;
   return true;
 }
@@ -237,13 +241,14 @@ function compute() {
 
 /* ------------------------------------------------------------------ facets */
 function renderFacets(base) {
-  const catCount = new Map(), packCount = new Map();
+  const catCount = new Map(), packCount = new Map(), fromCount = new Map();
   for (const it of base) {
     if (passOptions(it, 'category')) catCount.set(it.category, (catCount.get(it.category) || 0) + 1);
     if (it.type === 'icon' && passOptions(it, 'pack')) packCount.set(it.pack, (packCount.get(it.pack) || 0) + 1);
+    if (it.from && passOptions(it, 'from')) fromCount.set(it.from, (fromCount.get(it.from) || 0) + 1);
   }
   const cat = $('categoryFacet');
-  const groups = [['paper', '论文原图'], ['atomic', '论文小图元'], ['icon', '图标']];
+  const groups = [['paper', '论文原图'], ['atomic', '图元'], ['icon', '图标']];
   const html = [];
   for (const [type, label] of groups) {
     const list = catalog.categories[type].filter(c => catCount.get(c));
@@ -263,6 +268,16 @@ function renderFacets(base) {
     .filter(([key]) => packCount.get(key) || state.pack === key)
     .map(([key, p]) => `<button type="button" data-pack="${esc(key)}" class="${state.pack === key ? 'active' : ''}"><span>${esc(p.name)} <span class="sub">${esc(p.style)}</span></span><span class="count">${fmt(packCount.get(key) || 0)}</span></button>`)
     .join('');
+  const fromKeys = [...fromCount.keys()];
+  if (state.from && !fromKeys.includes(state.from)) fromKeys.push(state.from);
+  fromKeys.sort((a, b) => Number(Boolean(catalog.sources[b]?.original)) - Number(Boolean(catalog.sources[a]?.original))
+    || (fromCount.get(b) || 0) - (fromCount.get(a) || 0));
+  $('fromBlock').hidden = state.tab === 'paper' || state.tab === 'icon' || !fromKeys.length;
+  $('fromFacet').innerHTML = fromKeys.map(key => {
+    const s = catalog.sources[key] || {};
+    const licence = s.original ? 'CC0' : s.license_name || '';
+    return `<button type="button" data-from="${esc(key)}" class="${state.from === key ? 'active' : ''}"><span>${esc(s.short || key)} <span class="sub">${esc(licence)}</span></span><span class="count">${fmt(fromCount.get(key) || 0)}</span></button>`;
+  }).join('');
   document.querySelectorAll('#optionBlock [data-scope]').forEach(el => {
     const scope = el.dataset.scope;
     const any = state.tab === 'all' || state.tab === 'favorites';
@@ -276,6 +291,7 @@ function renderActive() {
   if (state.q) chips.push(['q', `搜索：${state.q}`]);
   if (state.category) chips.push(['category', state.category]);
   if (state.pack) chips.push(['pack', catalog.packs[state.pack]?.name || state.pack]);
+  if (state.from) chips.push(['from', `来源：${catalog.sources[state.from]?.short || state.from}`]);
   if (state.arch) chips.push(['arch', '完整架构图']);
   if (state.vector) chips.push(['vector', '附矢量']);
   if (state.mono) chips.push(['mono', '可改色']);
@@ -302,7 +318,7 @@ function card(it) {
     return `<article class="card icon-card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art">${art}</div><div class="card-body"><h3 class="card-title" title="${esc(it.name)} · ${esc(it.en)}">${esc(it.name)}</h3><div class="card-meta">${esc(it.packInfo.name)}</div></div></button></article>`;
   }
   const s = it.source || {};
-  const venue = it.original ? it.category : (s.venue || '').replace(/\s*·.*$/, '');
+  const venue = it.type === 'atomic' && (it.original || it.collection) ? it.category : (s.venue || '').replace(/\s*·.*$/, '');
   return `<article class="card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art"><span class="kind ${it.type}">${it.type === 'atomic' ? (it.files.svg ? 'SVG' : '位图') : esc(shortFigure(it.figure))}</span><img src="${esc(it.thumb)}" alt="${esc(it.name)}" loading="lazy" decoding="async"></div><div class="card-body"><h3 class="card-title" title="${esc(it.name)}">${esc(it.type === 'atomic' ? it.name.replace(/\s·\s.*$/, '') : it.name)}</h3><div class="card-meta"><span class="model">${esc(s.short || '')}</span>${venue ? `<span class="dot"></span><span class="venue">${esc(venue)}</span>` : ''}</div></div></button></article>`;
 }
 
@@ -380,6 +396,7 @@ function setTab(tab) {
   state.tab = tab;
   state.category = '';
   if (tab !== 'icon' && tab !== 'all' && tab !== 'favorites') state.pack = '';
+  if (tab === 'paper' || tab === 'icon') state.from = '';
   if (tab === 'icon') { state.arch = false; state.vector = false; }
   if (tab === 'paper' || tab === 'atomic') { state.mono = false; state.featured = false; }
   syncControls();
@@ -406,6 +423,7 @@ function openDetail(it, push = true) {
   const badges = isIcon
     ? [[it.packInfo.name, 'accent'], [it.packInfo.style, ''], [it.mono ? '可改色' : '彩色', ''], [it.license || it.packInfo.license, '']]
     : it.original ? [['原创图元', 'accent'], [it.category, ''], ['可编辑 SVG', ''], ['CC0 1.0', '']]
+    : it.collection ? [[it.source.short, 'accent'], [it.category, ''], [svgLabel(it), ''], [it.source.license_name, '']]
     : [[KIND_LABEL[it.type], 'accent'], [it.category, ''], [it.figure, ''], [it.source.license_name, licenseClass(it.source.license)]];
   if (!isIcon && it.architecture) badges.splice(2, 0, ['完整架构', '']);
   $('detailBadges').innerHTML = badges.filter(([t]) => t).map(([t, c]) => `<span class="${c}">${esc(t)}</span>`).join('');
@@ -432,6 +450,10 @@ function iconDescription(it) {
   const pack = it.packInfo;
   return `${pack.name}（${pack.style}）中的独立图标，分类为「${it.category}」。${it.mono ? '单色图标可改为任意颜色后下载 SVG 或 PNG。' : '彩色图标保留原始配色，可下载 SVG 或 PNG。'}`;
 }
+function svgLabel(it) {
+  if (!it.files.svg) return 'PNG';
+  return it.svgKind === 'mixed' ? 'SVG（含位图）' : '可编辑 SVG';
+}
 function licenseClass(id) { return /NC|ND|arXiv|publisher/i.test(id || '') ? 'warn' : ''; }
 
 function renderActions(it) {
@@ -456,13 +478,23 @@ function renderSource(it) {
   if (it.type === 'icon') { card.hidden = true; return; }
   const s = it.source;
   card.hidden = false;
-  card.querySelector('.cite').hidden = Boolean(it.original);
-  card.querySelector('h3').textContent = it.original ? '许可' : '来源';
+  card.querySelector('.cite').hidden = Boolean(it.original || it.collection);
+  card.querySelector('h3').textContent = it.original ? '许可' : it.collection ? '来源与许可' : '来源';
   if (it.original) {
     $('sourceTitle').textContent = '研图原创图元 · CC0 1.0（公共领域）';
     $('sourceMeta').textContent = '可在论文、课件、海报中自由使用和修改，可商用，无需署名或引用。';
     $('sourceLinks').innerHTML = `<a href="${esc(s.license_url)}" target="_blank" rel="noopener noreferrer">${svgIcon('external')}CC0 1.0 说明</a>`
       + `<a href="${esc(it.files.svg)}" target="_blank" rel="noopener">${svgIcon('file')}查看 SVG 源文件</a>`;
+    return;
+  }
+  if (it.collection) {
+    $('sourceTitle').textContent = s.title;
+    $('sourceMeta').textContent = `${(s.authors || []).join(', ')} · ${s.license_name}${licenseNote(s.license)}`;
+    $('sourceLinks').innerHTML = [
+      it.upstream && `<a href="${esc(it.upstream)}" target="_blank" rel="noopener noreferrer">${svgIcon('file')}${it.page ? `原幻灯片第 ${esc(it.page)} 页` : '原始文件'}</a>`,
+      `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${svgIcon('link')}项目主页</a>`,
+      `<a href="${esc(s.license_file || s.license_url)}" target="_blank" rel="noopener">${svgIcon('external')}${esc(s.license_name)} 许可</a>`
+    ].filter(Boolean).join('');
     return;
   }
   $('sourceTitle').textContent = s.title;
@@ -489,6 +521,13 @@ function renderMeta(it) {
     rows.push(['许可', 'CC0 1.0：可自由使用、修改、商用，无需署名']);
     rows.push(['编辑', 'SVG 中每个面、每个格子都是独立图形，可直接改色、增删格子或改尺寸']);
     rows.push(['格式', `SVG · PNG（${fmt(it.width)} × ${fmt(it.height)} px，透明背景）`]);
+  } else if (it.collection) {
+    const s = it.source;
+    rows.push(['类别', esc(it.category)]);
+    rows.push(['许可', `${esc(s.license_name)}${licenseNote(s.license)}`]);
+    rows.push(['署名', `<code>${esc(s.attribution)}</code> <button type="button" class="link-button" data-action="copy-attribution">复制署名</button>`]);
+    rows.push(['处理', esc(s.processing)]);
+    rows.push(['格式', `${it.files.svg ? (it.svgKind === 'mixed' ? 'SVG（含嵌入位图）· ' : 'SVG · ') : ''}PNG（${fmt(it.width)} × ${fmt(it.height)} px）`]);
   } else {
     const s = it.source;
     if (it.figure) rows.push(['图号', esc(it.figure)]);
@@ -509,6 +548,7 @@ function licenseNote(id) {
   if (/NC/.test(id)) return '：仅限非商业用途';
   if (/ND/.test(id)) return '：不得改编';
   if (id === 'arXiv' || id === 'publisher') return '：版权归作者或出版方，引用时注明出处';
+  if (/CC-BY-SA/.test(id)) return '：署名，改编后须以相同许可发布';
   if (/CC-BY|CC0|MIT|BSD/.test(id)) return '：署名后可再使用';
   return '';
 }
@@ -666,7 +706,7 @@ function toggleFavorite(id) {
   if (state.tab === 'favorites') render(true);
 }
 function resetFilters() {
-  Object.assign(state, { q: '', category: '', pack: '', arch: false, vector: false, mono: false, featured: false, sort: 'relevance' });
+  Object.assign(state, { q: '', category: '', pack: '', from: '', arch: false, vector: false, mono: false, featured: false, sort: 'relevance' });
   syncControls();
   render();
 }
@@ -693,6 +733,13 @@ $('categoryFacet').addEventListener('click', e => {
 $('packFacet').addEventListener('click', e => {
   const b = e.target.closest('[data-pack]'); if (!b) return;
   state.pack = state.pack === b.dataset.pack ? '' : b.dataset.pack; render();
+});
+$('fromFacet').addEventListener('click', e => {
+  const b = e.target.closest('[data-from]'); if (!b) return;
+  state.from = state.from === b.dataset.from ? '' : b.dataset.from; render();
+});
+$('detailMeta').addEventListener('click', e => {
+  if (e.target.closest('[data-action="copy-attribution"]') && current) copyText(current.source.attribution, '已复制署名');
 });
 [['onlyArch', 'arch'], ['onlyVector', 'vector'], ['onlyMono', 'mono'], ['onlyFeatured', 'featured']].forEach(([id, key]) => {
   $(id).addEventListener('change', e => { state[key] = e.target.checked; render(); });

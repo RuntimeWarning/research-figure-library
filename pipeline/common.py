@@ -10,6 +10,8 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import shutil
+import subprocess
 import sys
 import time
 import urllib.request
@@ -47,7 +49,26 @@ def fetch(url: str, dest: Path | None = None, *, retries: int = 4, timeout: int 
         except Exception as error:  # network errors are retried, then re-raised
             last = error
             time.sleep(2 + attempt * 3)
+    data = fetch_with_curl(url, timeout)  # some networks fail Python's TLS handshake but not curl's
+    if data is not None:
+        if dest is not None:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(data)
+        return data
     raise RuntimeError(f"Download failed: {url}: {last}")
+
+
+def fetch_with_curl(url: str, timeout: int = 120) -> bytes | None:
+    curl = shutil.which("curl")
+    if not curl:
+        return None
+    for _ in range(4):
+        result = subprocess.run([curl, "-sSL", "--retry", "3", "--retry-all-errors", "-m", str(timeout),
+                                 "-A", USER_AGENT, "-f", url], capture_output=True)
+        if result.returncode == 0 and result.stdout:
+            return result.stdout
+        time.sleep(2)
+    return None
 
 
 def sha256(path: Path) -> str:
