@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Collect figure elements from openly licensed libraries (see ``picks.py``).
+"""Collect stand-alone figure elements from openly licensed libraries (see ``picks.py``).
 
 Sources are downloaded at pinned commits into ``.cache/web/`` and processed into
 ``dist/assets/collected/<source>/``: an SVG where the source is vector, a PNG and a
 WebP thumbnail.  Metadata goes to ``pipeline/manifests/collected.json``.
 
-* d2l (CC BY-SA 4.0): the book's SVG figures, unchanged apart from px sizes.
-* dl-visuals (CC BY 4.0): PNG figures with the surrounding white space trimmed.
+* Isoflow isopacks (MIT): isometric SVG objects, unchanged.
+* Fluent Emoji 3D (MIT): 256 px renders; Chinese names come from the Fluent Emoji
+  icon manifest, so run ``pipeline/icons/build.py`` first.
+* 3dicons (CC0): 400 px renders in the colour and clay styles.
 * ML Visuals (MIT): slides exported from Google Slides as PDF, cropped per element
   and converted to SVG with PyMuPDF.
 * NN-SVG (MIT): schematics rendered by ``nnsvg.mjs`` (run it first; needs
@@ -15,25 +17,27 @@ WebP thumbnail.  Metadata goes to ``pipeline/manifests/collected.json``.
 from __future__ import annotations
 
 import io
+import json
 import re
 import sys
 import zipfile
 from collections import Counter
 from pathlib import Path
+from urllib.parse import quote
 
 import pymupdf
 import resvg_py
-from PIL import Image, ImageChops
+from PIL import Image
 
 sys.path[:0] = [str(Path(__file__).resolve().parents[1]), str(Path(__file__).resolve().parent)]
-from common import ASSETS, CACHE, DIST, MANIFESTS, fetch, sha256, write_json  # noqa: E402
-from picks import PICKS, PREFIX, SOURCES  # noqa: E402
+from common import ASSETS, CACHE, DIST, MANIFESTS, fetch, read_json, sha256, slug, write_json  # noqa: E402
+from picks import FLUENT, FLUENT_TAGS, FLUENT_ZH, PICKS, PREFIX, SOURCES, THREEDICON_STYLES, THREEDICONS  # noqa: E402
 
 WEB = CACHE / "web"
 OUT = ASSETS / "collected"
 PNG_SIDE = 1600
 THUMB_SIDE = 560
-ORDER = ["ml-visuals", "nn-svg", "d2l", "dl-visuals"]
+ORDER = ["isoflow", "fluent-3d", "3dicons", "ml-visuals", "nn-svg"]
 
 
 def categories():
@@ -44,7 +48,7 @@ def categories():
 
 # ------------------------------------------------------------------ sources
 def raw(repo, commit, path):
-    return f"https://raw.githubusercontent.com/{repo}/{commit}/{path}"
+    return f"https://raw.githubusercontent.com/{repo}/{commit}/{quote(path)}"
 
 
 def unpack(repo, commit):
@@ -56,14 +60,51 @@ def unpack(repo, commit):
     return root
 
 
+def fluent_jobs():
+    """Fluent Emoji 3D picks: (path in repo, id, zh, en, category, tags)."""
+    commit = SOURCES["fluent-3d"]["commit"]
+    tree = json.loads(fetch(f"https://api.github.com/repos/microsoft/fluentui-emoji/git/trees/{commit}?recursive=1",
+                            WEB / "fluent" / f"tree-{commit[:8]}.json"))
+    renders = {}
+    for entry in tree["tree"]:
+        path = entry["path"]
+        if path.endswith(".png") and "/3D/" in path and ("/Default/3D/" in path or path.count("/") == 3):
+            renders.setdefault(path.split("/")[1].lower(), path)
+    manifest = read_json(MANIFESTS / "icons-fluent-emoji.json")
+    if not manifest:
+        raise SystemExit("Run pipeline/icons/build.py first: Fluent Emoji names come from its manifest")
+    names = {a["en"].lower(): a for a in manifest["assets"]}
+    jobs = []
+    for category, entries in FLUENT.items():
+        for name in entries:
+            icon = names.get(name, {})
+            zh = FLUENT_ZH.get(name) or icon.get("zh")
+            if name not in renders or not zh:
+                raise ValueError(f"Fluent Emoji pick without a 3D render or Chinese name: {name}")
+            tags = FLUENT_TAGS.get(name, []) + [t for t in icon.get("tags", []) if t != zh][:6]
+            jobs.append((renders[name], slug(name), zh, name, category, tags))
+    return jobs
+
+
+def threedicon_jobs():
+    commit = SOURCES["3dicons"]["commit"]
+    jobs = []
+    for name, zh, en, category, tags in THREEDICONS:
+        meta = fetch(raw("realvjy/3dicons", commit, f"content/3dicons-meta/{name}.md"),
+                     WEB / "3dicons" / "meta" / f"{name}.md").decode("utf-8")
+        urls = dict(re.findall(r"^(\w+):\s*(https://\S+)", meta, re.M))
+        for style, style_zh in THREEDICON_STYLES.items():
+            jobs.append(((urls[style], style), f"{name}-{style}", f"{zh}（{style_zh}）", f"{en} ({style})", category,
+                         tags + ["三维", "3D", style_zh]))
+    return jobs
+
+
 def prepare():
     licences = DIST / "licenses"
-    s = SOURCES["d2l"]
-    for ref, *_ in PICKS["d2l"]:
-        fetch(raw("d2l-ai/d2l-en", s["commit"], f"img/{ref}"), WEB / "d2l" / ref)
-    (licences / "d2l-LICENSE.txt").write_bytes(fetch(raw("d2l-ai/d2l-en", s["commit"], "LICENSE"), WEB / "d2l" / "LICENSE"))
-    roots = {"dl-visuals": unpack("dvgodoy/dl-visuals", SOURCES["dl-visuals"]["commit"])}
-    (licences / "dl-visuals-LICENSE.txt").write_bytes((roots["dl-visuals"] / "LICENSE").read_bytes())
+    roots = {"isoflow": unpack("markmanx/isopacks", SOURCES["isoflow"]["commit"])}
+    (licences / "isoflow-LICENSE.txt").write_bytes((roots["isoflow"] / "collections/isoflow/LICENSE").read_bytes())
+    (licences / "3dicons-LICENSE.txt").write_bytes(
+        fetch(raw("realvjy/3dicons", SOURCES["3dicons"]["commit"], "LICENSE"), WEB / "3dicons" / "LICENSE"))
     deck = SOURCES["ml-visuals"]["deck"]
     fetch(deck + "export/pdf", WEB / "ml-visuals" / "ml-visuals.pdf", timeout=300)
     (licences / "ml-visuals-LICENSE.txt").write_bytes(
@@ -72,15 +113,17 @@ def prepare():
     (licences / "nn-svg-LICENSE.txt").write_bytes((roots["nn-svg"] / "LICENSE").read_bytes())
     if not (WEB / "nn-svg-out").is_dir():
         raise SystemExit(f"Run first: node pipeline/collected/nnsvg.mjs {roots['nn-svg']} {WEB / 'nn-svg-out'}")
-    return roots
+    jobs = {key: rows for key, rows in PICKS.items()}
+    jobs["fluent-3d"] = fluent_jobs()
+    jobs["3dicons"] = threedicon_jobs()
+    return roots, jobs
 
 
 # ------------------------------------------------------------------ processing
 def px_size(svg: str) -> str:
     """Use unitless (px) width/height on the root element; resvg rejects some units."""
     match = re.search(r"<svg\b[^>]*>", svg)
-    root = match.group(0)
-    fixed = re.sub(r'\b(width|height)="([\d.]+)(?:pt|px|mm)?"', r'\1="\2"', root)
+    fixed = re.sub(r'\b(width|height)="([\d.]+)(?:pt|px|mm)?"', r'\1="\2"', match.group(0))
     return svg[:match.start()] + fixed + svg[match.end():]
 
 
@@ -92,11 +135,8 @@ def render_svg(svg: str) -> Image.Image:
     return Image.open(io.BytesIO(bytes(png))).convert("RGBA")
 
 
-def trim(image: Image.Image, margin: int = 24) -> Image.Image:
-    rgb = image.convert("RGB")
-    corner = rgb.getpixel((0, 0))
-    diff = ImageChops.difference(rgb, Image.new("RGB", rgb.size, corner)).convert("L").point(lambda v: 255 if v > 12 else 0)
-    box = diff.getbbox()
+def trim_alpha(image: Image.Image, margin: int = 6) -> Image.Image:
+    box = image.getchannel("A").point(lambda v: 255 if v > 8 else 0).getbbox()
     if not box:
         return image
     x0, y0, x1, y1 = box
@@ -126,39 +166,42 @@ def crop_slide(doc, page_no, box):
     svg = px_size(target.get_svg_image(text_as_path=True))
     zoom = PNG_SIDE / max(clip.width, clip.height)
     pix = target.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), alpha=True)
-    image = Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGBA")
-    return svg, image
+    return svg, Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGBA")
 
 
 def upstream(key, ref):
     s = SOURCES[key]
-    if key == "d2l":
-        return f"{s['repo']}/blob/{s['commit']}/img/{ref}"
-    if key == "dl-visuals":
-        return f"{s['repo']}/blob/{s['commit']}/{ref}".replace(" ", "%20")
+    if key == "isoflow":
+        return f"{s['repo']}/blob/{s['commit']}/collections/isoflow/icons/{ref}"
+    if key == "fluent-3d":
+        return f"{s['repo']}/blob/{s['commit']}/{quote(ref)}"
+    if key == "3dicons":
+        return ref[0]
     if key == "ml-visuals":
         return s["deck"]
     return s["url"]
 
 
 def process(key, ref, roots, deck):
-    if key == "d2l":
-        svg = px_size((WEB / "d2l" / ref).read_text(encoding="utf-8"))
+    if key == "isoflow":
+        svg = px_size((roots["isoflow"] / "collections/isoflow/icons" / ref).read_text(encoding="utf-8"))
         return svg, render_svg(svg)
     if key == "nn-svg":
         svg = px_size((WEB / "nn-svg-out" / ref).read_text(encoding="utf-8"))
         return svg, render_svg(svg)
     if key == "ml-visuals":
-        page_no, box = ref
-        return crop_slide(deck, page_no, box)
-    image = Image.open(roots["dl-visuals"] / ref)
-    image = trim(image.convert("RGBA") if image.mode not in ("RGB", "RGBA") else image)
-    return None, image
+        return crop_slide(deck, *ref)
+    if key == "fluent-3d":
+        data = fetch(raw("microsoft/fluentui-emoji", SOURCES[key]["commit"], ref), WEB / "fluent" / Path(ref).name)
+    else:
+        url, style = ref
+        data = fetch(url, WEB / "3dicons" / "png" / style / Path(url).name)
+    return None, trim_alpha(Image.open(io.BytesIO(data)).convert("RGBA"))
 
 
 def main():
     allowed = set(categories())
-    roots = prepare()
+    roots, jobs = prepare()
     deck = pymupdf.open(WEB / "ml-visuals" / "ml-visuals.pdf")
     OUT.mkdir(parents=True, exist_ok=True)
     records, keep = [], set()
@@ -166,10 +209,9 @@ def main():
         source = SOURCES[key]
         folder = OUT / key
         (folder / "thumbs").mkdir(parents=True, exist_ok=True)
-        for ref, pid, zh, en, category, tags in PICKS[key]:
+        for ref, pid, zh, en, category, tags in jobs[key]:
             if category not in allowed:
                 raise ValueError(f"{pid}: unknown category {category}")
-            ident = f"{PREFIX[key]}-{pid}"
             svg, image = process(key, ref, roots, deck)
             files = {"png": folder / f"{pid}.png", "thumb": folder / "thumbs" / f"{pid}.webp"}
             if svg is not None:
@@ -180,15 +222,13 @@ def main():
             thumb.thumbnail((THUMB_SIDE, THUMB_SIDE), Image.Resampling.LANCZOS)
             thumb.save(files["thumb"], quality=90, method=6)
             keep.update(p.resolve() for p in files.values())
-            page = ref[0] + 1 if key == "ml-visuals" else ""
             records.append({
-                "id": ident, "kind": "atomic", "collection": key, "source": key, "category": category,
-                "name": zh, "english": en, "tags": tags + [source["short"]],
+                "id": f"{PREFIX[key]}-{pid}", "kind": "atomic", "collection": key, "source": key, "category": category,
+                "name": zh, "english": en, "tags": list(dict.fromkeys(tags + [source["short"]])),
                 "description": f"收集自 {source['title']}，{source['license_name']} 许可。{source['processing']}。",
-                "upstream": upstream(key, ref), "page": page,
+                "upstream": upstream(key, ref), "page": ref[0] + 1 if key == "ml-visuals" else "",
                 "svg_kind": "" if svg is None else ("mixed" if "<image" in svg else "vector"),
-                "has_alpha": image.mode == "RGBA" and image.getextrema()[3][0] < 255,
-                "width": image.width, "height": image.height,
+                "has_alpha": True, "width": image.width, "height": image.height,
                 "files": {k: p.relative_to(DIST).as_posix() for k, p in files.items()},
                 "hashes": {k: sha256(p) for k, p in files.items() if k != "thumb"},
                 "bytes": {k: p.stat().st_size for k, p in files.items() if k != "thumb"},

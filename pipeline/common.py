@@ -28,12 +28,16 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 
+_CURL_ONLY = False
+
+
 def fetch(url: str, dest: Path | None = None, *, retries: int = 4, timeout: int = 120, delay: float = 0.0) -> bytes:
     """Download ``url`` (optionally caching it at ``dest``) with simple retries."""
+    global _CURL_ONLY
     if dest is not None and dest.is_file() and dest.stat().st_size:
         return dest.read_bytes()
     last = None
-    for attempt in range(retries):
+    for attempt in range(0 if _CURL_ONLY else retries):
         try:
             request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
             with urllib.request.urlopen(request, timeout=timeout) as response:
@@ -51,6 +55,7 @@ def fetch(url: str, dest: Path | None = None, *, retries: int = 4, timeout: int 
             time.sleep(2 + attempt * 3)
     data = fetch_with_curl(url, timeout)  # some networks fail Python's TLS handshake but not curl's
     if data is not None:
+        _CURL_ONLY = True  # skip the slow urllib retries for the rest of the run
         if dest is not None:
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes(data)

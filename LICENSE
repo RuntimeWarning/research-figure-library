@@ -29,7 +29,6 @@ The original figure elements in dist/assets/elements/ are additionally dedicated
 to the public domain under CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/).
 
 Third-party icons in dist/assets/icons/ and the collected figure elements in
-dist/assets/collected/ keep their own open-source licenses (MIT, CC BY 4.0 or
-CC BY-SA 4.0), and the paper figures in dist/assets/papers/ remain the property of
+dist/assets/collected/ keep their own open-source licenses (MIT or CC0 1.0), and the paper figures in dist/assets/papers/ remain the property of
 their authors or publishers. None of them is licensed under the MIT License above. See
 THIRD_PARTY_NOTICES.md and dist/sources.csv for every item's source and license.

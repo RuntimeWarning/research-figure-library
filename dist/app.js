@@ -158,7 +158,7 @@ function heroArt() {
   const tiles = picks.map(id => byId.get(id)).filter(Boolean);
   const art = $('heroArt');
   art.innerHTML = tiles.map((it, i) => `<div class="tile t${i + 1}"><img src="${esc(it.thumb)}" alt="" decoding="async"><span>${esc(it.name)}</span></div>`).join('')
-    + chipFor('mlv-cube-3x3', 'c1', 'LSTM · Transformer · U-Net') + chipFor('el-radar-1', 'c2', '雷达回波 · 地球 · 点云');
+    + chipFor('f3d-robot', 'c1', '机器人 · 数据库 · 卫星') + chipFor('el-radar-1', 'c2', '雷达回波 · 地球 · 点云');
   function chipFor(id, cls, label) {
     const it = byId.get(id);
     return it ? `<div class="chip ${cls}"><img src="${esc(it.thumb)}" alt="">${esc(label)}</div>` : '';
@@ -319,7 +319,7 @@ function card(it) {
   }
   const s = it.source || {};
   const venue = it.type === 'atomic' && (it.original || it.collection) ? it.category : (s.venue || '').replace(/\s*·.*$/, '');
-  return `<article class="card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art"><span class="kind ${it.type}">${it.type === 'atomic' ? (it.files.svg ? 'SVG' : '位图') : esc(shortFigure(it.figure))}</span><img src="${esc(it.thumb)}" alt="${esc(it.name)}" loading="lazy" decoding="async"></div><div class="card-body"><h3 class="card-title" title="${esc(it.name)}">${esc(it.type === 'atomic' ? it.name.replace(/\s·\s.*$/, '') : it.name)}</h3><div class="card-meta"><span class="model">${esc(s.short || '')}</span>${venue ? `<span class="dot"></span><span class="venue">${esc(venue)}</span>` : ''}</div></div></button></article>`;
+  return `<article class="card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art"><span class="kind ${it.type}">${it.type === 'atomic' ? (it.files.svg ? 'SVG' : 'PNG') : esc(shortFigure(it.figure))}</span><img src="${esc(it.thumb)}" alt="${esc(it.name)}" loading="lazy" decoding="async"></div><div class="card-body"><h3 class="card-title" title="${esc(it.name)}">${esc(it.type === 'atomic' ? it.name.replace(/\s·\s.*$/, '') : it.name)}</h3><div class="card-meta"><span class="model">${esc(s.short || '')}</span>${venue ? `<span class="dot"></span><span class="venue">${esc(venue)}</span>` : ''}</div></div></button></article>`;
 }
 
 // Card badge: "Fig. 3" / "Table 1" from labels such as "Figure 3 中间 adaLN-Zero".
@@ -548,6 +548,7 @@ function licenseNote(id) {
   if (/NC/.test(id)) return '：仅限非商业用途';
   if (/ND/.test(id)) return '：不得改编';
   if (id === 'arXiv' || id === 'publisher') return '：版权归作者或出版方，引用时注明出处';
+  if (/CC0/.test(id)) return '：可自由使用，无需署名';
   if (/CC-BY-SA/.test(id)) return '：署名，改编后须以相同许可发布';
   if (/CC-BY|CC0|MIT|BSD/.test(id)) return '：署名后可再使用';
   return '';

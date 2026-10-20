@@ -28,8 +28,10 @@ OUT = ASSETS / "elements"
 PNG_SIDE = 1024
 THUMB_SIDE = 420
 # Shared by every element source (originals here, collected ones in ``pipeline/collected``).
-CATEGORIES = ["特征图", "张量与通道", "卷积与采样", "Token 与嵌入", "注意力与 Transformer", "循环网络", "神经元与全连接",
-              "网络结构与模块", "视觉任务与图像", "训练与优化", "运算符", "图与点云", "时空与气象", "信号与噪声"]
+CATEGORIES = ["特征图", "张量与通道", "卷积与采样", "Token 与嵌入", "注意力与 Transformer", "神经元与全连接",
+              "网络结构与模块", "视觉任务与图像", "运算符", "图与点云", "时空与气象", "信号与噪声",
+              "数据与文档", "计算与设备", "人物与智能体", "科学与医学", "天气与地理", "城市与交通", "动物与植物",
+              "标记与符号", "通用物件"]
 SPECS = []          # (id, builder, kwargs, meta)
 
 
