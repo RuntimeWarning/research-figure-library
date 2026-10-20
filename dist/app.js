@@ -32,7 +32,7 @@ const store = {
   set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ } }
 };
 
-const TAB_NAMES = { atomic: '论文图元', paper: '论文原图', icon: '科研图标', all: '全部素材', favorites: '我的收藏' };
+const TAB_NAMES = { atomic: '原创图元', paper: '论文原图', icon: '科研图标', all: '全部素材', favorites: '我的收藏' };
 const DEFAULT_TAB = 'atomic';
 const KIND_LABEL = { paper: '论文原图', atomic: '图元', icon: '图标' };
 const SWATCHES = ['#1f2937', '#3b5bdb', '#0f8a5f', '#d9480f', '#c2255c', '#7048e8', '#0b7285', '#ffffff'];
@@ -70,9 +70,10 @@ function buildItems(data) {
       type: p.kind, id: p.id, name: p.name, category: p.category, tags: p.tags || [], description: p.description,
       figure: p.figure, caption: p.caption, source: s, sourceKey: p.source, year: p.year || s.year, page: p.page,
       files: p.files, thumb: p.files.thumb || p.files.png, width: p.width, height: p.height, svgKind: p.svg_kind,
-      architecture: p.architecture, hasAlpha: p.has_alpha, vector: Boolean(p.files.svg || p.files.pdf), featured: true
+      architecture: p.architecture, hasAlpha: p.has_alpha, vector: Boolean(p.files.svg || p.files.pdf), featured: true,
+      original: Boolean(p.original)
     };
-    it.en = `${s.short || ''}${p.figure ? ' · ' + p.figure : ''}`;
+    it.en = p.original ? p.english : `${s.short || ''}${p.figure ? ' · ' + p.figure : ''}`;
     it.search = norm([it.id, it.name, it.en, it.category, it.description, it.tags.join(' '), s.title, s.short,
       s.venue, (s.authors || []).join(' '), it.caption, it.year].join(' ')) + ' ' + compact(it.name, it.en, s.short, it.tags.join(' '));
     out.push(it);
@@ -152,12 +153,11 @@ function updateTabCounts() {
 
 function heroArt() {
   // Elements lead; one original figure shows where they come from.
-  const picks = ['e-earthformer-f4-v03', 'e-p-sparsetransformer-f3-v03', 'e-acmix-f3-v11', 'e-p-fengwu-f2-i05',
-    'e-p-senet-f1-v02'];
+  const picks = ['el-seq-down-1', 'el-mask-causal-blue', 'el-tensor-cube-purple', 'el-image-day', 'el-tokens-cls-teal'];
   const tiles = picks.map(id => byId.get(id)).filter(Boolean);
   const art = $('heroArt');
   art.innerHTML = tiles.map((it, i) => `<div class="tile t${i + 1}"><img src="${esc(it.thumb)}" alt="" decoding="async"><span>${esc(it.name)}</span></div>`).join('')
-    + chipFor('arch-paper-unet', 'c1', '附论文原图') + chipFor('e-pointnetpp-f8-i16', 'c2', '点云 · 气象场 · 热图');
+    + chipFor('el-op-add-blue', 'c1', '运算符 · 箭头 · 模块') + chipFor('el-radar-1', 'c2', '雷达回波 · 地球 · 点云');
   function chipFor(id, cls, label) {
     const it = byId.get(id);
     return it ? `<div class="chip ${cls}"><img src="${esc(it.thumb)}" alt="">${esc(label)}</div>` : '';
@@ -268,6 +268,7 @@ function renderFacets(base) {
     const any = state.tab === 'all' || state.tab === 'favorites';
     el.hidden = !(any || state.tab === scope || (scope === 'figure' && (state.tab === 'paper' || state.tab === 'atomic')));
   });
+  $('optionBlock').hidden = [...document.querySelectorAll('#optionBlock [data-scope]')].every(el => el.hidden);
 }
 
 function renderActive() {
@@ -301,7 +302,7 @@ function card(it) {
     return `<article class="card icon-card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art">${art}</div><div class="card-body"><h3 class="card-title" title="${esc(it.name)} · ${esc(it.en)}">${esc(it.name)}</h3><div class="card-meta">${esc(it.packInfo.name)}</div></div></button></article>`;
   }
   const s = it.source || {};
-  const venue = (s.venue || '').replace(/\s*·.*$/, '');
+  const venue = it.original ? it.category : (s.venue || '').replace(/\s*·.*$/, '');
   return `<article class="card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art"><span class="kind ${it.type}">${it.type === 'atomic' ? (it.files.svg ? 'SVG' : '位图') : esc(shortFigure(it.figure))}</span><img src="${esc(it.thumb)}" alt="${esc(it.name)}" loading="lazy" decoding="async"></div><div class="card-body"><h3 class="card-title" title="${esc(it.name)}">${esc(it.type === 'atomic' ? it.name.replace(/\s·\s.*$/, '') : it.name)}</h3><div class="card-meta"><span class="model">${esc(s.short || '')}</span>${venue ? `<span class="dot"></span><span class="venue">${esc(venue)}</span>` : ''}</div></div></button></article>`;
 }
 
@@ -404,6 +405,7 @@ function openDetail(it, push = true) {
   $('detailDescription').textContent = isIcon ? iconDescription(it) : (it.description || '');
   const badges = isIcon
     ? [[it.packInfo.name, 'accent'], [it.packInfo.style, ''], [it.mono ? '可改色' : '彩色', ''], [it.license || it.packInfo.license, '']]
+    : it.original ? [['原创图元', 'accent'], [it.category, ''], ['可编辑 SVG', ''], ['CC0 1.0', '']]
     : [[KIND_LABEL[it.type], 'accent'], [it.category, ''], [it.figure, ''], [it.source.license_name, licenseClass(it.source.license)]];
   if (!isIcon && it.architecture) badges.splice(2, 0, ['完整架构', '']);
   $('detailBadges').innerHTML = badges.filter(([t]) => t).map(([t, c]) => `<span class="${c}">${esc(t)}</span>`).join('');
@@ -454,6 +456,15 @@ function renderSource(it) {
   if (it.type === 'icon') { card.hidden = true; return; }
   const s = it.source;
   card.hidden = false;
+  card.querySelector('.cite').hidden = Boolean(it.original);
+  card.querySelector('h3').textContent = it.original ? '许可' : '来源';
+  if (it.original) {
+    $('sourceTitle').textContent = '研图原创图元 · CC0 1.0（公共领域）';
+    $('sourceMeta').textContent = '可在论文、课件、海报中自由使用和修改，可商用，无需署名或引用。';
+    $('sourceLinks').innerHTML = `<a href="${esc(s.license_url)}" target="_blank" rel="noopener noreferrer">${svgIcon('external')}CC0 1.0 说明</a>`
+      + `<a href="${esc(it.files.svg)}" target="_blank" rel="noopener">${svgIcon('file')}查看 SVG 源文件</a>`;
+    return;
+  }
   $('sourceTitle').textContent = s.title;
   const authors = s.authors || [];
   const shown = authors.length > 6 ? authors.slice(0, 6).join(', ') + ' 等' : authors.join(', ');
@@ -473,6 +484,11 @@ function renderMeta(it) {
     rows.push(['许可', `<a href="${esc(p.license_file)}" target="_blank" rel="noopener">${esc(it.license || p.license)}</a>`]);
     if (it.author) rows.push(['作者', `${esc(it.author)}（使用时请署名）`]);
     rows.push(['文件', `<code>${esc(it.src)}</code>`]);
+  } else if (it.original) {
+    rows.push(['类别', esc(it.category)]);
+    rows.push(['许可', 'CC0 1.0：可自由使用、修改、商用，无需署名']);
+    rows.push(['编辑', 'SVG 中每个面、每个格子都是独立图形，可直接改色、增删格子或改尺寸']);
+    rows.push(['格式', `SVG · PNG（${fmt(it.width)} × ${fmt(it.height)} px，透明背景）`]);
   } else {
     const s = it.source;
     if (it.figure) rows.push(['图号', esc(it.figure)]);

@@ -70,10 +70,12 @@ def main():
         record = {k: p.get(k, "") for k in ("id", "kind", "name", "category", "tags", "description", "figure", "caption",
                                     "source", "year", "page", "files", "width", "height", "svg_kind",
                                     "architecture", "has_alpha")}
+        if p.get("original"):
+            record.update(original=True, english=p["english"])
         paper_rows.append(record)
         csv_rows.append({
-            "id": p["id"], "type": p["kind"], "name": p["name"], "english": f"{source['short']} · {p['figure']}" if p.get('figure') else source['short'],
-            "collection": "论文原图" if p["kind"] == "paper" else "论文图元", "category": p["category"],
+            "id": p["id"], "type": p["kind"], "name": p["name"], "english": p.get("english") or (f"{source['short']} · {p['figure']}" if p.get('figure') else source['short']),
+            "collection": "论文原图" if p["kind"] == "paper" else "研图原创图元", "category": p["category"],
             "featured": 1, "files": " ".join(v for k, v in p["files"].items() if k != "thumb"),
             "source_title": f"{source['title']} ({source['venue']})" + (f", p. {p['page']}" if p.get("page") else ""),
             "source_url": source["url"],
@@ -82,7 +84,9 @@ def main():
             "sha256": " ".join(f"{k}:{v}" for k, v in p["hashes"].items()),
         })
     order = {c: i for i, c in enumerate(PAPER_CATEGORIES + ATOMIC_CATEGORIES)}
-    paper_rows.sort(key=lambda r: (r["kind"] != "paper", order.get(r["category"], 99), r["year"] or 0, r["id"]))
+    position = {a["id"]: a.get("order", 0) for a in papers["assets"]}
+    paper_rows.sort(key=lambda r: (r["kind"] != "paper", order.get(r["category"], 99), r["year"] or 0,
+                                   position.get(r["id"], 0), r["id"]))
     icon_count = len(rows)
     counts = {
         "papers": sum(r["kind"] == "paper" for r in paper_rows),

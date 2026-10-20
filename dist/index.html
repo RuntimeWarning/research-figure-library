@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
-  <meta name="description" content="研图 Figure Atlas：从经典深度学习论文中分离出的可复用图元（特征张量、注意力矩阵、卷积核、气象场、点云……），以及论文原图与科研图标。保留原始矢量，来源与许可可追溯。">
+  <meta name="description" content="研图 Figure Atlas：290 个统一风格的论文配图图元（特征图、张量、卷积核、Token、注意力掩码、网络模块……），可编辑 SVG，CC0 免费使用；另附论文原图与科研图标。">
   <title>研图 · 论文图元素材库</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="研图 Figure Atlas">
   <meta property="og:title" content="研图 · 论文图元素材库">
-  <meta property="og:description" content="从经典论文中分离出的 391 个可复用图元、289 张论文原图与 2.8 万个科研图标，保留原始矢量，来源可追溯。">
+  <meta property="og:description" content="290 个统一风格的论文配图图元，可编辑 SVG、CC0 免费使用；另附 289 张论文原图与 2.8 万个科研图标。">
   <meta property="og:image" content="https://runtimewarning.github.io/research-figure-library/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -44,32 +44,32 @@
   <main>
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-copy">
-        <p class="eyebrow">论文图元 · 原始矢量 · 来源可追溯</p>
-        <h1 id="heroTitle">把经典论文里的<br><span>图元</span>，拿来就用</h1>
-        <p class="hero-lead">特征张量、注意力矩阵、卷积核、Token 序列、气象场、点云……从 <b data-count="sources">—</b> 篇经典论文的插图中逐个分离出 <b data-count="atomic">—</b> 个图元，矢量图元保留原始路径，可直接改色、拼进你的模型图。另附论文原图与开源科研图标。</p>
+        <p class="eyebrow">统一风格 · 可编辑 SVG · CC0 免费使用</p>
+        <h1 id="heroTitle">画模型图的<br><span>图元</span>，拿来就用</h1>
+        <p class="hero-lead">特征图、张量、卷积核、Token、注意力掩码、网络模块、运算符、雷达回波……<b data-count="atomic">—</b> 个图元采用同一套等轴测风格和 8 种配色，拼在一起就是一张整齐的模型结构图。每个都是可编辑 SVG，CC0 授权，论文和商用都可以直接用。另附论文原图与开源科研图标。</p>
         <form class="search" role="search" id="searchForm">
           <span data-icon="search" aria-hidden="true"></span>
           <label class="sr-only" for="searchInput">搜索素材</label>
-          <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="搜索图元、模型或图标，如 特征张量、注意力矩阵、卷积核、U-Net">
+          <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="搜索图元、模型或图标，如 特征图、张量、卷积核、注意力、Token">
           <button class="search-clear" id="clearSearch" type="button" aria-label="清空搜索" hidden><span data-icon="close"></span></button>
           <kbd aria-hidden="true">/</kbd>
         </form>
         <div class="quick" aria-label="常用搜索">
-          <button type="button" data-query="三维特征张量">特征张量</button>
-          <button type="button" data-query="注意力">注意力矩阵</button>
-          <button type="button" data-query="卷积核">卷积核</button>
-          <button type="button" data-query="Token">Token 序列</button>
-          <button type="button" data-query="气象">气象场</button>
+          <button type="button" data-query="特征图">特征图</button>
+          <button type="button" data-query="张量">张量</button>
+          <button type="button" data-query="卷积">卷积</button>
+          <button type="button" data-query="Token">Token</button>
+          <button type="button" data-query="注意力">注意力</button>
+          <button type="button" data-query="模块">网络模块</button>
+          <button type="button" data-query="运算符">运算符</button>
           <button type="button" data-query="雷达回波">雷达回波</button>
-          <button type="button" data-query="点云">点云</button>
-          <button type="button" data-query="热力图">热力图</button>
         </div>
       </div>
       <div class="hero-art" id="heroArt" aria-hidden="true"></div>
     </section>
 
     <section class="stats" aria-label="素材规模">
-      <button type="button" class="stat lead" data-tab-link="atomic"><b data-count="atomic">—</b><span>论文图元</span></button>
+      <button type="button" class="stat lead" data-tab-link="atomic"><b data-count="atomic">—</b><span>原创图元</span></button>
       <button type="button" class="stat" data-tab-link="paper"><b data-count="papers">—</b><span>论文原图</span></button>
       <button type="button" class="stat" data-tab-link="icon"><b data-count="icons">—</b><span>科研图标</span></button>
       <div class="stat static"><b data-count="sources">—</b><span>来源论文</span></div>
@@ -102,13 +102,13 @@
         <section class="filter-block" id="optionBlock">
           <h3>选项</h3>
           <label class="check" data-scope="paper"><input type="checkbox" id="onlyArch"> <span>只看完整架构图</span></label>
-          <label class="check" data-scope="figure"><input type="checkbox" id="onlyVector"> <span>只看矢量（可编辑 SVG）</span></label>
+          <label class="check" data-scope="paper"><input type="checkbox" id="onlyVector"> <span>附矢量 SVG / PDF</span></label>
           <label class="check" data-scope="icon"><input type="checkbox" id="onlyMono"> <span>只看可改色图标</span></label>
           <label class="check" data-scope="icon"><input type="checkbox" id="onlyFeatured"> <span>只看科研常用</span></label>
         </section>
         <section class="filter-note">
           <span data-icon="info"></span>
-          <p>图元与论文原图都来自原论文，权利归原作者或出版方；详情页列出原文、页码、作者与许可，使用时请引用原论文。</p>
+          <p>图元为本项目原创，CC0 免费使用；论文原图权利归原作者或出版方，详情页列出原文、页码与许可，使用时请引用原论文。</p>
         </section>
       </aside>
 
@@ -160,7 +160,7 @@
     <div class="footer-inner">
       <div>
         <strong>研图 Figure Atlas</strong>
-        <p>检索界面与构建脚本采用 MIT 许可。图标保留各自的开源许可；论文图元与原图仅作学术引用与介绍，权利归原作者或出版方。</p>
+        <p>检索界面与构建脚本采用 MIT 许可。原创图元采用 CC0；图标保留各自的开源许可；论文原图仅作学术引用与介绍，权利归原作者或出版方。</p>
       </div>
       <div class="footer-links">
         <a href="sources.csv" download>完整来源清单 CSV</a>

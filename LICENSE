@@ -25,6 +25,9 @@ dist/style.css, dist/favicon.svg), the build and maintenance code in pipeline/ a
 scripts/, and the curated metadata written by this project (Chinese names, categories,
 descriptions and the term list in pipeline/icons/zh_terms.tsv).
 
+The original figure elements in dist/assets/elements/ are additionally dedicated
+to the public domain under CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/).
+
 Third-party icons in dist/assets/icons/ keep their own open-source licenses, and the
 paper figures in dist/assets/papers/ remain the property of their authors or
 publishers. Neither is licensed under the MIT License above. See
