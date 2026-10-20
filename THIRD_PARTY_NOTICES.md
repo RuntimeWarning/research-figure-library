@@ -6,6 +6,24 @@
 
 `dist/assets/elements/` 中的 248 个图元由本项目用 `pipeline/elements/` 中的脚本绘制，不含任何第三方图形，采用 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)：可自由复制、修改、分发和商用，无需署名。
 
+## 计算机视觉图元所用照片
+
+`dist/assets/vision/` 中的 91 个图元由本项目生成并以 CC0 发布。其中照片类图元基于以下 CC0 / 公有领域照片（裁剪、缩放后做分割、检测、加噪、增强等处理），无需署名；为便于追溯，每个图元的详情页与 `sources.csv` 都给出原始照片链接。
+
+| 内容 | Wikimedia Commons 文件 | 作者 | 许可 |
+| --- | --- | --- | --- |
+| 猫 | [Tabby cat with blue eyes-3336579.jpg](https://commons.wikimedia.org/wiki/File:Tabby_cat_with_blue_eyes-3336579.jpg) | AdinaVoicu | CC0 1.0 |
+| 狗 | [Dog resting on the grass.jpg](https://commons.wikimedia.org/wiki/File:Dog_resting_on_the_grass.jpg) | Joselodos | CC0 1.0 |
+| 翠鸟 | [Eisvogel kingfisher.jpg](https://commons.wikimedia.org/wiki/File:Eisvogel_kingfisher.jpg) | Frank-2.0 | CC0 1.0 |
+| 汽车 | [Auto in car sharing a Livorno.jpg](https://commons.wikimedia.org/wiki/File:Auto_in_car_sharing_a_Livorno.jpg) | Marcxosm | CC0 1.0 |
+| 街景 | [Traffic and pedestrians on Calle Velásquez near Catedral San Nicolás de Bari, Barcelona, Venezuela.jpg](https://commons.wikimedia.org/wiki/File:Traffic_and_pedestrians_on_Calle_Velásquez_near_Catedral_San_Nicolás_de_Bari,_Barcelona,_Venezuela.jpg) | Wilfredor | CC0 1.0 |
+| 道路 | [Streets in Les Rivières, Quebec City (16).jpg](https://commons.wikimedia.org/wiki/File:Streets_in_Les_Rivières,_Quebec_City_(16).jpg) | Wilfredor | CC0 1.0 |
+| 室内 | [Living room (Unsplash).jpg](https://commons.wikimedia.org/wiki/File:Living_room_(Unsplash).jpg) | Jarosław Ceborski | CC0 1.0 |
+| 城市航拍 | [Seattle City Aerial View Sounds Peugeot.jpg](https://commons.wikimedia.org/wiki/File:Seattle_City_Aerial_View_Sounds_Peugeot.jpg) | Yourusernamewillbepublic2 | CC0 1.0 |
+| 运动人物 | [Walking Rugby.jpg](https://commons.wikimedia.org/wiki/File:Walking_Rugby.jpg) | Back ache | CC0 1.0 |
+
+另有 4 张来自 [scikit-image 示例数据](https://scikit-image.org/docs/stable/api/skimage.data.html)：宇航员 Eileen Collins（NASA，公有领域）、咖啡杯（Rachel Michetti，CC0）、摄影师（Lav Varshney，CC0）、眼底图像（Mikael Häggström，CC0）。
+
 ## 收集的物件
 
 `dist/assets/collected/` 中的 460 个物件来自下列开源图库，保留原许可。逐项的原始文件链接见 `dist/sources.csv` 的 `source_url` 列。

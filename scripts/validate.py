@@ -80,8 +80,8 @@ def validate(directory: Path, hashes: bool = False):
             fail(f"{p['id']}: unknown source {p['source']}")
         if p["category"] not in data["categories"]["paper"] + data["categories"]["atomic"]:
             fail(f"{p['id']}: unknown category {p['category']}")
-        if "png" not in p["files"] or "thumb" not in p["files"]:
-            fail(f"{p['id']}: PNG and thumbnail are required")
+        if not ("png" in p["files"] or "jpg" in p["files"]) or "thumb" not in p["files"]:
+            fail(f"{p['id']}: a PNG or JPEG and a thumbnail are required")
         for value in p["files"].values():
             files.add(check_path(directory, value))
     for key, source in data["sources"].items():

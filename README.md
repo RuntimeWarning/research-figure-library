@@ -4,9 +4,10 @@
 
 <p align="center">论文配图图元库</p>
 
-画模型结构图要用的图元，共 708 个，分两部分：
+画模型结构图要用的图元，共 799 个，分三部分：
 
 - **248 个原创图元**：特征图、张量、卷积核、Token、注意力掩码、运算符、雷达回波……按同一套等轴测风格和 8 种配色画好，可编辑 SVG，**CC0 授权**，无需署名。
+- **91 个计算机视觉图元**：用 CC0 / 公有领域照片做出的输入图像、ViT 分块、MAE 掩码、扩散加噪、数据增强、边缘与超像素、分割掩码与抠图、检测框、人体关键点，照片斜置成的图像平面与视频帧堆叠；以及相机视锥、多视角相机、NeRF 射线采样、体素、三维检测框、BEV、网格、3D 高斯等三维视觉示意。全部 CC0。
 - **460 个开源物件与装饰**：等轴测的服务器、数据库、文档、笔记本电脑，3D 的机器人、大脑、卫星、云朵、显微镜、汽车，以及对勾、火焰、雪花、序号、奖杯等标记，还有全连接网络、LeNet / AlexNet 式特征块等网络模块。全部是透明背景的单个元素，不带箭头和文字，可以直接放进模型图充当模块、补充细节或做点缀。来自 [Fluent Emoji 3D](https://github.com/microsoft/fluentui-emoji)、[3dicons](https://3dicons.co/)、[Isoflow](https://github.com/markmanx/isopacks)、[ML Visuals](https://github.com/dair-ai/ml-visuals)、[NN-SVG](https://github.com/alexlenail/NN-SVG)，保留原许可（MIT / CC0），详情页给出可直接复制的署名。
 
 另附 289 张按原样裁剪的经典论文原图和 28,102 个开源科研图标。
@@ -19,16 +20,16 @@
 
 | 集合 | 数量 | 说明 |
 | --- | ---: | --- |
-| **图元** | **708** | 原创 248（统一等轴测风格，SVG + 透明 PNG，CC0 1.0）+ 开源物件与装饰 460（保留原许可） |
+| **图元** | **799** | 原创 248（统一等轴测风格，CC0）+ 计算机视觉 91（CC0）+ 开源物件与装饰 460（保留原许可） |
 | 论文原图 | 289 | 来自 216 篇论文（1997–2025），覆盖 21 个方向；按原样裁剪，不重绘、不改色 |
 | 科研图标 | 28,102 | 10 个开源图标集，统一为 20 个中文分类，可按图标集筛选 |
-| **合计** | **29,099** | 每项素材在 `dist/sources.csv` 中列出文件、来源、许可与 SHA-256 |
+| **合计** | **29,190** | 每项素材在 `dist/sources.csv` 中列出文件、来源、许可与 SHA-256 |
 
 ### 图元
 
 ![图元](docs/screenshot-elements.jpg)
 
-原创图元和收集的物件按内容统一分为 21 类，侧栏还可以按来源筛选：
+原创图元、计算机视觉图元和收集的物件按内容统一分为 23 类，侧栏还可以按来源筛选：
 
 | 分类 | 原创 | 收集 | 内容 |
 | --- | ---: | ---: | --- |
@@ -39,7 +40,9 @@
 | 注意力与 Transformer | 24 | — | 因果、滑动窗口、稀疏等注意力掩码，注意力热图，相似度矩阵 |
 | 神经元与全连接 | 4 | 7 | 全连接网络（多种层数、按权重着色、竖向）、单个神经元 |
 | 网络结构与模块 | 2 | 8 | 残差单元、LeNet 式特征图堆叠、AlexNet / VGG 式三维特征块 |
-| 视觉任务与图像 | 7 | — | 输入图像、分割掩码、深度图、检测框 |
+| 图像输入与预处理 | 61 | — | 输入照片、斜置图像平面、视频帧堆叠、图像金字塔、4×4 分块与展开、MAE 掩码、分块序列、扩散加噪、低分辨率 / 模糊输入、Canny 边缘、RGB 通道、频谱、超像素、7 种数据增强 |
+| 检测、分割与关键点 | 20 | — | 分割掩码、分割叠加、透明抠图、单目标与多目标检测框、锚框、类激活热力图、注意力热力图、人体关键点与骨架、关键点热力图、光流编码 |
+| 三维视觉 | 21 | — | 相机视锥、多视角相机、NeRF 射线采样、体素、点云与三维检测框、BEV 栅格、三角网格、3D 高斯泼溅、三平面、双目三角测量、深度图 |
 | 运算符 | 16 | 1 | 加、乘、逐元素乘、Sigmoid、ReLU、拼接、求和、Softmax |
 | 图与点云 | 11 | — | 图结构、邻居聚合、点云、嵌入空间聚类 |
 | 时空与气象 | 12 | — | 地球经纬网格、雷达回波图与序列、全球温度场、时空张量 |
@@ -55,6 +58,10 @@
 | 通用物件 | — | 83 | 灯泡、齿轮、工具箱、放大镜、锁与钥匙、盾牌、拼图、沙漏、秒表、火箭、天平、魔杖 |
 
 **原创图元**：单色元素提供 8 种配色（蓝、青、橙、紫、绿、珊瑚红、石墨灰、琥珀黄）。SVG 里每个面、每个格子都是独立图形，在 PowerPoint、Illustrator、Inkscape 或 draw.io 中可以直接改色、增删格子、改尺寸。全部由 [`pipeline/elements/generate.py`](pipeline/elements/generate.py) 用同一个正交相机和配色表生成（绘图工具见 [`style.py`](pipeline/elements/style.py)），新增元素也会保持一致的风格。
+
+**计算机视觉图元**（91 个，CC0）：其中 72 个由 13 张 CC0 / 公有领域照片（Wikimedia Commons 与 scikit-image 示例图）用 [`pipeline/elements/vision.py`](pipeline/elements/vision.py) 处理得到：分割用 GrabCut 生成，边缘用 Canny，超像素用 SLIC，检测框与人体关键点为人工标注；其余为同一等轴测风格的三维视觉示意，SVG 可编辑。详情页给出原始照片链接。
+
+![计算机视觉图元：三维视觉](docs/screenshot-vision.jpg)
 
 **收集的物件**：
 
@@ -106,7 +113,7 @@
 ## 功能
 
 - **一个搜索框**：搜索中文名、英文名、模型简称、作者、原文图注和标签；`U-Net`、`unet`、`UNet` 都能命中。按 `/` 聚焦搜索框。
-- **分类与筛选**：图元 21 类并可按来源筛选，论文原图 21 个方向，图标 20 类；可只看完整架构图、附矢量文件的原图、可改色图标或科研常用图标。
+- **分类与筛选**：图元 23 类并可按来源筛选，论文原图 21 个方向，图标 20 类；可只看完整架构图、附矢量文件的原图、可改色图标或科研常用图标。
 - **论文原图详情**：原文图注、论文主页、直达原文 PDF 对应页、作者与许可；一键复制 BibTeX 或引用文本；下载 PNG，以及可用时的 SVG / PDF。
 - **图标改色与导出**：单色图标可在网格中统一改色，详情页可选色后下载 SVG、复制 SVG 代码，或导出 256–2048 px 的透明 PNG。
 - **收藏与分享**：收藏保存在当前浏览器；搜索条件写入网址，详情页可用 `#素材编号` 直接分享。
@@ -139,7 +146,7 @@ Windows 可直接双击根目录的 **`启动检索.cmd`**。浏览器打开 <ht
 
 ## 使用须知与许可
 
-本项目自行编写的检索页面、构建脚本与数据整理采用 [MIT](LICENSE) 许可；**原创图元**（`dist/assets/elements/`）采用 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.zh-hans)，可自由使用、修改、商用，无需署名。第三方素材**不在**上述许可范围内：
+本项目自行编写的检索页面、构建脚本与数据整理采用 [MIT](LICENSE) 许可；**原创图元**（`dist/assets/elements/`）与**计算机视觉图元**（`dist/assets/vision/`，所用照片均为 CC0 或公有领域）采用 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.zh-hans)，可自由使用、修改、商用，无需署名。第三方素材**不在**上述许可范围内：
 
 - **收集的物件**（`dist/assets/collected/`）保留原许可：3dicons 为 CC0（无需署名），Fluent Emoji 3D、Isoflow、ML Visuals 与 NN-SVG 为 MIT（保留版权声明）。详情页的「复制署名」给出可直接放进致谢的文字，许可原文在 [`dist/licenses/`](dist/licenses/)。
 
@@ -160,12 +167,13 @@ research-figure-library/
 │   ├── licenses/                 # 各图标集的许可原文
 │   └── assets/
 │       ├── elements/             # 原创图元 SVG / PNG 与 thumbs/ 缩略图
-│       ├── collected/<来源>/      # 收集的图元 SVG / PNG 与 thumbs/ 缩略图
+│       ├── vision/               # 计算机视觉图元 SVG / PNG / JPG 与 thumbs/ 缩略图
+│       ├── collected/<来源>/      # 收集的物件 SVG / PNG 与 thumbs/ 缩略图
 │       ├── papers/               # 论文原图 PNG / SVG / PDF 与 thumbs/ 缩略图
 │       └── icons/<图标集>/        # 按图标集分目录的 SVG
 ├── pipeline/                     # 素材构建流程（需要 PyMuPDF 等，见 requirements.txt）
 │   ├── papers/                   # 论文清单、下载、裁剪与元数据
-│   ├── elements/                 # 原创图元：style.py 绘图工具，generate.py 元素清单与生成
+│   ├── elements/                 # 原创图元：style.py 绘图工具，generate.py 元素清单与生成，vision.py 计算机视觉图元
 │   ├── collected/                # 收集的物件：picks.py 选取清单，build.py 下载与处理，nnsvg.mjs 生成 NN-SVG 图
 │   ├── icons/                    # 图标下载、清洗、分类、中文名词表
 │   └── catalog.py                # 生成 dist/data.json 与 dist/sources.csv
@@ -184,6 +192,7 @@ python pipeline/papers/fetch.py       # 下载论文 PDF 与元数据（缓存�
 python pipeline/papers/extract.py     # 裁剪 figures.json 中的图，生成 .cache/papers/qa/ 核对图
 python pipeline/papers/catalog.py     # 合并论文原图元数据
 python pipeline/elements/generate.py  # 生成全部原创图元（SVG、PNG、缩略图）
+python pipeline/elements/vision.py    # 下载 CC0 照片并生成计算机视觉图元（需要 opencv-python-headless、scikit-image）
 python pipeline/icons/fetch.py        # 下载固定版本的图标源包
 python pipeline/icons/build.py        # 清洗、分类并写入 dist/assets/icons/
 node pipeline/collected/nnsvg.mjs .cache/web/NN-SVG-<提交> .cache/web/nn-svg-out  # 需要 puppeteer-core 与 Chrome

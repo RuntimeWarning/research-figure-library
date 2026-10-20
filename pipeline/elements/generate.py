@@ -29,7 +29,7 @@ PNG_SIDE = 1024
 THUMB_SIDE = 420
 # Shared by every element source (originals here, collected ones in ``pipeline/collected``).
 CATEGORIES = ["特征图", "张量与通道", "卷积与采样", "Token 与嵌入", "注意力与 Transformer", "神经元与全连接",
-              "网络结构与模块", "视觉任务与图像", "运算符", "图与点云", "时空与气象", "信号与噪声",
+              "网络结构与模块", "图像输入与预处理", "检测、分割与关键点", "三维视觉", "运算符", "图与点云", "时空与气象", "信号与噪声",
               "数据与文档", "计算与设备", "人物与智能体", "科学与医学", "天气与地理", "城市与交通", "动物与植物",
               "标记与符号", "通用物件"]
 SPECS = []          # (id, builder, kwargs, meta)
@@ -816,19 +816,19 @@ def build_specs():
         add(f"graph-star-{i + 1}", "图与点云", f"邻居聚合示意（{PZ[a]}）", f"neighbour aggregation ({a})",
             ["图神经网络", "消息传递", "GNN", "邻居"], b_graph, pal_nodes=a, pal_alt=b, centre=True)
     for i, (k, shape) in enumerate((("blue", "blob"), ("purple", "blob"), ("teal", "torus"), ("orange", "torus"))):
-        add(f"pointcloud-{i + 1}", "图与点云", f"{PZ[k]}点云", f"{k} point cloud", ["点云", "point cloud", "三维"], b_point_cloud,
+        add(f"pointcloud-{i + 1}", "三维视觉", f"{PZ[k]}点云", f"{k} point cloud", ["点云", "point cloud", "三维"], b_point_cloud,
             pal=k, seed=i, shape=shape)
 
 
     for sc, zh in (("day", "白天"), ("sunset", "黄昏"), ("night", "夜晚")):
-        add(f"image-{sc}", "视觉任务与图像", f"输入图像（{zh}风景）", f"input image ({sc})", ["输入图像", "image", "图片", "输入"],
+        add(f"image-{sc}", "图像输入与预处理", f"输入图像（{zh}风景）", f"input image ({sc})", ["输入图像", "image", "图片", "输入"],
             b_image, scene=sc)
-    add("image-patches", "视觉任务与图像", "输入图像分块网格", "image split into patches", ["图像分块", "patch", "ViT", "输入图像"],
+    add("image-patches", "图像输入与预处理", "输入图像分块网格", "image split into patches", ["图像分块", "patch", "ViT", "输入图像"],
         b_image, scene="day", patches=True)
-    add("image-seg", "视觉任务与图像", "语义分割掩码", "semantic segmentation mask", ["语义分割", "segmentation", "掩码", "标签图"],
+    add("image-seg", "检测、分割与关键点", "语义分割掩码", "semantic segmentation mask", ["语义分割", "segmentation", "掩码", "标签图"],
         b_image, mode="seg")
-    add("image-depth", "视觉任务与图像", "深度图", "depth map", ["深度图", "depth", "深度估计"], b_image, mode="depth")
-    add("image-detect", "视觉任务与图像", "目标检测框", "detection boxes", ["目标检测", "检测框", "bounding box", "detection"],
+    add("image-depth", "三维视觉", "深度图", "depth map", ["深度图", "depth", "深度估计"], b_image, mode="depth")
+    add("image-detect", "检测、分割与关键点", "目标检测框", "detection boxes", ["目标检测", "检测框", "bounding box", "detection"],
         b_image, mode="detect")
     add("embed-space-3", "图与点云", "嵌入空间聚类（三类）", "embedding space, three clusters", ["嵌入空间", "聚类", "对比学习", "特征分布"],
         b_embedding_space, clusters=["blue", "orange", "teal"], seed=1)

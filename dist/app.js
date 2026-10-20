@@ -69,9 +69,10 @@ function buildItems(data) {
     const it = {
       type: p.kind, id: p.id, name: p.name, category: p.category, tags: p.tags || [], description: p.description,
       figure: p.figure, caption: p.caption, source: s, sourceKey: p.source, year: p.year || s.year, page: p.page,
-      files: p.files, thumb: p.files.thumb || p.files.png, width: p.width, height: p.height, svgKind: p.svg_kind,
+      files: p.files, main: p.files.png || p.files.jpg, thumb: p.files.thumb || p.files.png || p.files.jpg, width: p.width, height: p.height, svgKind: p.svg_kind,
       architecture: p.architecture, hasAlpha: p.has_alpha, vector: Boolean(p.files.svg || p.files.pdf), featured: true,
-      original: Boolean(p.original), collection: p.collection || '', upstream: p.upstream || '',
+      original: Boolean(p.original), collection: p.collection || '', upstream: p.upstream || '', credit: p.credit || '',
+      upstreamLabel: p.upstream_label || '',
       from: p.kind === 'atomic' ? (p.original ? p.source : p.collection || p.source) : ''
     };
     it.en = p.original || p.collection ? p.english : `${s.short || ''}${p.figure ? ' · ' + p.figure : ''}`;
@@ -154,7 +155,7 @@ function updateTabCounts() {
 
 function heroArt() {
   // Elements lead; one original figure shows where they come from.
-  const picks = ['el-seq-down-1', 'el-mask-causal-blue', 'el-tensor-cube-purple', 'el-image-day', 'el-tokens-cls-teal'];
+  const picks = ['el-seq-down-1', 'el-mask-causal-blue', 'el-tensor-cube-purple', 'cv-iso-cat', 'el-tokens-cls-teal'];
   const tiles = picks.map(id => byId.get(id)).filter(Boolean);
   const art = $('heroArt');
   art.innerHTML = tiles.map((it, i) => `<div class="tile t${i + 1}"><img src="${esc(it.thumb)}" alt="" decoding="async"><span>${esc(it.name)}</span></div>`).join('')
@@ -243,7 +244,10 @@ function compute() {
 function renderFacets(base) {
   const catCount = new Map(), packCount = new Map(), fromCount = new Map();
   for (const it of base) {
-    if (passOptions(it, 'category')) catCount.set(it.category, (catCount.get(it.category) || 0) + 1);
+    if (passOptions(it, 'category')) {
+      const key = `${it.type}|${it.category}`;   // paper figures and elements may share a category name
+      catCount.set(key, (catCount.get(key) || 0) + 1);
+    }
     if (it.type === 'icon' && passOptions(it, 'pack')) packCount.set(it.pack, (packCount.get(it.pack) || 0) + 1);
     if (it.from && passOptions(it, 'from')) fromCount.set(it.from, (fromCount.get(it.from) || 0) + 1);
   }
@@ -251,14 +255,14 @@ function renderFacets(base) {
   const groups = [['paper', '论文原图'], ['atomic', '图元'], ['icon', '图标']];
   const html = [];
   for (const [type, label] of groups) {
-    const list = catalog.categories[type].filter(c => catCount.get(c));
+    const list = catalog.categories[type].filter(c => catCount.get(`${type}|${c}`));
     if (!list.length) continue;
     if (state.tab === 'all' || state.tab === 'favorites') html.push(`<div class="group-label">${label}</div>`);
     for (const c of list) {
-      html.push(`<button type="button" data-category="${esc(c)}" class="${state.category === c ? 'active' : ''}"><span>${esc(c)}</span><span class="count">${fmt(catCount.get(c))}</span></button>`);
+      html.push(`<button type="button" data-category="${esc(c)}" class="${state.category === c ? 'active' : ''}"><span>${esc(c)}</span><span class="count">${fmt(catCount.get(`${type}|${c}`))}</span></button>`);
     }
   }
-  if (state.category && !catCount.get(state.category)) {
+  if (state.category && ![...catCount.keys()].some(k => k.endsWith(`|${state.category}`))) {
     html.unshift(`<button type="button" data-category="${esc(state.category)}" class="active"><span>${esc(state.category)}</span><span class="count">0</span></button>`);
   }
   cat.innerHTML = html.join('') || '<p class="sub">没有可选分类</p>';
@@ -319,7 +323,7 @@ function card(it) {
   }
   const s = it.source || {};
   const venue = it.type === 'atomic' && (it.original || it.collection) ? it.category : (s.venue || '').replace(/\s*·.*$/, '');
-  return `<article class="card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art"><span class="kind ${it.type}">${it.type === 'atomic' ? (it.files.svg ? 'SVG' : 'PNG') : esc(shortFigure(it.figure))}</span><img src="${esc(it.thumb)}" alt="${esc(it.name)}" loading="lazy" decoding="async"></div><div class="card-body"><h3 class="card-title" title="${esc(it.name)}">${esc(it.type === 'atomic' ? it.name.replace(/\s·\s.*$/, '') : it.name)}</h3><div class="card-meta"><span class="model">${esc(s.short || '')}</span>${venue ? `<span class="dot"></span><span class="venue">${esc(venue)}</span>` : ''}</div></div></button></article>`;
+  return `<article class="card">${save}<button type="button" class="card-open" data-open="${esc(it.id)}"><div class="card-art"><span class="kind ${it.type}">${it.type === 'atomic' ? (it.files.svg ? 'SVG' : it.files.png ? 'PNG' : 'JPG') : esc(shortFigure(it.figure))}</span><img src="${esc(it.thumb)}" alt="${esc(it.name)}" loading="lazy" decoding="async"></div><div class="card-body"><h3 class="card-title" title="${esc(it.name)}">${esc(it.type === 'atomic' ? it.name.replace(/\s·\s.*$/, '') : it.name)}</h3><div class="card-meta"><span class="model">${esc(s.short || '')}</span>${venue ? `<span class="dot"></span><span class="venue">${esc(venue)}</span>` : ''}</div></div></button></article>`;
 }
 
 // Card badge: "Fig. 3" / "Table 1" from labels such as "Figure 3 中间 adaLN-Zero".
@@ -413,8 +417,8 @@ function openDetail(it, push = true) {
   setStageBg(isIcon && it.mono ? 'light' : 'light');
   const img = $('detailImage');
   img.alt = it.name;
-  img.src = isIcon ? it.src : (it.files.png || it.thumb);
-  $('openOriginal').href = isIcon ? it.src : (it.files.png || it.thumb);
+  img.src = isIcon ? it.src : (it.main || it.thumb);
+  $('openOriginal').href = isIcon ? it.src : (it.main || it.thumb);
   $('detailSize').textContent = isIcon ? `${it.packInfo.name} · SVG` : `${fmt(it.width)} × ${fmt(it.height)} px`;
   $('detailCrumb').textContent = isIcon ? `图标 / ${it.category}` : `${KIND_LABEL[it.type]} / ${it.category}`;
   $('detailTitle').textContent = it.name;
@@ -451,7 +455,7 @@ function iconDescription(it) {
   return `${pack.name}（${pack.style}）中的独立图标，分类为「${it.category}」。${it.mono ? '单色图标可改为任意颜色后下载 SVG 或 PNG。' : '彩色图标保留原始配色，可下载 SVG 或 PNG。'}`;
 }
 function svgLabel(it) {
-  if (!it.files.svg) return 'PNG';
+  if (!it.files.svg) return it.files.png ? '透明 PNG' : 'JPG';
   return it.svgKind === 'mixed' ? 'SVG（含位图）' : '可编辑 SVG';
 }
 function licenseClass(id) { return /NC|ND|arXiv|publisher/i.test(id || '') ? 'warn' : ''; }
@@ -464,7 +468,8 @@ function renderActions(it) {
     buttons.push(`<button type="button" class="ghost-button" data-action="png">${svgIcon('download')}下载 PNG</button>`);
     buttons.push(`<button type="button" class="ghost-button" data-action="copy-svg">${svgIcon('copy')}复制 SVG 代码</button>`);
   } else {
-    buttons.push(`<a class="primary-button" href="${esc(it.files.png)}" download="${esc(fileName(it, 'png'))}">${svgIcon('download')}下载 PNG</a>`);
+    const ext = it.files.png ? 'png' : 'jpg';
+    buttons.push(`<a class="primary-button" href="${esc(it.main)}" download="${esc(fileName(it, ext))}">${svgIcon('download')}下载 ${ext.toUpperCase()}</a>`);
     if (it.files.svg) buttons.push(`<a class="ghost-button" href="${esc(it.files.svg)}" download="${esc(fileName(it, 'svg'))}">${svgIcon('download')}SVG${it.svgKind === 'mixed' ? '（含位图）' : ''}</a>`);
     if (it.files.pdf) buttons.push(`<a class="ghost-button" href="${esc(it.files.pdf)}" download="${esc(fileName(it, 'pdf'))}">${svgIcon('download')}PDF 矢量</a>`);
   }
@@ -491,7 +496,7 @@ function renderSource(it) {
     $('sourceTitle').textContent = s.title;
     $('sourceMeta').textContent = `${(s.authors || []).join(', ')} · ${s.license_name}${licenseNote(s.license)}`;
     $('sourceLinks').innerHTML = [
-      it.upstream && `<a href="${esc(it.upstream)}" target="_blank" rel="noopener noreferrer">${svgIcon('file')}${it.page ? `原幻灯片第 ${esc(it.page)} 页` : '原始文件'}</a>`,
+      it.upstream && `<a href="${esc(it.upstream)}" target="_blank" rel="noopener noreferrer">${svgIcon('file')}${it.page ? `原幻灯片第 ${esc(it.page)} 页` : esc(it.upstreamLabel || '原始文件')}</a>`,
       `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${svgIcon('link')}项目主页</a>`,
       `<a href="${esc(s.license_file || s.license_url)}" target="_blank" rel="noopener">${svgIcon('external')}${esc(s.license_name)} 许可</a>`
     ].filter(Boolean).join('');
@@ -525,9 +530,9 @@ function renderMeta(it) {
     const s = it.source;
     rows.push(['类别', esc(it.category)]);
     rows.push(['许可', `${esc(s.license_name)}${licenseNote(s.license)}`]);
-    rows.push(['署名', `<code>${esc(s.attribution)}</code> <button type="button" class="link-button" data-action="copy-attribution">复制署名</button>`]);
+    rows.push(['署名', `<code>${esc(it.credit || s.attribution)}</code> <button type="button" class="link-button" data-action="copy-attribution">复制署名</button>`]);
     rows.push(['处理', esc(s.processing)]);
-    rows.push(['格式', `${it.files.svg ? (it.svgKind === 'mixed' ? 'SVG（含嵌入位图）· ' : 'SVG · ') : ''}PNG（${fmt(it.width)} × ${fmt(it.height)} px）`]);
+    rows.push(['格式', `${it.files.svg ? (it.svgKind === 'mixed' ? 'SVG（含嵌入位图）· ' : 'SVG · ') : ''}${it.files.png ? 'PNG' : 'JPG'}（${fmt(it.width)} × ${fmt(it.height)} px）`]);
   } else {
     const s = it.source;
     if (it.figure) rows.push(['图号', esc(it.figure)]);
@@ -740,7 +745,7 @@ $('fromFacet').addEventListener('click', e => {
   state.from = state.from === b.dataset.from ? '' : b.dataset.from; render();
 });
 $('detailMeta').addEventListener('click', e => {
-  if (e.target.closest('[data-action="copy-attribution"]') && current) copyText(current.source.attribution, '已复制署名');
+  if (e.target.closest('[data-action="copy-attribution"]') && current) copyText(current.credit || current.source.attribution, '已复制署名');
 });
 [['onlyArch', 'arch'], ['onlyVector', 'vector'], ['onlyMono', 'mono'], ['onlyFeatured', 'featured']].forEach(([id, key]) => {
   $(id).addEventListener('change', e => { state[key] = e.target.checked; render(); });

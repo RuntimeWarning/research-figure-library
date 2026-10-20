@@ -44,6 +44,8 @@ def main():
     papers = read_json(MANIFESTS / "papers.json")
     elements = read_json(MANIFESTS / "elements.json")
     collected = read_json(MANIFESTS / "collected.json")
+    vision = read_json(MANIFESTS / "vision.json")
+    collected = {"sources": {**collected["sources"], **vision["sources"]}, "assets": collected["assets"] + vision["assets"]}
     ATOMIC_CATEGORIES = elements["categories"]
     unknown = {a["category"] for a in collected["assets"]} - set(ATOMIC_CATEGORIES)
     if unknown:
@@ -77,7 +79,8 @@ def main():
         if p.get("original"):
             record.update(original=True, english=p["english"])
         elif p.get("collection"):
-            record.update(collection=p["collection"], english=p["english"], upstream=p["upstream"])
+            record.update(collection=p["collection"], english=p["english"], upstream=p["upstream"],
+                          **{k: p[k] for k in ("credit", "upstream_label") if p.get(k)})
         paper_rows.append(record)
         collection = ("论文原图" if p["kind"] == "paper" else "研图原创图元" if p.get("original")
                       else source["title"])
