@@ -154,16 +154,18 @@ function updateTabCounts() {
 }
 
 function heroArt() {
-  // Clean single objects read best at this size: a robot, a server, chat bubbles, a laptop and a tensor.
-  const tiles = ['f3d-robot', 'iso-server', '3di-chat-bubble-color', 'f3d-laptop', 'el-tensor-cube-purple'];
-  const chips = [['iso-database', 'c1', '数据库 · 文档 · 服务器'], ['3di-rocket-color', 'c2', '3D 物件 · 标记 · 装饰']];
-  const label = it => it.name.replace(/（[^）]*）$/, '');
-  $('heroArt').innerHTML = tiles.map(id => byId.get(id)).filter(Boolean)
-    .map((it, i) => `<button type="button" class="tile t${i + 1}" data-open="${esc(it.id)}"><img src="${esc(it.thumb)}" alt="${esc(it.name)}" decoding="async"><span>${esc(label(it))}</span></button>`)
-    .join('')
+  // Fluent 3D objects share one soft rendering style, so they sit well together in the collage.
+  const tiles = [['f3d-brain', '大脑'], ['f3d-globe-showing-asia-australia', '地球'], ['f3d-dna', 'DNA'],
+    ['f3d-microscope', '显微镜'], ['f3d-sparkles', '闪光']];
+  const chips = [['f3d-satellite', 'c1', '卫星 · 天气 · 地球'], ['f3d-snowflake', 'c2', '雪花 · 火焰 · 对勾']];
+  $('heroArt').innerHTML = tiles.filter(([id]) => byId.has(id))
+    .map(([id, label], i) => {
+      const it = byId.get(id);
+      return `<button type="button" class="tile t${i + 1}" data-open="${esc(id)}"><img src="${esc(it.thumb)}" alt="${esc(it.name)}" decoding="async"><span>${esc(label)}</span></button>`;
+    }).join('')
     + chips.map(([id, cls, text]) => {
       const it = byId.get(id);
-      return it ? `<button type="button" class="chip ${cls}" data-open="${esc(it.id)}"><img src="${esc(it.thumb)}" alt="">${esc(text)}</button>` : '';
+      return it ? `<button type="button" class="chip ${cls}" data-open="${esc(id)}"><img src="${esc(it.thumb)}" alt="">${esc(text)}</button>` : '';
     }).join('');
 }
 
