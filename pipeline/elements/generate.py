@@ -403,12 +403,13 @@ def b_neuron(title, pal):
 def b_residual(title, pal):
     p = P[pal]
     s = st.Scene()
-    st.extrude(s, st.rect(3.0, 0.9), 0, 0.9, p, origin=(0, 0), front_svg=st.face_text("Layer", 1.5, 0.45, 0, 0.42, "#fff"))
-    st.extrude(s, st.rect(3.0, 0.9), 0, 0.9, p, origin=(0, 1.6), front_svg=st.face_text("Layer", 1.5, 2.05, 0, 0.42, "#fff"))
+    st.extrude(s, st.rect(3.0, 0.9), 0, 0.9, p, origin=(0, 0))
+    st.extrude(s, st.rect(3.0, 0.9), 0, 0.9, p, origin=(0, 1.6))
     path = [(1.5, 2.5), (1.5, 3.2), (4.0, 3.2), (4.0, -0.9), (2.0, -0.9)]
     links = [((1.5, 0.9), (1.5, 1.6)), ((1.5, 0.0), (1.5, -0.5))]
-    lines = "".join(st.line3((a[0], a[1], 0.45), (b[0], b[1], 0.45), P["slate"].base, 0.08) for a, b in list(zip(path, path[1:])) + links)
-    s.add(90, f"<g>{lines}</g>", [st.proj((1.5, 3.2, 0)), st.proj((4, -0.9, 0))])
+    segs = list(zip(path, path[1:])) + links
+    lines = "".join(st.line3((a[0], a[1], 0.45), (b[0], b[1], 0.45), P["slate"].base, 0.08) for a, b in segs)
+    s.add(90, f"<g>{lines}</g>", [st.proj((x, y, 0.45)) for seg in segs for x, y in seg])
     st.disc(s, P["slate"], 1.5, -0.9, 0.45, 0.42, glyph="+", depth_bias=-5)
     return s.to_svg(title)
 

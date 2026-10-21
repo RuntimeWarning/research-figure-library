@@ -120,6 +120,19 @@ def px_size(svg: str) -> str:
     return svg[:match.start()] + fixed + svg[match.end():]
 
 
+def pad_view(svg: str, frac: float = 0.03) -> str:
+    """Widen the root viewBox by ``frac`` on every side; some upstream SVGs cut their own outlines."""
+    match = re.search(r"<svg\b[^>]*>", svg)
+    root = match.group(0)
+    vb = re.search(r'viewBox="\s*([-\d.]+)[\s,]+([-\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)\s*"', root)
+    x, y, w, h = map(float, vb.groups())
+    m = frac * max(w, h)
+    root = root.replace(vb.group(0), f'viewBox="{x - m:.3f} {y - m:.3f} {w + 2 * m:.3f} {h + 2 * m:.3f}"')
+    root = re.sub(r'\bwidth="[\d.]+"', f'width="{w + 2 * m:.3f}"', root, count=1)
+    root = re.sub(r'\bheight="[\d.]+"', f'height="{h + 2 * m:.3f}"', root, count=1)
+    return svg[:match.start()] + root + svg[match.end():]
+
+
 def render_svg(svg: str) -> Image.Image:
     vb = re.search(r'viewBox="\s*[-\d.]+[\s,]+[-\d.]+[\s,]+([\d.]+)[\s,]+([\d.]+)', svg)
     w, h = float(vb.group(1)), float(vb.group(2))
@@ -150,7 +163,7 @@ def upstream(key, ref):
 
 def process(key, ref, roots):
     if key == "isoflow":
-        svg = px_size((roots["isoflow"] / "collections/isoflow/icons" / ref).read_text(encoding="utf-8"))
+        svg = pad_view(px_size((roots["isoflow"] / "collections/isoflow/icons" / ref).read_text(encoding="utf-8")))
         return svg, render_svg(svg)
     if key == "nn-svg":
         svg = px_size((WEB / "nn-svg-out" / ref).read_text(encoding="utf-8"))

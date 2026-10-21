@@ -35,7 +35,7 @@ SOURCES = {
         "license_url": "https://github.com/markmanx/isopacks/blob/main/collections/isoflow/LICENSE",
         "license_file": "licenses/isoflow-LICENSE.txt",
         "attribution": "Isometric icon from Isoflow isopacks by Mark Mankarious (https://github.com/markmanx/isopacks), MIT License.",
-        "processing": "原始 SVG 未改动",
+        "processing": "原始图形未改动，只在四周加了留白，避免边缘描边被裁掉",
     },
     "3dicons": {
         "short": "3dicons", "title": "3dicons 开源三维图标",

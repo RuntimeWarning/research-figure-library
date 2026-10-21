@@ -197,6 +197,7 @@ python pipeline/icons/build.py        # 清洗、分类并写入 dist/assets/ico
 node pipeline/collected/nnsvg.mjs .cache/web/NN-SVG-<提交> .cache/web/nn-svg-out  # 需要 puppeteer-core 与 Chrome
 python pipeline/collected/build.py    # 下载固定版本的 Fluent Emoji 3D、3dicons、Isoflow、NN-SVG 物件
 python pipeline/catalog.py            # 生成 data.json 与 sources.csv
+python pipeline/check_edges.py        # 检查图元是否贴边（贴边通常意味着被裁掉一部分）
 python scripts/validate.py --hashes   # 校验
 ```
 
