@@ -155,8 +155,8 @@ function updateTabCounts() {
 
 function heroArt() {
   // Fluent 3D objects share one soft rendering style, so they sit well together in the collage.
-  const tiles = [['f3d-brain', '大脑'], ['f3d-globe-showing-asia-australia', '地球'], ['f3d-dna', 'DNA'],
-    ['f3d-microscope', '显微镜'], ['f3d-sparkles', '闪光']];
+  const tiles = [['f3d-compass', '指南针'], ['f3d-globe-showing-asia-australia', '地球'], ['f3d-dna', 'DNA'],
+    ['f3d-robot', '机器人'], ['f3d-sparkles', '闪光']];
   const chips = [['f3d-satellite', 'c1', '卫星 · 天气 · 地球'], ['f3d-snowflake', 'c2', '雪花 · 火焰 · 对勾']];
   $('heroArt').innerHTML = tiles.filter(([id]) => byId.has(id))
     .map(([id, label], i) => {
