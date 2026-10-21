@@ -9,7 +9,7 @@ Two kinds of pieces, all released under CC0 1.0:
   detection boxes, pose keypoints, and photos laid on isometric planes or stacked
   as video frames;
 * isometric 3-D vision schematics drawn with ``style.py``: camera frustums,
-  multi-view rigs, NeRF ray sampling, voxels, 3-D boxes, BEV grids, meshes,
+  multi-view rigs, NeRF ray sampling, voxels, 3-D boxes, BEV grids,
   Gaussian splats and tri-planes.
 
 Outputs go to ``dist/assets/vision/`` and ``pipeline/manifests/vision.json``.
@@ -598,60 +598,6 @@ def b_bev(title, pal):
     return s.to_svg(title)
 
 
-def icosphere(level=1):
-    t = (1 + 5 ** 0.5) / 2
-    verts = [(-1, t, 0), (1, t, 0), (-1, -t, 0), (1, -t, 0), (0, -1, t), (0, 1, t), (0, -1, -t), (0, 1, -t),
-             (t, 0, -1), (t, 0, 1), (-t, 0, -1), (-t, 0, 1)]
-    faces = [(0, 11, 5), (0, 5, 1), (0, 1, 7), (0, 7, 10), (0, 10, 11), (1, 5, 9), (5, 11, 4), (11, 10, 2), (10, 7, 6),
-             (7, 1, 8), (3, 9, 4), (3, 4, 2), (3, 2, 6), (3, 6, 8), (3, 8, 9), (4, 9, 5), (2, 4, 11), (6, 2, 10), (8, 6, 7),
-             (9, 8, 1)]
-    verts = [tuple(c / math.sqrt(sum(v * v for v in vtx)) for c in vtx) for vtx in verts]
-    for _ in range(level):
-        cache, new = {}, []
-
-        def mid(a, b):
-            key = tuple(sorted((a, b)))
-            if key not in cache:
-                m = [(verts[a][i] + verts[b][i]) / 2 for i in range(3)]
-                n = math.sqrt(sum(v * v for v in m))
-                verts.append(tuple(v / n for v in m))
-                cache[key] = len(verts) - 1
-            return cache[key]
-        for a, b, c in faces:
-            ab, bc, ca = mid(a, b), mid(b, c), mid(c, a)
-            new += [(a, ab, ca), (b, bc, ab), (c, ca, bc), (ab, bc, ca)]
-        faces = new
-    return verts, faces
-
-
-def b_mesh(title, pal, level=2, bumpy=True):
-    p = P[pal]
-    verts, faces = icosphere(level)
-    if bumpy:
-        verts = [tuple(c * (1 + 0.12 * math.sin(3 * v[0] + 2 * v[1]) * math.cos(2 * v[2])) for c in v) for v in verts]
-    verts = [(v[0] * 2.2, v[1] * 1.8, v[2] * 2.2) for v in verts]
-    light = (-0.5, 0.8, -0.4)
-    ln = math.sqrt(sum(c * c for c in light))
-    light = tuple(c / ln for c in light)
-    s = st.Scene()
-    for a, b, c in faces:
-        A, B, C = verts[a], verts[b], verts[c]
-        u = [B[i] - A[i] for i in range(3)]
-        v = [C[i] - A[i] for i in range(3)]
-        n = (u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0])
-        nn = math.sqrt(sum(x * x for x in n)) or 1
-        n = tuple(x / nn for x in n)
-        if st.dot(n, st.D) > 0:
-            n = tuple(-x for x in n)
-            if st.dot(n, st.D) > 0:
-                continue
-        lam = max(0.0, st.dot(n, light))
-        fill = st.mix(p.left, p.cell, 0.15 + 0.8 * lam)
-        face = [st.proj(q) for q in (A, B, C)]
-        s.add(st.depth_of([A, B, C]), st.poly(face, fill, ' stroke="#ffffff" stroke-width="0.025" stroke-opacity="0.85"'), face)
-    return s.to_svg(title)
-
-
 def b_splats(title, pals, seed=4, n=90):
     rng = np.random.default_rng(seed)
     s = st.Scene()
@@ -925,9 +871,6 @@ def build_specs():
         ("svg", lambda: lambda title: b_bbox3d(title, "blue")))
     add("bev", THREE_D, "鸟瞰图（BEV）栅格与车辆", "bird's-eye-view grid with vehicles", ["BEV", "鸟瞰图", "自动驾驶", "占据栅格"],
         ("svg", lambda: lambda title: b_bev(title, "blue")))
-    for pal in ("blue", "teal", "purple"):
-        add(f"mesh-{pal}", THREE_D, f"三角网格（{P[pal].zh}）", f"triangle mesh ({pal})", ["网格", "mesh", "三维重建"],
-            ("svg", lambda p=pal: lambda title: b_mesh(title, p)))
     add("splats", THREE_D, "三维高斯泼溅", "3D Gaussian splats", ["3DGS", "高斯泼溅", "Gaussian splatting", "新视角合成"],
         ("svg", lambda: lambda title: b_splats(title, ["blue", "teal", "purple", "orange"])))
     add("triplane", THREE_D, "三平面特征（Tri-plane）", "tri-plane features", ["Tri-plane", "三平面", "三维表示"],

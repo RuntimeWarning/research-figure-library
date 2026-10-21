@@ -154,8 +154,8 @@ function updateTabCounts() {
 }
 
 function heroArt() {
-  // A collage of the most photogenic elements: patches, feature maps, a cut-out, frames, a mesh.
-  const tiles = ['cv-patches-cat', 'el-seq-down-1', 'cv-cutout-bird', 'cv-frames-street', 'cv-mesh-teal'];
+  // Card shapes in style.css follow these images' aspect ratios (1, 1.47, 0.8, 1.72, 1).
+  const tiles = ['cv-patches-cat', 'el-seq-down-1', 'cv-cutout-bird', 'cv-boxes-street', 'cv-pose-skeleton'];
   const chips = [['f3d-robot', 'c1', '机器人 · 数据库 · 卫星'], ['3di-rocket-color', 'c2', '3D 物件 · 标记 · 装饰']];
   $('heroArt').innerHTML = tiles.map(id => byId.get(id)).filter(Boolean)
     .map((it, i) => `<button type="button" class="tile t${i + 1}" data-open="${esc(it.id)}"><img src="${esc(it.thumb)}" alt="${esc(it.name)}" decoding="async"><span>${esc(it.name)}</span></button>`)

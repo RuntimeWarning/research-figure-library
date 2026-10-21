@@ -106,16 +106,16 @@ main { max-width: 1480px; margin: 0 auto; padding: 0 28px; }
 .quick button { padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font-size: 12.5px; }
 .quick button:hover { border-color: var(--accent); color: var(--accent); }
 
-.hero-art { position: relative; height: 380px; }
+.hero-art { position: relative; aspect-ratio: 1.64; }
 .hero-art .tile { position: absolute; display: block; text-align: left; border-radius: 16px; background: var(--artboard); border: 1px solid var(--line); box-shadow: var(--shadow-lg); padding: 12px 12px 30px; overflow: hidden; transition: transform .4s ease; }
 .hero-art .tile img { width: 100%; height: 100%; object-fit: contain; }
 .hero-art .tile span { position: absolute; left: 12px; right: 12px; bottom: 8px; font-size: 11px; color: #6b7280; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .hero-art .tile:hover { transform: translateY(-4px) rotate(0deg) !important; z-index: 5; }
-.hero-art .t1 { left: 0; top: 30px; width: 46%; height: 62%; transform: rotate(-3deg); }
-.hero-art .t2 { left: 40%; top: 0; width: 38%; height: 50%; transform: rotate(2.5deg); z-index: 2; }
-.hero-art .t3 { right: 0; top: 70px; width: 30%; height: 44%; transform: rotate(4deg); }
-.hero-art .t4 { left: 30%; bottom: 0; width: 44%; height: 42%; transform: rotate(-1.5deg); z-index: 3; }
-.hero-art .t5 { right: 2%; bottom: 10px; width: 26%; height: 34%; transform: rotate(-4deg); z-index: 1; }
+.hero-art .t1 { left: 1%; top: 7%; width: 39%; height: 69%; transform: rotate(-3deg); }
+.hero-art .t2 { left: 36%; top: 0; width: 37%; height: 47%; transform: rotate(2.5deg); z-index: 2; }
+.hero-art .t3 { right: 1%; top: 5%; width: 26%; height: 52%; transform: rotate(4deg); }
+.hero-art .t4 { left: 31%; bottom: 0; width: 42%; height: 47%; transform: rotate(-1.5deg); z-index: 3; }
+.hero-art .t5 { right: 0; bottom: 0; width: 23%; height: 41%; transform: rotate(-4deg); z-index: 4; }
 .hero-art .chip { position: absolute; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 12px; color: var(--ink-2); z-index: 6; }
 .hero-art .chip img { width: 26px; height: 26px; }
 .hero-art .c1 { left: -14px; bottom: 26px; }
@@ -295,7 +295,7 @@ button.stat:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--li
 /* ---------------------------------------------------------------- responsive */
 @media (max-width: 1100px) {
   .hero { grid-template-columns: 1fr; padding-top: 36px; }
-  .hero-art { height: 320px; width: 100%; max-width: 640px; margin: 0 auto; }
+  .hero-art { width: 100%; max-width: 640px; margin: 0 auto; }
 }
 @media (max-width: 900px) {
   .topnav { display: none; }
