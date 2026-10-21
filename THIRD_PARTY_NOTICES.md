@@ -26,7 +26,7 @@
 
 ## 收集的物件
 
-`dist/assets/collected/` 中的 460 个物件来自下列开源图库，保留原许可。逐项的原始文件链接见 `dist/sources.csv` 的 `source_url` 列。
+`dist/assets/collected/` 中的 450 个物件来自下列开源图库，保留原许可。逐项的原始文件链接见 `dist/sources.csv` 的 `source_url` 列。
 
 | 来源 | 版本 | 许可 | 收录与处理 | 署名 |
 | --- | --- | --- | --- | --- |
@@ -34,9 +34,8 @@
 | [3dicons](https://github.com/realvjy/3dicons)（Vijay Verma） | 提交 `8884d59e`，官方 CDN 的 v1 dynamic 视角 | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | 118 个（60 种 × 彩色 / 白色黏土），只裁去透明留白 | 无需署名 |
 | [Isoflow isopacks](https://github.com/markmanx/isopacks)（Mark Mankarious） | 提交 `ab717516` | MIT（Copyright 2023 Mark Mankarious） | 34 个 `collections/isoflow` SVG，未改动；未收录含文字的 DNS、支付卡与刷卡机图标 | Isometric icon from Isoflow isopacks by Mark Mankarious (https://github.com/markmanx/isopacks), MIT License. |
 | [NN-SVG](https://github.com/alexlenail/NN-SVG)（Alexander LeNail） | 提交 `d72cf124` | MIT（Copyright (c) 2018 Alexander Lenail） | 15 个，由 `pipeline/collected/nnsvg.mjs` 调用 NN-SVG 生成，不带标注 | Drawn with NN-SVG (LeNail, JOSS 2019, https://github.com/alexlenail/NN-SVG), MIT License. |
-| [ML Visuals](https://github.com/dair-ai/ml-visuals)（dair.ai 社区） | 仓库提交 `e1e81c67`，幻灯片 2026-10-20 导出 | MIT（Copyright (c) 2020 dair.ai） | 10 个，从幻灯片导出的 PDF 中按原样裁出并转为 SVG / PNG | Visual from ML Visuals by dair.ai (https://github.com/dair-ai/ml-visuals), MIT License. |
 
-- MIT 来源的版权声明与许可原文在 `dist/licenses/`（`fluent-emoji-LICENSE.txt`、`isoflow-LICENSE.txt`、`nn-svg-LICENSE.txt`、`ml-visuals-LICENSE.txt`），3dicons 的 CC0 声明在 `3dicons-LICENSE.txt`。
+- MIT 来源的版权声明与许可原文在 `dist/licenses/`（`fluent-emoji-LICENSE.txt`、`isoflow-LICENSE.txt`、`nn-svg-LICENSE.txt`），3dicons 的 CC0 声明在 `3dicons-LICENSE.txt`。
 
 ## 论文原图
 

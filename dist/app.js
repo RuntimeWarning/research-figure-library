@@ -154,16 +154,11 @@ function updateTabCounts() {
 }
 
 function heroArt() {
-  // Elements lead; one original figure shows where they come from.
-  const picks = ['el-seq-down-1', 'el-mask-causal-blue', 'el-tensor-cube-purple', 'cv-iso-cat', 'el-tokens-cls-teal'];
-  const tiles = picks.map(id => byId.get(id)).filter(Boolean);
-  const art = $('heroArt');
-  art.innerHTML = tiles.map((it, i) => `<div class="tile t${i + 1}"><img src="${esc(it.thumb)}" alt="" decoding="async"><span>${esc(it.name)}</span></div>`).join('')
-    + chipFor('f3d-robot', 'c1', '机器人 · 数据库 · 卫星') + chipFor('el-radar-1', 'c2', '雷达回波 · 地球 · 点云');
-  function chipFor(id, cls, label) {
-    const it = byId.get(id);
-    return it ? `<div class="chip ${cls}"><img src="${esc(it.thumb)}" alt="">${esc(label)}</div>` : '';
-  }
+  // One tile per kind of element: model parts, vision, 3-D, objects.
+  const picks = ['el-seq-down-1', 'el-tensor-cube-purple', 'cv-iso-cat', 'cv-voxels-blue', 'iso-database', 'f3d-robot'];
+  $('heroArt').innerHTML = picks.map(id => byId.get(id)).filter(Boolean)
+    .map(it => `<button type="button" class="tile" data-open="${esc(it.id)}" title="${esc(it.name)}"><img src="${esc(it.thumb)}" alt="${esc(it.name)}" decoding="async"></button>`)
+    .join('');
 }
 
 /* ------------------------------------------------------------------ url state */
@@ -769,6 +764,10 @@ $('activeFilters').addEventListener('click', e => {
   const k = b.dataset.clear;
   if (k === 'q') state.q = ''; else if (typeof state[k] === 'boolean') state[k] = false; else state[k] = '';
   syncControls(); render();
+});
+$('heroArt').addEventListener('click', e => {
+  const open = e.target.closest('[data-open]');
+  if (open) openDetail(byId.get(open.dataset.open));
 });
 $('grid').addEventListener('click', e => {
   const save = e.target.closest('[data-save]');

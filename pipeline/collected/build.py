@@ -9,8 +9,6 @@ WebP thumbnail.  Metadata goes to ``pipeline/manifests/collected.json``.
 * Fluent Emoji 3D (MIT): 256 px renders; Chinese names come from the Fluent Emoji
   icon manifest, so run ``pipeline/icons/build.py`` first.
 * 3dicons (CC0): 400 px renders in the colour and clay styles.
-* ML Visuals (MIT): slides exported from Google Slides as PDF, cropped per element
-  and converted to SVG with PyMuPDF.
 * NN-SVG (MIT): schematics rendered by ``nnsvg.mjs`` (run it first; needs
   puppeteer-core and Chrome) into ``.cache/web/nn-svg-out``.
 """
@@ -25,7 +23,6 @@ from collections import Counter
 from pathlib import Path
 from urllib.parse import quote
 
-import pymupdf
 import resvg_py
 from PIL import Image
 
@@ -37,7 +34,7 @@ WEB = CACHE / "web"
 OUT = ASSETS / "collected"
 PNG_SIDE = 1600
 THUMB_SIDE = 560
-ORDER = ["isoflow", "fluent-3d", "3dicons", "ml-visuals", "nn-svg"]
+ORDER = ["isoflow", "fluent-3d", "3dicons", "nn-svg"]
 
 
 def categories():
@@ -105,10 +102,6 @@ def prepare():
     (licences / "isoflow-LICENSE.txt").write_bytes((roots["isoflow"] / "collections/isoflow/LICENSE").read_bytes())
     (licences / "3dicons-LICENSE.txt").write_bytes(
         fetch(raw("realvjy/3dicons", SOURCES["3dicons"]["commit"], "LICENSE"), WEB / "3dicons" / "LICENSE"))
-    deck = SOURCES["ml-visuals"]["deck"]
-    fetch(deck + "export/pdf", WEB / "ml-visuals" / "ml-visuals.pdf", timeout=300)
-    (licences / "ml-visuals-LICENSE.txt").write_bytes(
-        fetch(raw("dair-ai/ml-visuals", SOURCES["ml-visuals"]["commit"], "LICENSE"), WEB / "ml-visuals" / "LICENSE"))
     roots["nn-svg"] = unpack("alexlenail/NN-SVG", SOURCES["nn-svg"]["commit"])
     (licences / "nn-svg-LICENSE.txt").write_bytes((roots["nn-svg"] / "LICENSE").read_bytes())
     if not (WEB / "nn-svg-out").is_dir():
@@ -144,31 +137,6 @@ def trim_alpha(image: Image.Image, margin: int = 6) -> Image.Image:
                        min(image.height, y1 + margin)))
 
 
-def slide_box(page) -> pymupdf.Rect:
-    full = page.rect
-    rects = [pymupdf.Rect(d["rect"]) for d in page.get_drawings()]
-    rects += [pymupdf.Rect(i["bbox"]) for i in page.get_image_info()]
-    rects += [pymupdf.Rect(b["bbox"]) for b in page.get_text("dict")["blocks"] if b["type"] == 0]
-    box = pymupdf.Rect()
-    for r in rects:
-        if r.is_empty or (r.width > full.width * 0.97 and r.height > full.height * 0.9):
-            continue
-        box |= r
-    return (box + (-6, -6, 6, 6)) & full
-
-
-def crop_slide(doc, page_no, box):
-    page = doc[page_no]
-    clip = pymupdf.Rect(box) if box else slide_box(page)
-    out = pymupdf.open()
-    target = out.new_page(width=clip.width, height=clip.height)
-    target.show_pdf_page(target.rect, doc, page_no, clip=clip)
-    svg = px_size(target.get_svg_image(text_as_path=True))
-    zoom = PNG_SIDE / max(clip.width, clip.height)
-    pix = target.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), alpha=True)
-    return svg, Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGBA")
-
-
 def upstream(key, ref):
     s = SOURCES[key]
     if key == "isoflow":
@@ -177,20 +145,16 @@ def upstream(key, ref):
         return f"{s['repo']}/blob/{s['commit']}/{quote(ref)}"
     if key == "3dicons":
         return ref[0]
-    if key == "ml-visuals":
-        return s["deck"]
     return s["url"]
 
 
-def process(key, ref, roots, deck):
+def process(key, ref, roots):
     if key == "isoflow":
         svg = px_size((roots["isoflow"] / "collections/isoflow/icons" / ref).read_text(encoding="utf-8"))
         return svg, render_svg(svg)
     if key == "nn-svg":
         svg = px_size((WEB / "nn-svg-out" / ref).read_text(encoding="utf-8"))
         return svg, render_svg(svg)
-    if key == "ml-visuals":
-        return crop_slide(deck, *ref)
     if key == "fluent-3d":
         data = fetch(raw("microsoft/fluentui-emoji", SOURCES[key]["commit"], ref), WEB / "fluent" / Path(ref).name)
     else:
@@ -202,7 +166,6 @@ def process(key, ref, roots, deck):
 def main():
     allowed = set(categories())
     roots, jobs = prepare()
-    deck = pymupdf.open(WEB / "ml-visuals" / "ml-visuals.pdf")
     OUT.mkdir(parents=True, exist_ok=True)
     records, keep = [], set()
     for key in ORDER:
@@ -212,7 +175,7 @@ def main():
         for ref, pid, zh, en, category, tags in jobs[key]:
             if category not in allowed:
                 raise ValueError(f"{pid}: unknown category {category}")
-            svg, image = process(key, ref, roots, deck)
+            svg, image = process(key, ref, roots)
             files = {"png": folder / f"{pid}.png", "thumb": folder / "thumbs" / f"{pid}.webp"}
             if svg is not None:
                 files["svg"] = folder / f"{pid}.svg"
@@ -226,7 +189,7 @@ def main():
                 "id": f"{PREFIX[key]}-{pid}", "kind": "atomic", "collection": key, "source": key, "category": category,
                 "name": zh, "english": en, "tags": list(dict.fromkeys(tags + [source["short"]])),
                 "description": f"收集自 {source['title']}，{source['license_name']} 许可。{source['processing']}。",
-                "upstream": upstream(key, ref), "page": ref[0] + 1 if key == "ml-visuals" else "",
+                "upstream": upstream(key, ref), "page": "",
                 "svg_kind": "" if svg is None else ("mixed" if "<image" in svg else "vector"),
                 "has_alpha": True, "width": image.width, "height": image.height,
                 "files": {k: p.relative_to(DIST).as_posix() for k, p in files.items()},

@@ -4,8 +4,7 @@ Only stand-alone pieces that can be dropped into a model figure as a module, a
 detail or a decoration: no arrows, labels or task-specific diagrams.
 
 ``PICKS`` maps a source to ``(ref, id, 中文名, english, category, tags)`` rows.
-``ref`` is the upstream file; for ML Visuals it is ``(page, crop box in PDF
-points)`` with ``None`` meaning the whole slide content.  3dicons picks are
+``ref`` is the upstream file.  3dicons picks are
 ``(slug, 中文名, english, category, tags)`` rendered in each of
 ``THREEDICON_STYLES``.  Fluent Emoji picks are listed by CLDR name per category
 and take their Chinese names from the icon manifest unless ``FLUENT_ZH`` gives
@@ -14,19 +13,6 @@ one.  Categories are the shared element categories in
 """
 
 SOURCES = {
-    "ml-visuals": {
-        "short": "ML Visuals", "title": "ML Visuals（dair.ai 社区）",
-        "authors": ["dair.ai community", "Elvis Saravia"],
-        "venue": "Google Slides · MIT", "year": 2023, "arxiv": "",
-        "url": "https://github.com/dair-ai/ml-visuals", "repo": "https://github.com/dair-ai/ml-visuals",
-        "commit": "e1e81c67e07d3543da9e21d6092853475ae1b206",
-        "deck": "https://docs.google.com/presentation/d/11mR1nkIR9fbHegFkcFq8z9oDQ5sjv8E3JJp1LfLGKuk/",
-        "license": "MIT", "license_name": "MIT",
-        "license_url": "https://github.com/dair-ai/ml-visuals/blob/master/LICENSE",
-        "license_file": "licenses/ml-visuals-LICENSE.txt",
-        "attribution": "Visual from ML Visuals by dair.ai (https://github.com/dair-ai/ml-visuals), MIT License.",
-        "processing": "从幻灯片导出的 PDF 中按原样裁出，转为 SVG；渐变填充在导出时已是位图",
-    },
     "nn-svg": {
         "short": "NN-SVG", "title": "NN-SVG 网络结构示意图生成器",
         "authors": ["Alexander LeNail"],
@@ -77,22 +63,9 @@ SOURCES = {
     },
 }
 
-FMAP, TENSOR, TOKEN, OPS, NEURON, ARCH = "特征图", "张量与通道", "Token 与嵌入", "运算符", "神经元与全连接", "网络结构与模块"
+TENSOR, NEURON, ARCH = "张量与通道", "神经元与全连接", "网络结构与模块"
 DATA, DEVICE, PEOPLE, SCIENCE, EARTH, CITY, NATURE, MARKS, OBJECTS = (
     "数据与文档", "计算与设备", "人物与智能体", "科学与医学", "天气与地理", "城市与交通", "动物与植物", "标记与符号", "通用物件")
-
-MLV = [
-    ((3, None), "token-vector", "渐变 Token 向量（横）", "gradient token vector", TOKEN, ["向量", "Token", "嵌入"]),
-    ((4, None), "vector-reflection", "紫色向量（带倒影）", "purple vector with reflection", TOKEN, ["向量", "嵌入", "倒影"]),
-    ((6, (38, 52, 70, 158)), "slab-thin", "渐变薄片", "thin gradient slab", TENSOR, ["特征图", "薄片", "通道"]),
-    ((6, (12, 205, 68, 382)), "slab-thick", "渐变厚片", "thick gradient slab", TENSOR, ["特征图", "张量", "通道"]),
-    ((6, (288, 210, 423, 352)), "cube-3x3", "渐变 3×3×3 立方体", "3x3x3 gradient cube", TENSOR, ["张量", "立方体", "tensor"]),
-    ((6, (429, 173, 664, 307)), "gradient-grid", "渐变网格 6×4", "gradient grid 6x4", FMAP, ["特征图", "网格", "渐变"]),
-    ((7, (585, 62, 632, 332)), "operators", "运算符：求和、点乘、乘、加", "sum, dot, multiply, add operators", OPS, ["运算符", "求和", "逐元素乘", "加法"]),
-    ((29, (0, 0, 280, 187)), "kernel-on-grid", "输入网格上的 3×3 卷积核", "3x3 kernel on an input grid", "卷积与采样", ["卷积核", "感受野", "网格"]),
-    ((29, (312, 0, 594, 187)), "dilated-kernel", "输入网格上的空洞卷积核", "dilated kernel on an input grid", "卷积与采样", ["空洞卷积", "感受野", "dilation"]),
-    ((30, None), "grid-rows", "网格中高亮的行", "grid with highlighted rows", FMAP, ["网格", "高亮", "特征图"]),
-]
 
 NNSVG = [
     ("fcnn-small.svg", "fcnn-small", "全连接网络 3-4-4-2", "fully connected network 3-4-4-2", NEURON, ["全连接", "MLP", "神经网络"]),
@@ -275,5 +248,5 @@ FLUENT_TAGS = {
     "gear": ["处理", "模块"], "hammer and wrench": ["工具调用", "工具"], "toolbox": ["工具调用", "工具"],
 }
 
-PICKS = {"ml-visuals": MLV, "nn-svg": NNSVG, "isoflow": ISOFLOW}
-PREFIX = {"ml-visuals": "mlv", "nn-svg": "nns", "isoflow": "iso", "3dicons": "3di", "fluent-3d": "f3d"}
+PICKS = {"nn-svg": NNSVG, "isoflow": ISOFLOW}
+PREFIX = {"nn-svg": "nns", "isoflow": "iso", "3dicons": "3di", "fluent-3d": "f3d"}
