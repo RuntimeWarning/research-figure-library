@@ -154,15 +154,16 @@ function updateTabCounts() {
 }
 
 function heroArt() {
-  // Card shapes in style.css follow these images' aspect ratios (1, 1.47, 0.8, 1.72, 1).
-  const tiles = ['cv-patches-cat', 'el-seq-down-1', 'cv-cutout-bird', 'cv-boxes-street', 'cv-pose-skeleton'];
-  const chips = [['f3d-robot', 'c1', '机器人 · 数据库 · 卫星'], ['3di-rocket-color', 'c2', '3D 物件 · 标记 · 装饰']];
+  // Clean single objects read best at this size: a robot, a server, chat bubbles, a laptop and a tensor.
+  const tiles = ['f3d-robot', 'iso-server', '3di-chat-bubble-color', 'f3d-laptop', 'el-tensor-cube-purple'];
+  const chips = [['iso-database', 'c1', '数据库 · 文档 · 服务器'], ['3di-rocket-color', 'c2', '3D 物件 · 标记 · 装饰']];
+  const label = it => it.name.replace(/（[^）]*）$/, '');
   $('heroArt').innerHTML = tiles.map(id => byId.get(id)).filter(Boolean)
-    .map((it, i) => `<button type="button" class="tile t${i + 1}" data-open="${esc(it.id)}"><img src="${esc(it.thumb)}" alt="${esc(it.name)}" decoding="async"><span>${esc(it.name)}</span></button>`)
+    .map((it, i) => `<button type="button" class="tile t${i + 1}" data-open="${esc(it.id)}"><img src="${esc(it.thumb)}" alt="${esc(it.name)}" decoding="async"><span>${esc(label(it))}</span></button>`)
     .join('')
-    + chips.map(([id, cls, label]) => {
+    + chips.map(([id, cls, text]) => {
       const it = byId.get(id);
-      return it ? `<button type="button" class="chip ${cls}" data-open="${esc(it.id)}"><img src="${esc(it.thumb)}" alt="">${esc(label)}</button>` : '';
+      return it ? `<button type="button" class="chip ${cls}" data-open="${esc(it.id)}"><img src="${esc(it.thumb)}" alt="">${esc(text)}</button>` : '';
     }).join('');
 }
 
