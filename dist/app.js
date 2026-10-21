@@ -154,11 +154,16 @@ function updateTabCounts() {
 }
 
 function heroArt() {
-  // One tile per kind of element: model parts, vision, 3-D, objects.
-  const picks = ['el-seq-down-1', 'el-tensor-cube-purple', 'cv-iso-cat', 'cv-voxels-blue', 'iso-database', 'f3d-robot'];
-  $('heroArt').innerHTML = picks.map(id => byId.get(id)).filter(Boolean)
-    .map(it => `<button type="button" class="tile" data-open="${esc(it.id)}" title="${esc(it.name)}"><img src="${esc(it.thumb)}" alt="${esc(it.name)}" decoding="async"></button>`)
-    .join('');
+  // A collage of the most photogenic elements: patches, feature maps, a cut-out, frames, a mesh.
+  const tiles = ['cv-patches-cat', 'el-seq-down-1', 'cv-cutout-bird', 'cv-frames-street', 'cv-mesh-teal'];
+  const chips = [['f3d-robot', 'c1', '机器人 · 数据库 · 卫星'], ['3di-rocket-color', 'c2', '3D 物件 · 标记 · 装饰']];
+  $('heroArt').innerHTML = tiles.map(id => byId.get(id)).filter(Boolean)
+    .map((it, i) => `<button type="button" class="tile t${i + 1}" data-open="${esc(it.id)}"><img src="${esc(it.thumb)}" alt="${esc(it.name)}" decoding="async"><span>${esc(it.name)}</span></button>`)
+    .join('')
+    + chips.map(([id, cls, label]) => {
+      const it = byId.get(id);
+      return it ? `<button type="button" class="chip ${cls}" data-open="${esc(it.id)}"><img src="${esc(it.thumb)}" alt="">${esc(label)}</button>` : '';
+    }).join('');
 }
 
 /* ------------------------------------------------------------------ url state */
