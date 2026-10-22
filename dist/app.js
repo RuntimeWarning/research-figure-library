@@ -40,7 +40,7 @@ const FAVORITES_KEY = 'paper-elements-favorites-v1';
 const PAGE = { paper: 48, icon: 180, mixed: 96 };
 
 const state = {
-  tab: DEFAULT_TAB, q: '', category: '', pack: '', from: '', arch: false, vector: false, mono: false, featured: false,
+  tab: DEFAULT_TAB, q: '', category: '', pack: '', arch: false, vector: false, mono: false, featured: false,
   sort: 'relevance', limit: 0, color: store.get('figure-atlas-color', '#1f2937')
 };
 let catalog = null, items = [], byId = new Map(), results = [], current = null, pngSize = 512, searchTimer = 0;
@@ -72,8 +72,7 @@ function buildItems(data) {
       files: p.files, main: p.files.png || p.files.jpg, thumb: p.files.thumb || p.files.png || p.files.jpg, width: p.width, height: p.height, svgKind: p.svg_kind,
       architecture: p.architecture, hasAlpha: p.has_alpha, vector: Boolean(p.files.svg || p.files.pdf), featured: true,
       original: Boolean(p.original), collection: p.collection || '', upstream: p.upstream || '', credit: p.credit || '',
-      upstreamLabel: p.upstream_label || '',
-      from: p.kind === 'atomic' ? (p.original ? p.source : p.collection || p.source) : ''
+      upstreamLabel: p.upstream_label || ''
     };
     it.en = p.original || p.collection ? p.english : `${s.short || ''}${p.figure ? ' · ' + p.figure : ''}`;
     it.search = norm([it.id, it.name, it.en, it.category, it.description, it.tags.join(' '), s.title, s.short,
@@ -176,7 +175,6 @@ function readUrl() {
   state.q = p.get('q') || '';
   state.category = p.get('cat') || '';
   state.pack = p.get('pack') || '';
-  state.from = p.get('from') || '';
 }
 function writeUrl() {
   const p = new URLSearchParams();
@@ -184,7 +182,6 @@ function writeUrl() {
   if (state.q) p.set('q', state.q);
   if (state.category) p.set('cat', state.category);
   if (state.pack) p.set('pack', state.pack);
-  if (state.from) p.set('from', state.from);
   const qs = p.toString();
   history.replaceState(null, '', `${location.pathname}${qs ? '?' + qs : ''}${location.hash}`);
 }
@@ -206,7 +203,6 @@ function passOptions(it, skip = '') {
   if (state.mono && !(it.type === 'icon' && it.mono)) return false;
   if (state.featured && it.type === 'icon' && !it.featured) return false;
   if (skip !== 'pack' && state.pack && it.pack !== state.pack) return false;
-  if (skip !== 'from' && state.from && it.from !== state.from) return false;
   if (skip !== 'category' && state.category && it.category !== state.category) return false;
   return true;
 }
@@ -245,14 +241,13 @@ function compute() {
 
 /* ------------------------------------------------------------------ facets */
 function renderFacets(base) {
-  const catCount = new Map(), packCount = new Map(), fromCount = new Map();
+  const catCount = new Map(), packCount = new Map();
   for (const it of base) {
     if (passOptions(it, 'category')) {
       const key = `${it.type}|${it.category}`;   // paper figures and elements may share a category name
       catCount.set(key, (catCount.get(key) || 0) + 1);
     }
     if (it.type === 'icon' && passOptions(it, 'pack')) packCount.set(it.pack, (packCount.get(it.pack) || 0) + 1);
-    if (it.from && passOptions(it, 'from')) fromCount.set(it.from, (fromCount.get(it.from) || 0) + 1);
   }
   const cat = $('categoryFacet');
   const groups = [['paper', '论文原图'], ['atomic', '图元'], ['icon', '图标']];
@@ -275,16 +270,6 @@ function renderFacets(base) {
     .filter(([key]) => packCount.get(key) || state.pack === key)
     .map(([key, p]) => `<button type="button" data-pack="${esc(key)}" class="${state.pack === key ? 'active' : ''}"><span>${esc(p.name)} <span class="sub">${esc(p.style)}</span></span><span class="count">${fmt(packCount.get(key) || 0)}</span></button>`)
     .join('');
-  const fromKeys = [...fromCount.keys()];
-  if (state.from && !fromKeys.includes(state.from)) fromKeys.push(state.from);
-  fromKeys.sort((a, b) => Number(Boolean(catalog.sources[b]?.original)) - Number(Boolean(catalog.sources[a]?.original))
-    || (fromCount.get(b) || 0) - (fromCount.get(a) || 0));
-  $('fromBlock').hidden = state.tab === 'paper' || state.tab === 'icon' || !fromKeys.length;
-  $('fromFacet').innerHTML = fromKeys.map(key => {
-    const s = catalog.sources[key] || {};
-    const licence = s.original ? 'CC0' : s.license_name || '';
-    return `<button type="button" data-from="${esc(key)}" class="${state.from === key ? 'active' : ''}"><span>${esc(s.short || key)} <span class="sub">${esc(licence)}</span></span><span class="count">${fmt(fromCount.get(key) || 0)}</span></button>`;
-  }).join('');
   document.querySelectorAll('#optionBlock [data-scope]').forEach(el => {
     const scope = el.dataset.scope;
     const any = state.tab === 'all' || state.tab === 'favorites';
@@ -298,7 +283,6 @@ function renderActive() {
   if (state.q) chips.push(['q', `搜索：${state.q}`]);
   if (state.category) chips.push(['category', state.category]);
   if (state.pack) chips.push(['pack', catalog.packs[state.pack]?.name || state.pack]);
-  if (state.from) chips.push(['from', `来源：${catalog.sources[state.from]?.short || state.from}`]);
   if (state.arch) chips.push(['arch', '完整架构图']);
   if (state.vector) chips.push(['vector', '附矢量']);
   if (state.mono) chips.push(['mono', '可改色']);
@@ -403,7 +387,6 @@ function setTab(tab) {
   state.tab = tab;
   state.category = '';
   if (tab !== 'icon' && tab !== 'all' && tab !== 'favorites') state.pack = '';
-  if (tab === 'paper' || tab === 'icon') state.from = '';
   if (tab === 'icon') { state.arch = false; state.vector = false; }
   if (tab === 'paper' || tab === 'atomic') { state.mono = false; state.featured = false; }
   syncControls();
@@ -487,7 +470,7 @@ function renderSource(it) {
   const s = it.source;
   card.hidden = false;
   card.querySelector('.cite').hidden = Boolean(it.original || it.collection);
-  card.querySelector('h3').textContent = it.original ? '许可' : it.collection ? '来源与许可' : '来源';
+  card.querySelector('h3').textContent = '来源';
   if (it.original) {
     $('sourceTitle').textContent = '研图原创图元 · CC0 1.0（公共领域）';
     $('sourceMeta').textContent = '可在论文、课件、海报中自由使用和修改，可商用，无需署名或引用。';
@@ -715,7 +698,7 @@ function toggleFavorite(id) {
   if (state.tab === 'favorites') render(true);
 }
 function resetFilters() {
-  Object.assign(state, { q: '', category: '', pack: '', from: '', arch: false, vector: false, mono: false, featured: false, sort: 'relevance' });
+  Object.assign(state, { q: '', category: '', pack: '', arch: false, vector: false, mono: false, featured: false, sort: 'relevance' });
   syncControls();
   render();
 }
@@ -742,10 +725,6 @@ $('categoryFacet').addEventListener('click', e => {
 $('packFacet').addEventListener('click', e => {
   const b = e.target.closest('[data-pack]'); if (!b) return;
   state.pack = state.pack === b.dataset.pack ? '' : b.dataset.pack; render();
-});
-$('fromFacet').addEventListener('click', e => {
-  const b = e.target.closest('[data-from]'); if (!b) return;
-  state.from = state.from === b.dataset.from ? '' : b.dataset.from; render();
 });
 $('detailMeta').addEventListener('click', e => {
   if (e.target.closest('[data-action="copy-attribution"]') && current) copyText(current.credit || current.source.attribution, '已复制署名');

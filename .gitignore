@@ -1,7 +1,5 @@
-# Generated public site and unpublished Sites configuration.
-/_site/
+# Unpublished Sites configuration.
 /.openai/
-/.local-backup/
 
 # Archives, caches, environments, and installed dependencies.
 *.zip
