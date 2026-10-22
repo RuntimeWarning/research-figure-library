@@ -4,11 +4,11 @@
 
 ## 原创图元（不属于第三方素材）
 
-`dist/assets/elements/` 中的 248 个图元由本项目用 `pipeline/elements/` 中的脚本绘制，不含任何第三方图形，采用 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)：可自由复制、修改、分发和商用，无需署名。
+`dist/assets/elements/` 中的 465 个图元由本项目用 `pipeline/elements/` 中的脚本绘制，不含任何第三方图形，采用 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)：可自由复制、修改、分发和商用，无需署名。
 
 ## 计算机视觉图元所用照片
 
-`dist/assets/vision/` 中的 88 个图元由本项目生成并以 CC0 发布。其中照片类图元基于以下 CC0 / 公有领域照片（裁剪、缩放后做分割、检测、加噪、增强等处理），无需署名；为便于追溯，每个图元的详情页与 `sources.csv` 都给出原始照片链接。
+`dist/assets/vision/` 中的 169 个图元由本项目生成并以 CC0 发布。其中照片类图元基于以下 CC0 / 公有领域照片与医学图像（裁剪、缩放后做分割、检测、加噪、退化、增强等处理），无需署名；为便于追溯，每个图元的详情页与 `sources.csv` 都给出原始照片链接。
 
 | 内容 | Wikimedia Commons 文件 | 作者 | 许可 |
 | --- | --- | --- | --- |
@@ -21,8 +21,11 @@
 | 室内 | [Living room (Unsplash).jpg](https://commons.wikimedia.org/wiki/File:Living_room_(Unsplash).jpg) | Jarosław Ceborski | CC0 1.0 |
 | 城市航拍 | [Seattle City Aerial View Sounds Peugeot.jpg](https://commons.wikimedia.org/wiki/File:Seattle_City_Aerial_View_Sounds_Peugeot.jpg) | Yourusernamewillbepublic2 | CC0 1.0 |
 | 运动人物 | [Walking Rugby.jpg](https://commons.wikimedia.org/wiki/File:Walking_Rugby.jpg) | Back ache | CC0 1.0 |
+| 胸部 X 光片 | [Chest Xray PA 3-8-2010.png](https://commons.wikimedia.org/wiki/File:Chest_Xray_PA_3-8-2010.png) | Stillwaterising | CC0 1.0 |
+| 脑部 CT | [Computed tomography of human brain - large.png](https://commons.wikimedia.org/wiki/File:Computed_tomography_of_human_brain_-_large.png) | Department of Radiology, Uppsala University Hospital | CC0 1.0 |
+| 脑部 MRI | [T1-weighted-MRI.png](https://commons.wikimedia.org/wiki/File:T1-weighted-MRI.png) | Mim.cis | 公有领域 |
 
-另有 4 张来自 [scikit-image 示例数据](https://scikit-image.org/docs/stable/api/skimage.data.html)：宇航员 Eileen Collins（NASA，公有领域）、咖啡杯（Rachel Michetti，CC0）、摄影师（Lav Varshney，CC0）、眼底图像（Mikael Häggström，CC0）。
+另有 7 张来自 [scikit-image 示例数据](https://scikit-image.org/docs/stable/api/skimage.data.html)：宇航员 Eileen Collins（NASA，公有领域）、咖啡杯（Rachel Michetti，CC0）、摄影师（Lav Varshney，CC0）、眼底图像（Mikael Häggström，CC0）、皮肤 H&E 切片（Kilbad，公有领域）、荧光细胞核（David Root，CC0）、小鼠肾组织共聚焦图像（Genevieve Buckley，CC0）。
 
 ## 收集的物件
 

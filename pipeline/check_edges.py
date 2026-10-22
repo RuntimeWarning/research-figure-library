@@ -16,7 +16,8 @@ from PIL import Image
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import ASSETS  # noqa: E402
 
-FULL_BLEED = {"mae-cat", "mae-dog", "mae-visible-cat", "patch-row-cat", "patches-cat", "patches-dog"}
+FULL_BLEED = {"mae-cat", "mae-dog", "mae-visible-cat", "patch-row-cat", "patches-cat", "patches-dog",
+              "aug-perspective-dog", "featgrid-cat-grey", "featgrid-cat-viridis", "featgrid-dog-magma"}
 
 
 def touches(path: Path) -> dict:

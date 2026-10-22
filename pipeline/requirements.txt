@@ -6,3 +6,4 @@ resvg-py>=0.2
 lxml>=5
 opencv-python-headless>=4.9
 scikit-image>=0.22
+tifffile>=2023.1

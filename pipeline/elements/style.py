@@ -275,6 +275,13 @@ def _tangent_band(sx, sy, dx, dy, r):
     return [(sx + nx, sy + ny), (sx + dx + nx, sy + dy + ny), (sx + dx - nx, sy + dy - ny), (sx - nx, sy - ny)]
 
 
+CURVES = {   # glyph -> (f on [-3, 3], low, high) drawn as a small plot inside a badge
+    "tanh": (math.tanh, -1.0, 1.0),
+    "gelu": (lambda x: 0.5 * x * (1 + math.erf(x / math.sqrt(2))), -0.5, 3.0),
+    "sin": (lambda x: math.sin(x * 1.05), -1.0, 1.0),
+}
+
+
 def glyph_svg(glyph, sx, sy, r, colour, font=0.0):
     s = r * 0.5
     w = r * 0.16
@@ -291,6 +298,17 @@ def glyph_svg(glyph, sx, sy, r, colour, font=0.0):
                 f'{sx + s * .1:.3f} {sy - s * .55:.3f}S{sx + s * .6:.3f} {sy - s * .55:.3f} {sx + s:.3f} {sy - s * .55:.3f}" {line}/>')
     if glyph == "relu":
         return f'<path d="M{sx - s:.3f} {sy + s * .45:.3f}H{sx:.3f}L{sx + s:.3f} {sy - s * .6:.3f}" {line}/>'
+    if glyph == "-":
+        return f'<path d="M{sx - s:.3f} {sy:.3f}H{sx + s:.3f}" {line}/>'
+    if glyph == "div":
+        dots = "".join(f'<circle cx="{sx:.3f}" cy="{sy + k * s * 0.55:.3f}" r="{w * 0.75:.3f}" fill="{colour}"/>' for k in (-1, 1))
+        return f'<path d="M{sx - s:.3f} {sy:.3f}H{sx + s:.3f}" {line}/>{dots}'
+    if glyph in CURVES:
+        f, lo, hi = CURVES[glyph]
+        xs = [-1 + 2 * i / 24 for i in range(25)]
+        ys = [f(x * 3) for x in xs]
+        pts = " ".join(f"{sx + x * s:.3f},{sy - s * (2 * (y - lo) / (hi - lo) - 1) * 0.6:.3f}" for x, y in zip(xs, ys))
+        return f'<polyline points="{pts}" {line} stroke-linejoin="round"/>'
     size = font or r * 1.05
     return (f'<text x="{sx:.3f}" y="{sy + size * 0.36:.3f}" font-size="{size:.3f}" text-anchor="middle" '
             f'font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="700" fill="{colour}">{glyph}</text>')

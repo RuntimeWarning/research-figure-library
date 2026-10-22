@@ -23,14 +23,15 @@ sys.path[:0] = [str(Path(__file__).resolve().parents[1]), str(Path(__file__).res
 from common import ASSETS, MANIFESTS, sha256, write_json  # noqa: E402
 import style as st  # noqa: E402
 from style import PALETTES as P, ORDER  # noqa: E402
+import blocks  # noqa: E402
 
 OUT = ASSETS / "elements"
 PNG_SIDE = 1024
 THUMB_SIDE = 420
 # Shared by every element source (originals here, collected ones in ``pipeline/collected``).
 CATEGORIES = ["特征图", "张量与通道", "卷积与采样", "Token 与嵌入", "注意力与 Transformer", "神经元与全连接",
-              "网络结构与模块", "图像输入与预处理", "检测、分割与关键点", "三维视觉", "运算符", "图与点云", "时空与气象", "信号与噪声",
-              "数据与文档", "计算与设备", "人物与智能体", "科学与医学", "天气与地理", "城市与交通", "动物与植物",
+              "网络结构与模块", "图像输入与预处理", "检测、分割与关键点", "三维视觉", "医学影像", "运算符", "图与点云", "时空与气象",
+              "信号与噪声", "分布与图表", "数据与文档", "计算与设备", "人物与智能体", "科学与医学", "天气与地理", "城市与交通", "动物与植物",
               "标记与符号", "通用物件"]
 SPECS = []          # (id, builder, kwargs, meta)
 
@@ -867,6 +868,7 @@ def build_specs():
     for k in ("teal", "purple"):
         add(f"wavelet-{k}", "信号与噪声", f"{PZ[k]}小波四子带", f"{k} wavelet sub-bands", ["小波", "wavelet", "LL", "频域"],
             b_wavelet, pal=k)
+    blocks.register(add)
 
 
 def render(task):
