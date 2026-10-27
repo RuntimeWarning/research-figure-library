@@ -2,7 +2,7 @@
 
 <h1 align="center">研图 · Figure Atlas</h1>
 
-<p align="center">论文配图图元库</p>
+<p align="center">模型结构图的现成零件</p>
 
 画模型结构图要用的图元，共 1,084 个，分三部分：
 
@@ -27,7 +27,7 @@
 
 ### 图元
 
-![图元](docs/screenshot-elements.jpg)
+![图元：搜索「编码器」](docs/screenshot-elements.jpg)
 
 原创图元、计算机视觉图元和收集的物件按内容统一分为 25 类：
 
@@ -64,6 +64,8 @@
 **计算机视觉图元**（169 个，CC0）：其中 128 个由 19 张 CC0 / 公有领域照片与医学图像（Wikimedia Commons 与 scikit-image 示例图）用 [`pipeline/elements/vision.py`](pipeline/elements/vision.py) 处理得到：分割用 GrabCut 生成，边缘用 Canny / Sobel，超像素用 SLIC，细胞核用阈值加分水岭分割，脑组织用 k-means 分类，特征图是 Gabor、高斯差分与颜色对立滤波器组的整流响应，各种退化按成像模型合成，检测框、人体关键点、提示点与涂鸦为人工标注；其余为同一等轴测风格的三维视觉示意，SVG 可编辑。详情页给出原始照片链接。
 
 ![计算机视觉图元：三维视觉](docs/screenshot-vision.jpg)
+
+![计算机视觉图元：医学影像](docs/screenshot-medical.jpg)
 
 **收集的物件**：
 
