@@ -6,9 +6,9 @@
 
 画模型结构图要用的图元，共 1,084 个，分三部分：
 
-- **465 个原创图元**：特征图、张量、卷积核、Token、注意力掩码、运算符、雷达回波，以及卷积层块、编码器 / 解码器、U-Net、FPN、Transformer 层、MoE 等网络模块，Swin 窗口、可变形采样、IoU / NMS / RoI Align 等视觉示意，激活函数曲线、分布与损失曲面……按同一套等轴测风格和 8 种配色画好，可编辑 SVG，**CC0 授权**，无需署名。
-- **169 个计算机视觉图元**：用 CC0 / 公有领域照片做出的输入图像、ViT 分块与 Token、MAE 掩码、扩散加噪、去噪 / 低光 / 去雾 / 去雨等复原输入、MixUp / CutMix / Mosaic 等数据增强、仿 CNN 的真实特征图、分割掩码与抠图、检测框、SAM 提示与标注、人体关键点，CT / MRI / X 光 / 病理 / 荧光显微等医学影像；以及相机视锥、NeRF 射线采样、体素、网格模型、代价体、哈希网格、激光雷达、语义占据、物体点云、3D 高斯等三维视觉示意。全部 CC0。
-- **450 个开源物件与装饰**：等轴测的服务器、数据库、文档、笔记本电脑，3D 的机器人、大脑、卫星、云朵、显微镜、汽车，以及对勾、火焰、雪花、序号、奖杯等标记，还有全连接网络、LeNet / AlexNet 式特征块等网络模块。全部是透明背景的单个元素，不带箭头和文字，可以直接放进模型图充当模块、补充细节或做点缀。来自 [Fluent Emoji 3D](https://github.com/microsoft/fluentui-emoji)、[3dicons](https://3dicons.co/)、[Isoflow](https://github.com/markmanx/isopacks)、[NN-SVG](https://github.com/alexlenail/NN-SVG)，保留原许可（MIT / CC0），详情页给出可直接复制的署名。
+- **465 个原创图元**：特征图、张量、卷积核、Token、注意力掩码、运算符、雷达回波，以及卷积层块、编码器 / 解码器、U-Net、FPN、Transformer 层、MoE 等网络模块，Swin 窗口、可变形采样、IoU / NMS / RoI Align 等视觉示意，激活函数曲线、分布与损失曲面……按同一套等轴测风格和 8 种配色画好，均为可编辑 SVG。
+- **169 个计算机视觉图元**：由真实照片做出的输入图像、ViT 分块与 Token、MAE 掩码、扩散加噪、去噪 / 低光 / 去雾 / 去雨等复原输入、MixUp / CutMix / Mosaic 等数据增强、仿 CNN 的真实特征图、分割掩码与抠图、检测框、SAM 提示与标注、人体关键点，CT / MRI / X 光 / 病理 / 荧光显微等医学影像；以及相机视锥、NeRF 射线采样、体素、网格模型、代价体、哈希网格、激光雷达、语义占据、物体点云、3D 高斯等三维视觉示意。
+- **450 个开源物件与装饰**：等轴测的服务器、数据库、文档、笔记本电脑，3D 的机器人、大脑、卫星、云朵、显微镜、汽车，以及对勾、火焰、雪花、序号、奖杯等标记，还有全连接网络、LeNet / AlexNet 式特征块等网络模块。都是透明背景的单个元素，可以直接放进模型图充当模块、补充细节或做点缀。来自 [Fluent Emoji 3D](https://github.com/microsoft/fluentui-emoji)、[3dicons](https://3dicons.co/)、[Isoflow](https://github.com/markmanx/isopacks) 和 [NN-SVG](https://github.com/alexlenail/NN-SVG)。
 
 另附 289 张按原样裁剪的经典论文原图和 28,102 个开源科研图标。
 
@@ -20,7 +20,7 @@
 
 | 集合 | 数量 | 说明 |
 | --- | ---: | --- |
-| **图元** | **1,084** | 原创 465（统一等轴测风格，CC0）+ 计算机视觉 169（CC0）+ 开源物件与装饰 450（保留原许可） |
+| **图元** | **1,084** | 原创 465（统一等轴测风格）+ 计算机视觉 169 + 开源物件与装饰 450 |
 | 论文原图 | 289 | 来自 216 篇论文（1997–2025），覆盖 21 个方向；按原样裁剪，不重绘、不改色 |
 | 科研图标 | 28,102 | 10 个开源图标集，统一为 20 个中文分类，可按图标集筛选 |
 | **合计** | **29,475** | 每项素材在 `dist/sources.csv` 中列出文件、来源、许可与 SHA-256 |
@@ -61,7 +61,7 @@
 
 **原创图元**：单色元素提供 8 种配色（蓝、青、橙、紫、绿、珊瑚红、石墨灰、琥珀黄）。SVG 里每个面、每个格子都是独立图形，在 PowerPoint、Illustrator、Inkscape 或 draw.io 中可以直接改色、增删格子、改尺寸。全部由 [`pipeline/elements/generate.py`](pipeline/elements/generate.py) 用同一个正交相机和配色表生成（绘图工具见 [`style.py`](pipeline/elements/style.py)，网络模块、注意力与检测示意、图表见 [`blocks.py`](pipeline/elements/blocks.py)），新增元素也会保持一致的风格。
 
-**计算机视觉图元**（169 个，CC0）：其中 128 个由 19 张 CC0 / 公有领域照片与医学图像（Wikimedia Commons 与 scikit-image 示例图）用 [`pipeline/elements/vision.py`](pipeline/elements/vision.py) 处理得到：分割用 GrabCut 生成，边缘用 Canny / Sobel，超像素用 SLIC，细胞核用阈值加分水岭分割，脑组织用 k-means 分类，特征图是 Gabor、高斯差分与颜色对立滤波器组的整流响应，各种退化按成像模型合成，检测框、人体关键点、提示点与涂鸦为人工标注；其余为同一等轴测风格的三维视觉示意，SVG 可编辑。详情页给出原始照片链接。
+**计算机视觉图元**（169 个）：其中 128 个由 19 张 CC0 / 公有领域照片与医学图像（Wikimedia Commons 与 scikit-image 示例图）用 [`pipeline/elements/vision.py`](pipeline/elements/vision.py) 处理得到：分割用 GrabCut 生成，边缘用 Canny / Sobel，超像素用 SLIC，细胞核用阈值加分水岭分割，脑组织用 k-means 分类，特征图是 Gabor、高斯差分与颜色对立滤波器组的整流响应，各种退化按成像模型合成，检测框、人体关键点、提示点与涂鸦为人工标注；其余为同一等轴测风格的三维视觉示意，SVG 可编辑。详情页给出原始照片链接。
 
 ![计算机视觉图元：三维视觉](docs/screenshot-vision.jpg)
 
@@ -78,7 +78,7 @@
 | [Isoflow isopacks](https://github.com/markmanx/isopacks)（Mark Mankarious） | 34 | MIT | 等轴测服务器、数据库、文档、电脑、用户、齿轮、几何体等，可编辑 SVG |
 | [NN-SVG](https://github.com/alexlenail/NN-SVG)（Alexander LeNail） | 15 | MIT | 不带标注的全连接网络、LeNet 式与 AlexNet / VGG 式结构，SVG |
 
-只收录能单独放进图里的元素：不带箭头、文字标注，也不是针对某个具体任务画好的整张示意图。每个物件的详情页列出原始文件链接、许可和一段可直接复制的英文署名。
+只收录能单独放进图里的元素，不收针对某个具体任务画好的整张示意图。每个物件的详情页列出原始文件链接和可直接复制的英文署名。
 
 ### 论文原图覆盖的方向
 
